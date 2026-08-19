@@ -1,0 +1,26 @@
+/**
+ * Base typography for the Ubuntu wiki.
+ *
+ * Applies the webfonts declared in Fonts.less. Kept skin-agnostic so both
+ * the ubuntu skin and Minerva pick the same base and mono stacks up via
+ * ext.ubuntu.styles; skin-specific typography (headings, script fallbacks,
+ * print) stays in the skins.
+ */
+
+html,
+body,
+.mw-editsection,
+.mw-editsection-like {
+    font-family: 'Ubuntu Sans', sans-serif;
+}
+
+code,
+pre,
+kbd,
+samp,
+tt,
+.mw-code,
+.mw-highlight,
+.mw-highlight pre {
+    font-family: 'Ubuntu Sans Mono', monospace;
+}
