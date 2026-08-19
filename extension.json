@@ -1,0 +1,95 @@
+{
+    "name": "UbuntuWiki",
+    "version": "1.0.0",
+    "author": "Ubuntu Developers",
+    "url": "https://github.com/ubuntu/ubuntu-mediawiki-extension",
+    "descriptionmsg": "ubuntu-ext-desc",
+    "namemsg": "ubuntu-ext-name",
+    "license-name": "GPL-3.0",
+    "type": "other",
+    "requires": {
+        "MediaWiki": ">= 1.46"
+    },
+    "MessagesDirs": {
+        "UbuntuWiki": [
+            "i18n"
+        ]
+    },
+    "AutoloadNamespaces": {
+        "MediaWiki\\Extension\\UbuntuWiki\\": "src/"
+    },
+    "HookHandlers": {
+        "main": {
+            "class": "MediaWiki\\Extension\\UbuntuWiki\\Hooks",
+            "services": [
+                "MainConfig",
+                "LinkRenderer"
+            ]
+        }
+    },
+    "Hooks": {
+        "BeforePageDisplay": "main",
+        "SkinAddFooterLinks": "main"
+    },
+    "ResourceModules": {
+        "ext.ubuntu.styles": {
+            "styles": [
+                "ext.ubuntu.styles/common.less"
+            ]
+        },
+        "ext.ubuntu.styles.minerva": {
+            "styles": [
+                "ext.ubuntu.styles.minerva/minerva.less"
+            ]
+        },
+        "ext.ubuntu.cookieConsent": {
+            "styles": [
+                "ext.ubuntu.cookieConsent/vendor/cookie-policy.css"
+            ],
+            "noflip": true,
+            "packageFiles": [
+                "ext.ubuntu.cookieConsent/cookieConsent.js",
+                "ext.ubuntu.cookieConsent/cookieConsent-vendor.js",
+                "ext.ubuntu.cookieConsent/vendor/cookie-policy.js",
+                {
+                    "name": "ext.ubuntu.cookieConsent/config.json",
+                    "config": [
+                        "UbuntuCookieConsentEnabled"
+                    ]
+                }
+            ],
+            "messages": [
+                "ubuntu-manage-trackers-button-label"
+            ]
+        }
+    },
+    "ResourceFileModulePaths": {
+        "localBasePath": "resources",
+        "remoteExtPath": "UbuntuWiki/resources"
+    },
+    "ResourceModuleSkinStyles": {
+        "ubuntu": {
+            "+ext.ubuntu.styles": "ext.ubuntu.styles/common.less"
+        },
+        "minerva": {
+            "+ext.ubuntu.styles": "ext.ubuntu.styles/common.less",
+            "+ext.ubuntu.styles.minerva": "ext.ubuntu.styles.minerva/minerva.less"
+        }
+    },
+    "config": {
+        "UbuntuCookieConsentEnabled": {
+            "value": false,
+            "description": "Enable the Canonical cookie-policy consent banner."
+        },
+        "UbuntuFooterLinks": {
+            "value": {
+                "legal": "https://canonical.com/legal",
+                "privacy": "https://canonical.com/legal/data-privacy",
+                "codeofconduct": "https://ubuntu.com/community/docs/ethos/code-of-conduct"
+            },
+            "description": "Footer link targets (name => wiki page title or external URL). Set a name to null to drop the link; labels come from the ubuntu-footer-<name>-desc messages.",
+            "merge_strategy": "array_replace"
+        }
+    },
+    "manifest_version": 2
+}
