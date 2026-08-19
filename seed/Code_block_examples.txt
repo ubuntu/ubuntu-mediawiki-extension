@@ -1,0 +1,51 @@
+The Ubuntu wiki's code blocks are produced by on-wiki templates (see
+[[Template:Code block]]) that emit <code>&lt;div class="ubuntu-code-block"&gt;</code>
+markup. The ext.ubuntu.codeBlock module enhances any such block — wherever it
+appears — with a copy button.
+
+== Via template ==
+
+{{Code block|sudo apt update && sudo apt install ubuntu-desktop}}
+
+== Raw HTML block ==
+
+<div class="ubuntu-code-block"><pre>snap install --classic code</pre></div>
+
+== Custom labels ==
+
+<div class="ubuntu-code-block" data-copy-label="Copy this command" data-copied-label="Command copied!"><pre>flatpak install flathub org.gnome.Calculator</pre></div>
+
+== Inline code element ==
+
+<div class="ubuntu-code-block"><code>lsb_release -a</code></div>
+
+== CAPTCHA-style block ==
+
+The same markup the CAPTCHA question embeds (see [[CAPTCHA testing]]). The
+copy button's aria-label should read "Copy terminal command for CAPTCHA":
+
+<div class="ubuntu-code-block ubuntu-code-block--captcha"><pre>echo $(( 6 * 7 ))</pre></div>
+
+== Focus order ==
+
+The copy button inherits a positive tabindex from the next focusable element
+after the block (this mirrors the CAPTCHA answer field's tabindex=1). Tab
+from the copy button below: focus should land on the link.
+
+<div class="ubuntu-code-block"><pre>whoami</pre></div>
+<a href="#focus-order" tabindex="1">Focusable link (tabindex=1)</a>
+
+== Not enhanced: plain pre ==
+
+A <code>&lt;pre&gt;</code> without the wrapper class gets no button:
+
+<pre>no .ubuntu-code-block wrapper here</pre>
+
+== SyntaxHighlight comparison ==
+
+SyntaxHighlight output is a different markup shape and is intentionally not
+enhanced:
+
+<syntaxhighlight lang="bash">
+sudo apt update
+</syntaxhighlight>

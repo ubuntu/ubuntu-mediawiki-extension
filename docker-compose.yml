@@ -1,0 +1,24 @@
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mediawiki
+      MYSQL_USER: mediawiki
+      MYSQL_PASSWORD: mediawiki
+    volumes:
+      - db-data:/var/lib/mysql
+
+  mediawiki:
+    image: mediawiki:1.46
+    ports:
+      - "8080:80"
+    volumes:
+      # Extension files are served directly from this directory (live mount)
+      - .:/var/www/html/extensions/UbuntuWiki
+      # LocalSettings.php is managed via: make deploy
+    depends_on:
+      - db
+
+volumes:
+  db-data:

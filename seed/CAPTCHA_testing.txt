@@ -1,0 +1,25 @@
+This wiki runs ConfirmEdit with QuestyCaptcha, and ''every'' edit requires
+solving the CAPTCHA — <code>skipcaptcha</code> is revoked from all groups in
+LocalSettings.php.
+
+The question embeds an <code>.ubuntu-code-block.ubuntu-code-block--captcha</code>
+block as raw HTML (QuestyCaptcha inserts the question into the edit form
+unparsed), so the ext.ubuntu.codeBlock copy button has to work outside of
+wikitext rendering.
+
+== Try it ==
+
+# Edit any page (source editor or VisualEditor) and hit save.
+# The CAPTCHA appears above the edit form, with a code block containing a terminal command.
+# Use the copy button (or run the command) and enter the answer: <code>42</code>.
+
+== Things to check ==
+
+* The copy button appears inside the CAPTCHA code block on the initial edit-form render.
+* With VisualEditor, the CAPTCHA widget is injected dynamically after the failed save — the MutationObserver in codeBlock.js must still bind the button.
+* The CAPTCHA answer field has <code>tabindex="1"</code>; the copy button should inherit it so keyboard focus order stays sensible.
+* The button's aria-label should be "Copy terminal command for CAPTCHA" (the <code>ubuntu-codeblock-copy-captcha-command</code> message).
+
+== Configuration ==
+
+See the "Local testing only" section of <code>LocalSettings.example.php</code>.

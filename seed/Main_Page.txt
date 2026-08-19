@@ -1,0 +1,14 @@
+Welcome to the local Ubuntu Wiki test instance.
+
+This wiki runs the [https://github.com/ubuntu/ubuntu-mediawiki-extension UbuntuWiki extension] from a live-mounted checkout, so edits to the extension's files apply on page reload.
+
+== Test pages ==
+
+* [[Code block examples]] — the copy button on <code>.ubuntu-code-block</code> markup in regular wikitext
+* [[CAPTCHA testing]] — the copy button inside the ConfirmEdit CAPTCHA form (outside wikitext rendering)
+
+== Useful things to try ==
+
+* Append <code>?useskin=vector</code> or <code>?useskin=minerva</code> to any page URL — the extension ships per-skin styles
+* [[Special:Version]] — loaded extensions and skins
+* The footer shows the extension's Ubuntu links and the "Manage your tracker settings" consent button
