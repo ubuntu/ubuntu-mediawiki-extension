@@ -1,0 +1,31 @@
+/**
+ * Common Ubuntu wiki styles, applied to every supported skin.
+ *
+ * Loaded on both the ubuntu skin and minerva via ResourceModuleSkinStyles.
+ * The ubuntu skin (ubuntu-mediawiki-skin fork) also depends on resources
+ * here directly — notably the palette custom properties — so treat the
+ * tokens exposed by this module as a stable contract.
+ *
+ * This entry point only imports; keep declarations in the component and
+ * vendor/ files so concerns stay separated. Styling of the ubuntu skin
+ * itself lives in the ubuntu-mediawiki-skin repo, not here.
+ */
+@import './variables.less';
+@import './mixins.less';
+@import './vendor/ubuntu-palette.less';
+
+// Fonts: @font-face declarations (all media).
+@import './components/Fonts.less';
+
+@media screen {
+
+	// Apply the light theme palette at the root by default.
+	// Dark/paper themes are applied by the skins where supported.
+	:root {
+		.vf-theme-light-colors();
+		.vf-static-colors();
+	}
+
+	// Components
+	@import './components/Typography.less';
+}
