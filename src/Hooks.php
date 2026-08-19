@@ -55,7 +55,13 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook
      * Targets come from the `UbuntuFooterLinks` config (a name => target map
      * where target is a wiki page title or an external URL); labels come
      * from the `ubuntu-footer-<name>-desc` messages, which can be overridden
-     * on-wiki via the MediaWiki: namespace. Set a target to null to drop a
+     * on-wiki via the MediaWiki: namespace. Set a target to null to drop the
+     * link entirely.
+     *
+     * The 'privacy' name is special: core merges hook-provided items over the
+     * default footer links by key, so reusing the 'privacy' key replaces the
+     * default privacy link's target instead of adding a second link. Its
+     * label is the built-in 'privacy' message. A null target blanks out the
      * default link entirely.
      *
      * The cookie-settings link is always added: it reopens the consent banner
@@ -73,9 +79,28 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook
         }
 
         $links = $this->config->get('UbuntuFooterLinks');
+
+        if (array_key_exists('privacy', $links)) {
+            $privacyMsg = $skin->msg('privacy');
+            if ($links['privacy'] === null) {
+                // An empty string still overrides the default link, and the
+                // resulting empty list item renders nothing.
+                $footerlinks['privacy'] = '';
+            } elseif (!$privacyMsg->inContentLanguage()->isDisabled()) {
+                $link = $this->buildFooterLink($links['privacy'], $privacyMsg->text());
+                if ($link !== null) {
+                    $footerlinks['privacy'] = $link;
+                }
+            }
+            unset($links['privacy']);
+        }
+
         foreach ($links as $name => $target) {
+            if ($target === null) {
+                continue;
+            }
             $descMsg = $skin->msg("ubuntu-footer-$name-desc");
-            if ($target === null || !$descMsg->exists()) {
+            if (!$descMsg->exists()) {
                 continue;
             }
             $link = $this->buildFooterLink($target, $descMsg->text());

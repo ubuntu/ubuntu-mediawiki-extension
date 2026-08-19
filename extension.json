@@ -94,7 +94,7 @@
                 "privacy": "https://canonical.com/legal/data-privacy",
                 "codeofconduct": "https://ubuntu.com/community/docs/ethos/code-of-conduct"
             },
-            "description": "Footer link targets (name => wiki page title or external URL). Set a name to null to drop the link; labels come from the ubuntu-footer-<name>-desc messages.",
+            "description": "Footer link targets (name => wiki page title or external URL). The 'privacy' name replaces the default footer privacy link instead of adding a new one. Set a name to null to drop the link; labels come from the ubuntu-footer-<name>-desc messages (the built-in 'privacy' message for the privacy link).",
             "merge_strategy": "array_replace"
         }
     },

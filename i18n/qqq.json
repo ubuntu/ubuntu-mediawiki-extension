@@ -9,6 +9,5 @@
     "ubuntu-codeblock-copied": "Generic label shown briefly after content has been copied to the clipboard.",
     "ubuntu-codeblock-copy-captcha-command": "Accessible label for a copy button inside a CAPTCHA code block that copies a terminal command to the clipboard.",
     "ubuntu-footer-legal-desc": "Label for the footer link whose target is configured as 'legal' in $wgUbuntuFooterLinks. Typically points to legal information about the site.",
-    "ubuntu-footer-privacy-desc": "Label for the footer link whose target is configured as 'privacy' in $wgUbuntuFooterLinks. Typically points to the site's privacy policy.",
     "ubuntu-footer-codeofconduct-desc": "Label for the footer link whose target is configured as 'codeofconduct' in $wgUbuntuFooterLinks. Typically points to the community code of conduct."
 }
