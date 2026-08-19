@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace MediaWiki\Extension\UbuntuWiki;
 
-use Config;
-use Html;
+use MediaWiki\Config\Config;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
+use MediaWiki\Html\Html;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Skin\Skin;
-use Title;
+use MediaWiki\Title\Title;
 
 /**
  * Main hook handler for the UbuntuWiki extension.
