@@ -78,9 +78,6 @@
         "remoteExtPath": "UbuntuWiki/resources"
     },
     "ResourceModuleSkinStyles": {
-        "ubuntu": {
-            "+ext.ubuntu.styles": "ext.ubuntu.styles/common.less"
-        },
         "minerva": {
             "+ext.ubuntu.styles": "ext.ubuntu.styles/common.less",
             "+ext.ubuntu.styles.minerva": "ext.ubuntu.styles.minerva/minerva.less"

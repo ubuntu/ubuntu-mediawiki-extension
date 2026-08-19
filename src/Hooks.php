@@ -31,11 +31,17 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook
     /**
      * Conditionally attach feature modules to every page view.
      *
+     * ext.ubuntu.styles is the extension's shared base styling and is loaded
+     * on every skin (as a style-only module, so it is in place before first
+     * paint); the minerva-specific addition still comes via
+     * ResourceModuleSkinStyles.
+     *
      * @param OutputPage $out
      * @param Skin $skin
      */
     public function onBeforePageDisplay($out, $skin): void
     {
+        $out->addModuleStyles(['ext.ubuntu.styles']);
         $out->addModules(['ext.ubuntu.codeBlock']);
 
         if ($this->config->get('UbuntuCookieConsentEnabled')) {
