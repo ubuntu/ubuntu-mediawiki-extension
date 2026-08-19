@@ -36,6 +36,8 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook
      */
     public function onBeforePageDisplay($out, $skin): void
     {
+        $out->addModules(['ext.ubuntu.codeBlock']);
+
         if ($this->config->get('UbuntuCookieConsentEnabled')) {
             $out->addModules(['ext.ubuntu.cookieConsent']);
         }

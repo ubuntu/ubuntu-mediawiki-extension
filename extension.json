@@ -32,6 +32,16 @@
         "SkinAddFooterLinks": "main"
     },
     "ResourceModules": {
+        "ext.ubuntu.codeBlock": {
+            "packageFiles": [
+                "ext.ubuntu.codeBlock/codeBlock.js"
+            ],
+            "messages": [
+                "ubuntu-codeblock-copy",
+                "ubuntu-codeblock-copied",
+                "ubuntu-codeblock-copy-captcha-command"
+            ]
+        },
         "ext.ubuntu.styles": {
             "styles": [
                 "ext.ubuntu.styles/common.less"

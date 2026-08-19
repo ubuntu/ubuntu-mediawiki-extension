@@ -5,6 +5,9 @@
     "ubuntu-ext-desc": "{{desc|name=UbuntuWiki|url=https://github.com/ubuntu/ubuntu-mediawiki-extension}}",
     "ubuntu-ext-name": "Display name of the extension, shown on Special:Version.",
     "ubuntu-manage-trackers-button-label": "Label for the footer link that reopens the cookie consent banner. Shown in the page footer and as a button inside the banner itself.",
+    "ubuntu-codeblock-copy": "Generic label for a button that copies content to the clipboard.\n{{Identical|Copy}}",
+    "ubuntu-codeblock-copied": "Generic label shown briefly after content has been copied to the clipboard.",
+    "ubuntu-codeblock-copy-captcha-command": "Accessible label for a copy button inside a CAPTCHA code block that copies a terminal command to the clipboard.",
     "ubuntu-footer-legal-desc": "Label for the footer link whose target is configured as 'legal' in $wgUbuntuFooterLinks. Typically points to legal information about the site.",
     "ubuntu-footer-privacy-desc": "Label for the footer link whose target is configured as 'privacy' in $wgUbuntuFooterLinks. Typically points to the site's privacy policy.",
     "ubuntu-footer-codeofconduct-desc": "Label for the footer link whose target is configured as 'codeofconduct' in $wgUbuntuFooterLinks. Typically points to the community code of conduct."

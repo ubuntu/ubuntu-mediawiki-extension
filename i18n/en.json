@@ -5,6 +5,9 @@
     "ubuntu-ext-desc": "Ubuntu MediaWiki extension. Provides special integration and shared resources.",
     "ubuntu-ext-name": "Ubuntu Wiki",
     "ubuntu-manage-trackers-button-label": "Manage your tracker settings",
+    "ubuntu-codeblock-copy": "Copy",
+    "ubuntu-codeblock-copied": "Copied!",
+    "ubuntu-codeblock-copy-captcha-command": "Copy terminal command for CAPTCHA",
     "ubuntu-footer-legal-desc": "Legal",
     "ubuntu-footer-privacy-desc": "Privacy",
     "ubuntu-footer-codeofconduct-desc": "Code of conduct"

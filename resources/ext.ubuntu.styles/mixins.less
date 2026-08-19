@@ -1,12 +1,8 @@
 /**
  * Shared LESS mixins for Ubuntu wiki styles.
+ *
+ * Core mixins (.user-select(), .mixin-screen-reader-text(), ...) come from
+ * MediaWiki core's mediawiki.mixins.less.
  */
-
-// Example:
-// .ubuntu-visually-hidden() {
-// 	position: absolute;
-// 	width: 1px;
-// 	height: 1px;
-// 	overflow: hidden;
-// 	clip: rect( 0 0 0 0 );
-// }
+@import 'mediawiki.skin.variables.less';
+@import 'mediawiki.mixins.less';
