@@ -8,19 +8,25 @@
  */
 
 html,
-body,
+body.mediawiki,
 .mw-editsection,
-.mw-editsection-like {
-    font-family: 'Ubuntu Sans', sans-serif;
+.mw-editsection-like,
+body.mediawiki :is(.mw-body h1,
+    .mw-body .mw-heading1,
+    .mw-body-content h1,
+    .mw-body-content .mw-heading1,
+    .mw-body-content h2,
+    .mw-body-content .mw-heading2,
+    .mw-parser-output h3,
+    .mw-parser-output h4,
+    .mw-parser-output h5,
+    .mw-parser-output h6) {
+    font-family: @font-family-sans;
 }
 
-code,
-pre,
-kbd,
-samp,
-tt,
+body.mediawiki :is(code, pre, kbd, samp, tt),
 .mw-code,
 .mw-highlight,
 .mw-highlight pre {
-    font-family: 'Ubuntu Sans Mono', monospace;
+    font-family: @font-family-mono;
 }

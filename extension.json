@@ -45,12 +45,31 @@
         "ext.ubuntu.styles": {
             "styles": [
                 "ext.ubuntu.styles/common.less"
-            ]
+            ],
+            "skinStyles": {
+                "ubuntu": [
+                    "ext.ubuntu.styles/common.less"
+                ],
+                "vector": [
+                    "ext.ubuntu.styles/common.less"
+                ],
+                "vector-2022": [
+                    "ext.ubuntu.styles/common.less"
+                ],
+                "minerva": [
+                    "ext.ubuntu.styles/common.less"
+                ]
+            }
         },
         "ext.ubuntu.styles.minerva": {
             "styles": [
                 "ext.ubuntu.styles.minerva/minerva.less"
-            ]
+            ],
+            "skinStyles": {
+                "minerva": [
+                    "ext.ubuntu.styles.minerva/minerva.less"
+                ]
+            }
         },
         "ext.ubuntu.cookieConsent": {
             "styles": [
@@ -76,12 +95,6 @@
     "ResourceFileModulePaths": {
         "localBasePath": "resources",
         "remoteExtPath": "UbuntuWiki/resources"
-    },
-    "ResourceModuleSkinStyles": {
-        "minerva": {
-            "+ext.ubuntu.styles": "ext.ubuntu.styles/common.less",
-            "+ext.ubuntu.styles.minerva": "ext.ubuntu.styles.minerva/minerva.less"
-        }
     },
     "config": {
         "UbuntuCookieConsentEnabled": {
