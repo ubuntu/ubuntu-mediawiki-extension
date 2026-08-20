@@ -44,6 +44,10 @@ wfLoadSkin('Vector');
 wfLoadSkin('MinervaNeue');
 $wgDefaultSkin = 'vector-2022';
 
+wfLoadExtension('MobileFrontend');
+$wgMFAutodetectMobileView = true;
+$wgDefaultMobileSkin = 'minerva';
+
 # Logo — uses the Ubuntu logo bundled in this extension.
 # Replace with your own image path to use a custom logo.
 $wgLogos = [

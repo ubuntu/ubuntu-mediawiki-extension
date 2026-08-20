@@ -16,6 +16,9 @@ services:
     volumes:
       # Extension files are served directly from this directory (live mount)
       - .:/var/www/html/extensions/UbuntuWiki
+      # MobileFrontend is not bundled with the tarball; `make setup` clones
+      # it into .ext/ (gitignored) and it is mounted here.
+      - ./.ext/MobileFrontend:/var/www/html/extensions/MobileFrontend
       # LocalSettings.php is managed via: make deploy
     depends_on:
       - db

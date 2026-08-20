@@ -6,7 +6,7 @@ This is a MediaWiki extension for the Ubuntu Wiki, holding special integrations 
 
 The repo ships a Makefile and docker-compose.yml that spin up a throwaway MediaWiki 1.46 + MariaDB instance with this extension live-mounted at `extensions/UbuntuWiki` — edits to `src/` and `resources/` apply on page reload, no rebuilds.
 
-Prerequisites: Docker (with the compose plugin). Vector is the default skin; MinervaNeue is also enabled for testing the minerva skin styles. (The Ubuntu skin is deliberately not installed: its current release declares `UbuntuCookieConsentEnabled` itself, which conflicts with this extension.)
+Prerequisites: Docker (with the compose plugin) and git. Vector is the default skin; MobileFrontend is also installed (shallow-cloned into the gitignored `.ext/` by `make setup`) and serves MinervaNeue to mobile devices — use a mobile user-agent or append `?useformat=mobile` to test the minerva skin styles. (The Ubuntu skin is deliberately not installed: its current release declares `UbuntuCookieConsentEnabled` itself, which conflicts with this extension.)
 
 ```sh
 make setup   # first run: start containers, install MediaWiki, seed test pages
@@ -14,17 +14,17 @@ make setup   # first run: start containers, install MediaWiki, seed test pages
 
 Then open <http://localhost:8080> (user `admin`, password `UbuntuWiki2026!`).
 
-| Target        | What it does |
-| ------------- | ------------ |
-| `make setup`  | First-time setup: containers, DB install, seeded pages |
-| `make up`     | Start containers (redeploys LocalSettings.php) |
-| `make down`   | Stop containers |
-| `make clean`  | Stop containers and DELETE the database volume (full reset) |
-| `make deploy` | Copy LocalSettings.php into the container and run update.php |
+| Target        | What it does                                                     |
+| ------------- | ---------------------------------------------------------------- |
+| `make setup`  | First-time setup: containers, DB install, seeded pages           |
+| `make up`     | Start containers (redeploys LocalSettings.php)                   |
+| `make down`   | Stop containers                                                  |
+| `make clean`  | Stop containers and DELETE the database volume (full reset)      |
+| `make deploy` | Copy LocalSettings.php into the container and run update.php     |
 | `make seed`   | (Re)import the test pages from seed/ (overwrites existing pages) |
-| `make update` | Run MediaWiki's update.php in the container |
-| `make lint`   | Run phpcs, parallel-lint and minus-x locally |
-| `make shell`  | Open a shell in the mediawiki container |
+| `make update` | Run MediaWiki's update.php in the container                      |
+| `make lint`   | Run phpcs, parallel-lint and minus-x locally                     |
+| `make shell`  | Open a shell in the mediawiki container                          |
 
 Note: don't run this and the skin repo's environment at the same time — both bind port 8080.
 
