@@ -6,119 +6,113 @@
  * on-wiki templates; keep the class names stable.
  */
 :root {
-    --ubuntu-template-note-border-color: var(--vf-color-border-information, #24598f);
-    --ubuntu-template-warning-border-color: var(--vf-color-border-caution, #cc7900);
-    --ubuntu-template-tip-border-color: var(--vf-color-border-positive, #0e8420);
-    --ubuntu-template-doccan-border-color: var(--vf-color-border-positive, #0e8420);
-    --ubuntu-template-info-border-color: var(--vf-color-border-information, #24598f);
-    --ubuntu-template-danger-border-color: var(--vf-color-border-negative, #c7162b);
+	--ubuntu-template-note-border-color: var( --vf-color-border-information, #24598f );
+	--ubuntu-template-warning-border-color: var( --vf-color-border-caution, #cc7900 );
+	--ubuntu-template-tip-border-color: var( --vf-color-border-positive, #0e8420 );
+	--ubuntu-template-doccan-border-color: var( --vf-color-border-positive, #0e8420 );
+	--ubuntu-template-info-border-color: var( --vf-color-border-information, #24598f );
+	--ubuntu-template-danger-border-color: var( --vf-color-border-negative, #c7162b );
 }
 
 div.ubuntu-template-box {
-    position: relative;
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    padding: calc(0.5rem - 1px) 1rem calc(0.5rem - 1px) 3rem;
-    border: 1.5px solid var(--vf-color-border-default, rgba(0, 0, 0, 0.2));
-    overflow: hidden;
+	position: relative;
+	margin-top: 0;
+	margin-bottom: 1.5rem;
+	padding: calc( 0.5rem - 1px ) 1rem calc( 0.5rem - 1px ) 3rem;
+	border: 1.5px solid var( --vf-color-border-default, rgba( 0, 0, 0, 0.2 ) );
+	overflow: hidden;
 
-    >p {
-        margin: 0;
-    }
+	>p {
+		margin: 0;
+	}
 
-    // Left accent bar.
-    &::before {
-        content: '';
-        position: absolute;
-        z-index: 1;
-        top: -1px;
-        bottom: -1px;
-        left: -1px;
-        width: 0.1875rem;
-    }
+	// Left accent bar.
+	&::before {
+		content: '';
+		position: absolute;
+		z-index: 1;
+		top: -1px;
+		bottom: -1px;
+		left: -1px;
+		width: 0.1875rem;
+	}
 
-    // Icon. Single-colour icons are masked so they tint to the accent colour.
-    &::after {
-        content: '';
-        position: absolute;
-        top: calc(0.5rem - 1px);
-        left: 1rem;
-        width: 1rem;
-        height: 1.5rem;
-        height: 1lh;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 1rem;
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        -webkit-mask-position: center;
-        mask-position: center;
-        -webkit-mask-size: 1rem;
-        mask-size: 1rem;
-    }
+	// Icon. Single-colour icons are masked so they tint to the accent colour.
+	&::after {
+		content: '';
+		position: absolute;
+		top: calc( 0.5rem - 1px );
+		left: 1rem;
+		width: 1rem;
+		height: 1.5rem;
+		height: 1lh;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 1rem;
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		-webkit-mask-position: center;
+		mask-position: center;
+		-webkit-mask-size: 1rem;
+		mask-size: 1rem;
+	}
 
-    &.ubuntu-template-box-note::before {
-        background-color: var(--ubuntu-template-note-border-color);
-    }
+	&.ubuntu-template-box-note::before {
+		background-color: var( --ubuntu-template-note-border-color );
+	}
 
-    &.ubuntu-template-box-warning::before {
-        background-color: var(--ubuntu-template-warning-border-color);
-    }
+	&.ubuntu-template-box-warning::before {
+		background-color: var( --ubuntu-template-warning-border-color );
+	}
 
-    &.ubuntu-template-box-tip::before {
-        background-color: var(--ubuntu-template-tip-border-color);
-    }
+	&.ubuntu-template-box-tip::before {
+		background-color: var( --ubuntu-template-tip-border-color );
+	}
 
-    &.ubuntu-template-box-doccan::before {
-        background-color: var(--ubuntu-template-doccan-border-color);
-    }
+	&.ubuntu-template-box-doccan::before {
+		background-color: var( --ubuntu-template-doccan-border-color );
+	}
 
-    &.ubuntu-template-box-info::before {
-        background-color: var(--ubuntu-template-info-border-color);
-    }
+	&.ubuntu-template-box-info::before {
+		background-color: var( --ubuntu-template-info-border-color );
+	}
 
-    &.ubuntu-template-box-danger::before {
-        background-color: var(--ubuntu-template-danger-border-color);
-    }
+	&.ubuntu-template-box-danger::before {
+		background-color: var( --ubuntu-template-danger-border-color );
+	}
 
-    &.ubuntu-template-box-note::after,
-    &.ubuntu-template-box-info::after {
-        -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 1a7 7 0 110 14A7 7 0 018 1zm0 1.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM8.75 7v5.02h-1.5V7h1.5zM8.5 3.944a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E");
-        mask-image: url("data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 1a7 7 0 110 14A7 7 0 018 1zm0 1.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM8.75 7v5.02h-1.5V7h1.5zM8.5 3.944a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E");
-    }
+	&.ubuntu-template-box-note::after,
+	&.ubuntu-template-box-info::after {
+		-webkit-mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 1a7 7 0 110 14A7 7 0 018 1zm0 1.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM8.75 7v5.02h-1.5V7h1.5zM8.5 3.944a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E" );
+		mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 1a7 7 0 110 14A7 7 0 018 1zm0 1.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM8.75 7v5.02h-1.5V7h1.5zM8.5 3.944a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E" );
+	}
 
-    &.ubuntu-template-box-tip::after {
-        -webkit-mask-image: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTYnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggZD0nTTggMWE1IDUgMCAwMTMuMDAxIDlMMTEgMTJhMyAzIDAgMDEtNiAwdi0yYTUgNSAwIDAxMy05em0xLjM3IDExLjYxMUg2LjYzYTEuNSAxLjUgMCAwMDIuNzQgMHpNOCAyLjVhMy41IDMuNSAwIDAwLTIuMSA2LjMgMS41IDEuNSAwIDAxLjU5MiAxLjA0NEw2LjUgMTB2MS4xMWgzbC4wMDEtMS4xMTFBMS41IDEuNSAwIDAxMTAuMSA4LjggMy41IDMuNSAwIDAwOCAyLjV6TTYuMzkxIDYuNDNMOCA3LjI2NWwxLjYyMy0uODI3LjY4MSAxLjMzNy0yLjMxIDEuMTc3LTIuMjkyLTEuMTg5LjY5LTEuMzMxeicgZmlsbD0nIzAwMCcgIGZpbGwtcnVsZT0nbm9uemVybycvPjwvc3ZnPg==");
-        mask-image: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTYnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggZD0nTTggMWE1IDUgMCAwMTMuMDAxIDlMMTEgMTJhMyAzIDAgMDEtNiAwdi0yYTUgNSAwIDAxMy05em0xLjM3IDExLjYxMUg2LjYzYTEuNSAxLjUgMCAwMDIuNzQgMHpNOCAyLjVhMy41IDMuNSAwIDAwLTIuMSA2LjMgMS41IDEuNSAwIDAxLjU5MiAxLjA0NEw2LjUgMTB2MS4xMWgzbC4wMDEtMS4xMTFBMS41IDEuNSAwIDAxMTAuMSA4LjggMy41IDMuNSAwIDAwOCAyLjV6TTYuMzkxIDYuNDNMOCA3LjI2NWwxLjYyMy0uODI3LjY4MSAxLjMzNy0yLjMxIDEuMTc3LTIuMjkyLTEuMTg5LjY5LTEuMzMxeicgZmlsbD0nIzAwMCcgIGZpbGwtcnVsZT0nbm9uemVybycvPjwvc3ZnPg==");
-    }
+	&.ubuntu-template-box-tip::after {
+		background-color: var( --ubuntu-template-tip-border-color );
+		-webkit-mask-image: url( data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTYnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggZD0nTTggMWE1IDUgMCAwMTMuMDAxIDlMMTEgMTJhMyAzIDAgMDEtNiAwdi0yYTUgNSAwIDAxMy05em0xLjM3IDExLjYxMUg2LjYzYTEuNSAxLjUgMCAwMDIuNzQgMHpNOCAyLjVhMy41IDMuNSAwIDAwLTIuMSA2LjMgMS41IDEuNSAwIDAxLjU5MiAxLjA0NEw2LjUgMTB2MS4xMWgzbC4wMDEtMS4xMTFBMS41IDEuNSAwIDAxMTAuMSA4LjggMy41IDMuNSAwIDAwOCAyLjV6TTYuMzkxIDYuNDNMOCA3LjI2NWwxLjYyMy0uODI3LjY4MSAxLjMzNy0yLjMxIDEuMTc3LTIuMjkyLTEuMTg5LjY5LTEuMzMxeicgZmlsbD0nIzAwMCcgIGZpbGwtcnVsZT0nbm9uemVybycvPjwvc3ZnPg== );
+		mask-image: url( data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTYnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggZD0nTTggMWE1IDUgMCAwMTMuMDAxIDlMMTEgMTJhMyAzIDAgMDEtNiAwdi0yYTUgNSAwIDAxMy05em0xLjM3IDExLjYxMUg2LjYzYTEuNSAxLjUgMCAwMDIuNzQgMHpNOCAyLjVhMy41IDMuNSAwIDAwLTIuMSA2LjMgMS41IDEuNSAwIDAxLjU5MiAxLjA0NEw2LjUgMTB2MS4xMWgzbC4wMDEtMS4xMTFBMS41IDEuNSAwIDAxMTAuMSA4LjggMy41IDMuNSAwIDAwOCAyLjV6TTYuMzkxIDYuNDNMOCA3LjI2NWwxLjYyMy0uODI3LjY4MSAxLjMzNy0yLjMxIDEuMTc3LTIuMjkyLTEuMTg5LjY5LTEuMzMxeicgZmlsbD0nIzAwMCcgIGZpbGwtcnVsZT0nbm9uemVybycvPjwvc3ZnPg== );
+	}
 
-    &.ubuntu-template-box-doccan::after {
-        -webkit-mask-image: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTYnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggZD0nTTggLjQ5NmwyLjA1MyAxLjg2MyAyLjc3LS4xMDguMzc2IDIuNzQ3IDIuMTkxIDEuNjk5LTEuNDc4IDIuMzQ1LjU4NyAyLjcxLTIuNjQuODQ3LTEuMjkyIDIuNDUzTDggMTQuMDAzbC0yLjU2NyAxLjA0OS0xLjI5Mi0yLjQ1My0yLjY0LS44NDcuNTg3LTIuNzFMLjYxIDYuNjk3IDIuOCA0Ljk5OGwuMzc1LTIuNzQ3IDIuNzcuMTA4TDggLjQ5NnpNOCAyLjUyTDYuNSAzLjg4MWwtMi4wMjItLjA3OC0uMjc0IDIuMDA1LTEuNjAxIDEuMjQgMS4wOCAxLjcxMy0uNDI4IDEuOTc4IDEuOTI4LjYxOS45NDMgMS43OUw4IDEyLjM4M2wxLjg3My43NjUuOTQ0LTEuNzkgMS45MjctLjYxOS0uNDI4LTEuOTc4IDEuMDgtMS43MTMtMS42LTEuMjQtLjI3NS0yLjAwNS0yLjAyMi4wNzhMOCAyLjUyem0xLjg5OSAyLjgzNWwxLjIwNy44OS0zLjcyNyA1LjA2LTIuNjYtMi4zNTMuOTk0LTEuMTIzIDEuNDMxIDEuMjY1IDIuNzU1LTMuNzM5eicgZmlsbD0nIzAwMCcgIGZpbGwtcnVsZT0nbm9uemVybycvPjwvc3ZnPg==");
-        mask-image: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTYnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggZD0nTTggLjQ5NmwyLjA1MyAxLjg2MyAyLjc3LS4xMDguMzc2IDIuNzQ3IDIuMTkxIDEuNjk5LTEuNDc4IDIuMzQ1LjU4NyAyLjcxLTIuNjQuODQ3LTEuMjkyIDIuNDUzTDggMTQuMDAzbC0yLjU2NyAxLjA0OS0xLjI5Mi0yLjQ1My0yLjY0LS44NDcuNTg3LTIuNzFMLjYxIDYuNjk3IDIuOCA0Ljk5OGwuMzc1LTIuNzQ3IDIuNzcuMTA4TDggLjQ5NnpNOCAyLjUyTDYuNSAzLjg4MWwtMi4wMjItLjA3OC0uMjc0IDIuMDA1LTEuNjAxIDEuMjQgMS4wOCAxLjcxMy0uNDI4IDEuOTc4IDEuOTI4LjYxOS45NDMgMS43OUw4IDEyLjM4M2wxLjg3My43NjUuOTQ0LTEuNzkgMS45MjctLjYxOS0uNDI4LTEuOTc4IDEuMDgtMS43MTMtMS42LTEuMjQtLjI3NS0yLjAwNS0yLjAyMi4wNzhMOCAyLjUyem0xLjg5OSAyLjgzNWwxLjIwNy44OS0zLjcyNyA1LjA2LTIuNjYtMi4zNTMuOTk0LTEuMTIzIDEuNDMxIDEuMjY1IDIuNzU1LTMuNzM5eicgZmlsbD0nIzAwMCcgIGZpbGwtcnVsZT0nbm9uemVybycvPjwvc3ZnPg==");
-    }
+	&.ubuntu-template-box-doccan::after {
+		background-color: var( --ubuntu-template-doccan-border-color );
+		-webkit-mask-image: url( data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTYnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggZD0nTTggLjQ5NmwyLjA1MyAxLjg2MyAyLjc3LS4xMDguMzc2IDIuNzQ3IDIuMTkxIDEuNjk5LTEuNDc4IDIuMzQ1LjU4NyAyLjcxLTIuNjQuODQ3LTEuMjkyIDIuNDUzTDggMTQuMDAzbC0yLjU2NyAxLjA0OS0xLjI5Mi0yLjQ1My0yLjY0LS44NDcuNTg3LTIuNzFMLjYxIDYuNjk3IDIuOCA0Ljk5OGwuMzc1LTIuNzQ3IDIuNzcuMTA4TDggLjQ5NnpNOCAyLjUyTDYuNSAzLjg4MWwtMi4wMjItLjA3OC0uMjc0IDIuMDA1LTEuNjAxIDEuMjQgMS4wOCAxLjcxMy0uNDI4IDEuOTc4IDEuOTI4LjYxOS45NDMgMS43OUw4IDEyLjM4M2wxLjg3My43NjUuOTQ0LTEuNzkgMS45MjctLjYxOS0uNDI4LTEuOTc4IDEuMDgtMS43MTMtMS42LTEuMjQtLjI3NS0yLjAwNS0yLjAyMi4wNzhMOCAyLjUyem0xLjg5OSAyLjgzNWwxLjIwNy44OS0zLjcyNyA1LjA2LTIuNjYtMi4zNTMuOTk0LTEuMTIzIDEuNDMxIDEuMjY1IDIuNzU1LTMuNzM5eicgZmlsbD0nIzAwMCcgIGZpbGwtcnVsZT0nbm9uemVybycvPjwvc3ZnPg== );
+		mask-image: url( data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTYnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggZD0nTTggLjQ5NmwyLjA1MyAxLjg2MyAyLjc3LS4xMDguMzc2IDIuNzQ3IDIuMTkxIDEuNjk5LTEuNDc4IDIuMzQ1LjU4NyAyLjcxLTIuNjQuODQ3LTEuMjkyIDIuNDUzTDggMTQuMDAzbC0yLjU2NyAxLjA0OS0xLjI5Mi0yLjQ1My0yLjY0LS44NDcuNTg3LTIuNzFMLjYxIDYuNjk3IDIuOCA0Ljk5OGwuMzc1LTIuNzQ3IDIuNzcuMTA4TDggLjQ5NnpNOCAyLjUyTDYuNSAzLjg4MWwtMi4wMjItLjA3OC0uMjc0IDIuMDA1LTEuNjAxIDEuMjQgMS4wOCAxLjcxMy0uNDI4IDEuOTc4IDEuOTI4LjYxOS45NDMgMS43OUw4IDEyLjM4M2wxLjg3My43NjUuOTQ0LTEuNzkgMS45MjctLjYxOS0uNDI4LTEuOTc4IDEuMDgtMS43MTMtMS42LTEuMjQtLjI3NS0yLjAwNS0yLjAyMi4wNzhMOCAyLjUyem0xLjg5OSAyLjgzNWwxLjIwNy44OS0zLjcyNyA1LjA2LTIuNjYtMi4zNTMuOTk0LTEuMTIzIDEuNDMxIDEuMjY1IDIuNzU1LTMuNzM5eicgZmlsbD0nIzAwMCcgIGZpbGwtcnVsZT0nbm9uemVybycvPjwvc3ZnPg== );
+	}
 
-    &.ubuntu-template-box-note::after {
-        background-color: var(--ubuntu-template-note-border-color);
-    }
+	&.ubuntu-template-box-note::after {
+		background-color: var( --ubuntu-template-note-border-color );
+	}
 
-    &.ubuntu-template-box-info::after {
-        background-color: var(--ubuntu-template-info-border-color);
-    }
+	&.ubuntu-template-box-info::after {
+		background-color: var( --ubuntu-template-info-border-color );
+	}
 
-    &.ubuntu-template-box-tip::after {
-        background-color: var(--ubuntu-template-tip-border-color);
-    }
+	// Multi-colour icons are used as background images to preserve their colours.
+	&.ubuntu-template-box-warning::after {
+		background-image: url( data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTYnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggZmlsbD0nI2NjNzkwMCcgZmlsbC1ydWxlPSdldmVub2RkJyBjbGlwLXJ1bGU9J2V2ZW5vZGQnIGQ9J005LjM0IDEuMmw1Ljg0MiAxMS42MjdBMS41IDEuNSAwIDAxMTMuODQyIDE1SDIuMTU4YTEuNSAxLjUgMCAwMS0xLjM0LTIuMTczTDYuNjYgMS4yYTEuNSAxLjUgMCAwMTIuNjggMHpNOC41IDExYS41LjUgMCAwMS40OTIuNDFMOSAxMS41djFhLjUuNSAwIDAxLS40MS40OTJMOC41IDEzaC0xYS41LjUgMCAwMS0uNDkyLS40MUw3IDEyLjV2LTFhLjUuNSAwIDAxLjQxLS40OTJMNy41IDExaDF6TTkgNXY0LjVIN1Y1aDJ6Jy8+PC9zdmc+ );
+	}
 
-    &.ubuntu-template-box-doccan::after {
-        background-color: var(--ubuntu-template-doccan-border-color);
-    }
-
-    // Multi-colour icons are used as background images to preserve their colours.
-    &.ubuntu-template-box-warning::after {
-        background-image: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTYnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggZmlsbD0nI2NjNzkwMCcgZmlsbC1ydWxlPSdldmVub2RkJyBjbGlwLXJ1bGU9J2V2ZW5vZGQnIGQ9J005LjM0IDEuMmw1Ljg0MiAxMS42MjdBMS41IDEuNSAwIDAxMTMuODQyIDE1SDIuMTU4YTEuNSAxLjUgMCAwMS0xLjM0LTIuMTczTDYuNjYgMS4yYTEuNSAxLjUgMCAwMTIuNjggMHpNOC41IDExYS41LjUgMCAwMS40OTIuNDFMOSAxMS41djFhLjUuNSAwIDAxLS40MS40OTJMOC41IDEzaC0xYS41LjUgMCAwMS0uNDkyLS40MUw3IDEyLjV2LTFhLjUuNSAwIDAxLjQxLS40OTJMNy41IDExaDF6TTkgNXY0LjVIN1Y1aDJ6Jy8+PC9zdmc+");
-    }
-
-    &.ubuntu-template-box-danger::after {
-        background-image: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNicgaGVpZ2h0PScxNicgdmlld0JveD0nMCAwIDE2IDE2Jz48cGF0aCBmaWxsPScjYzcxNjJiJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGNsaXAtcnVsZT0nZXZlbm9kZCcgZD0nTTEgOGE3IDcgMCAxIDEgMTQgMEE3IDcgMCAwIDEgMSA4TTkgOC41VjRIN3Y0LjV6bS0uMDA4IDEuOTFBLjUuNSAwIDAgMCA4LjUgMTBoLTFsLS4wOS4wMDhBLjUuNSAwIDAgMCA3IDEwLjV2MWwuMDA4LjA5QS41LjUgMCAwIDAgNy41IDEyaDFsLjA5LS4wMDhBLjUuNSAwIDAgMCA5IDExLjV2LTF6Jy8+PC9zdmc+");
-    }
+	&.ubuntu-template-box-danger::after {
+		background-image: url( data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNicgaGVpZ2h0PScxNicgdmlld0JveD0nMCAwIDE2IDE2Jz48cGF0aCBmaWxsPScjYzcxNjJiJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGNsaXAtcnVsZT0nZXZlbm9kZCcgZD0nTTEgOGE3IDcgMCAxIDEgMTQgMEE3IDcgMCAwIDEgMSA4TTkgOC41VjRIN3Y0LjV6bS0uMDA4IDEuOTFBLjUuNSAwIDAgMCA4LjUgMTBoLTFsLS4wOS4wMDhBLjUuNSAwIDAgMCA3IDEwLjV2MWwuMDA4LjA5QS41LjUgMCAwIDAgNy41IDEyaDFsLjA5LS4wMDhBLjUuNSAwIDAgMCA5IDExLjV2LTF6Jy8+PC9zdmc+ );
+	}
 }

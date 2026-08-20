@@ -19,7 +19,7 @@
 
 /* Wordmark text is white against the dark header */
 .vector-header-container a.mw-logo .mw-logo-wordmark {
-	color: var(--color-inverted-fixed) !important;
+	color: var( --color-inverted-fixed ) !important;
 }
 
 /* Don't underline the wiki title on hover. */
@@ -33,7 +33,7 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 	filter: none !important;
 }
 
-@media (prefers-color-scheme: dark) {
+@media ( prefers-color-scheme: dark ) {
 	html.skin-theme-clientpref-os .vector-header-container .mw-logo-container.skin-invert {
 		filter: none !important;
 	}
@@ -48,34 +48,32 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 .vector-header-container {
 
 	// We still want to change links for the sticky header
-	&:not(.vector-sticky-header-container) {
+	&:not( .vector-sticky-header-container ) {
 		.vf-codex-token-map-dark();
-		background-color: var(--vf-color-background-default) !important;
+		background-color: var( --vf-color-background-default ) !important;
 	}
 
 	a,
 	a:visited {
-		color: var(--color-base) !important;
+		color: var( --color-base ) !important;
 	}
 }
 
 // Use different background color for dark theme
 @media screen {
 	html.skin-theme-clientpref-night {
-
 		.vector-header,
-		.vector-header-container:not(.vector-sticky-header-container) {
-			background-color: var(--vf-color-background-alt) !important;
+		.vector-header-container:not( .vector-sticky-header-container ) {
+			background-color: var( --vf-color-background-alt ) !important;
 		}
 	}
 }
 
-@media (prefers-color-scheme: dark) {
+@media ( prefers-color-scheme: dark ) {
 	html.skin-theme-clientpref-os {
-
 		.vector-header,
-		.vector-header-container:not(.vector-sticky-header-container) {
-			background-color: var(--vf-color-background-alt) !important;
+		.vector-header-container:not( .vector-sticky-header-container ) {
+			background-color: var( --vf-color-background-alt ) !important;
 		}
 	}
 }
@@ -91,7 +89,6 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 
 @media screen {
 	html.skin-theme-clientpref-night {
-
 		.vector-header-container .vector-dropdown-content,
 		.vector-header-container .vector-search-box,
 		.vector-header-container .vector-typeahead-search-container {
@@ -99,14 +96,13 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 		}
 
 		.vector-dropdown-content {
-			border: 1px solid var(--border-color-base);
+			border: 1px solid var( --border-color-base );
 		}
 	}
 }
 
-@media (prefers-color-scheme: dark) {
+@media ( prefers-color-scheme: dark ) {
 	html.skin-theme-clientpref-os {
-
 		.vector-header-container .vector-dropdown-content,
 		.vector-header-container .vector-search-box,
 		.vector-header-container .vector-typeahead-search-container {
@@ -114,12 +110,12 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 		}
 
 		.vector-dropdown-content {
-			border: 1px solid var(--border-color-base);
+			border: 1px solid var( --border-color-base );
 		}
 	}
 }
 
-/*Header spacing*/
+/* Header spacing */
 .vector-header {
 	padding-top: 0;
 	padding-bottom: 0;
@@ -134,12 +130,14 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 	margin: 0 !important;
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
-	border: none !important;
+	border: 0 !important;
 }
 
 /* Fix logo area for rectangular (tall) logo - reduced padding */
 .vector-header-start .vector-logo {
 	display: flex !important;
+	align-items: stretch !important;
+	height: 50px !important;
 	padding: 0 12px !important;
 }
 
@@ -151,11 +149,6 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 /* Vertically center the hamburger menu button within the header */
 .vector-header-start .vector-main-menu-landmark {
 	align-self: center;
-}
-
-.vector-header-start .vector-logo {
-	align-items: stretch !important;
-	height: 50px !important;
 }
 
 .vector-header-start a.mw-logo {
@@ -202,7 +195,7 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 	align-items: center !important;
 }
 
-/* Remove duplicate search icon in the sticky header*/
+/* Remove duplicate search icon in the sticky header */
 .cdx-button.vector-sticky-header-search-toggle {
 	display: none;
 }
