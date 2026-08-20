@@ -1,0 +1,36 @@
+/* Vector-chrome icon button sizing and spacing. */
+
+/* Reduce padding around icons on hover */
+.vector-user-links .cdx-button--icon-only,
+#pt-watchlist-2 .cdx-button--icon-only {
+	padding: 4px !important;
+	min-width: auto !important;
+	min-height: auto !important;
+}
+
+/* Target the search toggle specifically */
+a.search-toggle.cdx-button--icon-only,
+a.search-toggle.cdx-button--icon-only:hover {
+	padding: 2px !important;
+	min-width: auto !important;
+	min-height: auto !important;
+	margin-left: 4px !important;
+}
+
+/* Adjust the hover background size of icon-only buttons. Must live in this
+ * zzz module: Codex's own padding rules (in skins.*, which load earlier
+ * than ext.ubuntu.styles but earlier still than this module) would beat it
+ * by source order if it shipped in the shared layer. */
+.cdx-button--icon-only:hover,
+.cdx-button.cdx-button--fake-button--enabled:hover {
+	padding: 4px !important;
+}
+
+.vector-icon,
+.cdx-button {
+	background: var(--color-base);
+
+	svg {
+		color: var(--color-base);
+	}
+}

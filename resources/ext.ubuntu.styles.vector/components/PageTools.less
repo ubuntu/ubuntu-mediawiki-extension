@@ -1,0 +1,17 @@
+/* Tools links should not be blue */
+.vector-page-tools {
+
+	a,
+	a:visited {
+		color: var( --color-subtle ) !important;
+	}
+}
+
+/* Horizontal padding on the Tools dropdown button, so its hover shadow
+ * extends past the text instead of hugging it. Must override Codex's
+ * zeroing of the fake-button's horizontal padding. (8px = the skin's
+ * @padding-horizontal-tabs, which is not available here.) */
+#vector-page-tools-dropdown > .vector-dropdown-label {
+	padding-left: 8px !important;
+	padding-right: 8px !important;
+}

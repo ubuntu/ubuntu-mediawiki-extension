@@ -1,0 +1,13 @@
+/* Vector-chrome body styles. */
+
+/* Page action tabs (Read, Edit, View history, etc.) use regular text color */
+.vector-menu-tabs .vector-menu-content a,
+.vector-menu-tabs .vector-menu-content-list a {
+	color: inherit !important;
+}
+
+/* The page title (h1) should not have a rule beneath it. The skin draws a
+ * faux bottom border on the titlebar via ::after; remove it. */
+.vector-page-titlebar::after {
+	content: none;
+}

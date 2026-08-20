@@ -1,0 +1,12 @@
+/* Wings: use the base (content) background for the page surroundings, not
+ * the skin's gray secondary background, so the area around the page
+ * container matches the content on wide screens. The zzz module sorts after
+ * skins.*, so this wins the specificity tie by source order. */
+body {
+	background-color: var( --background-color-base );
+}
+
+/* Spacing between the page tabs/toolbar and the main content. */
+#mw-content-text {
+	margin-top: 24px;
+}
