@@ -8,7 +8,7 @@ ADMIN_PASSWORD := UbuntuWiki2026!
 PORT := $(or $(UBUNTU_WIKI_PORT),8088)
 export UBUNTU_WIKI_PORT
 
-setup: LocalSettings.php .ext/MobileFrontend
+setup: LocalSettings.php .ext/MobileFrontend .ext/CodeMirror
 	docker compose up -d
 	@echo "Waiting for database..."
 	@until docker compose exec -T mediawiki bash -c "php -r \"new mysqli('db', 'mediawiki', 'mediawiki', 'mediawiki');\"" > /dev/null 2>&1; do printf '.'; sleep 2; done
@@ -31,7 +31,7 @@ deploy: LocalSettings.php
 	docker compose cp LocalSettings.php mediawiki:/var/www/html/LocalSettings.php
 	docker compose exec mediawiki php maintenance/run.php update --quick
 
-up: LocalSettings.php .ext/MobileFrontend
+up: LocalSettings.php .ext/MobileFrontend .ext/CodeMirror
 	docker compose up -d
 	docker compose cp LocalSettings.php mediawiki:/var/www/html/LocalSettings.php
 
@@ -69,10 +69,15 @@ LocalSettings.php:
 	cp LocalSettings.example.php LocalSettings.php
 	@echo "Created LocalSettings.php from LocalSettings.example.php — edit it before running setup."
 
-# MobileFrontend is not bundled with the MediaWiki tarball. It is shallow-
-# cloned into .ext/ (gitignored) and mounted into the container — see
-# docker-compose.yml. Keep this target at the bottom: the FIRST target in a
-# Makefile is the default run by a bare `make`, which must stay `setup`.
+# Some extensions we want to test with are not bundled with the MediaWiki tarball.
+# They are shallow-cloned into .ext/ (gitignored) and mounted into the
+# container — see docker-compose.yml. Keep this target at the bottom: the
+# FIRST target in a Makefile is the default run by a bare `make`, which must
+# stay `setup`.
 .ext/MobileFrontend:
 	git clone --depth 1 --branch REL1_46 \
 		https://github.com/wikimedia/mediawiki-extensions-MobileFrontend.git $@
+
+.ext/CodeMirror:
+	git clone --depth 1 --branch REL1_46 \
+		https://github.com/wikimedia/mediawiki-extensions-CodeMirror.git $@

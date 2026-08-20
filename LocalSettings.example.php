@@ -109,22 +109,22 @@ wfLoadExtension('WikiEditor');
 wfLoadExtension('VisualEditor');
 wfLoadExtension('SyntaxHighlight_GeSHi');
 
+# CodeMirror (cloned into .ext/ by make setup), on by default for both the
+# wikitext and source editors.
+wfLoadExtension('CodeMirror');
+$wgDefaultUserOptions['usecodemirror'] = 1;
+
 $wgDefaultUserOptions['visualeditor-newwikitext'] = 1;
 $wgHiddenPrefs[] = 'visualeditor-newwikitext';
 
 # ---------------------------------------------------------------------------
 # Local testing only — do NOT copy to production.
 #
-# ConfirmEdit with QuestyCaptcha, configured so that EVERY edit (by anyone)
-# shows a CAPTCHA whose question embeds .ubuntu-code-block markup as raw
-# HTML — the same markup the on-wiki templates produce, and the reason the
-# ext.ubuntu.codeBlock copy button must work outside of regular wikitext
-# rendering (QuestyCaptcha inserts the question into the edit form unparsed,
-# and VisualEditor injects its CAPTCHA widget dynamically after a failed
-# save, exercising the MutationObserver path in codeBlock.js).
-#
-# Try it: edit any page and save. The answer is 42. See the seeded
-# "CAPTCHA testing" page for details.
+# ConfirmEdit with QuestyCaptcha, configured so that EVERY edit shows a
+# CAPTCHA whose question embeds .ubuntu-code-block markup as raw HTML. This
+# exercises the ext.ubuntu.codeBlock copy button outside regular wikitext
+# rendering. Edit any page and save; the answer is 42. See the seeded
+# "CAPTCHA testing" page.
 # ---------------------------------------------------------------------------
 # QuestyCaptcha is a sub-module of ConfirmEdit with its own extension.json,
 # hence the "ConfirmEdit/QuestyCaptcha" path form.
