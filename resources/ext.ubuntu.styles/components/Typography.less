@@ -1,10 +1,9 @@
 /**
  * Base typography for the Ubuntu wiki.
  *
- * Applies the webfonts declared in Fonts.less. Kept skin-agnostic so both
- * the ubuntu skin and Minerva pick the same base and mono stacks up via
- * ext.ubuntu.styles; skin-specific typography (headings, script fallbacks,
- * print) stays in the skins.
+ * Applies the webfonts declared in Fonts.less to the shared base and mono
+ * stacks; skin-specific typography (headings, script fallbacks, print)
+ * stays in the skins.
  */
 
 html,
@@ -29,4 +28,34 @@ body.mediawiki :is(code, pre, kbd, samp, tt),
 .mw-highlight,
 .mw-highlight pre {
     font-family: @font-family-mono;
+}
+
+/* No rule beneath the page title (h1 / firstHeading). */
+body.mediawiki :is(.mw-body h1,
+    .mw-body .mw-heading1,
+    .mw-body-content h1,
+    .mw-body-content .mw-heading1,
+    .mw-body .firstHeading) {
+    border-bottom: 0;
+}
+
+/* The section-heading rule sits above the h2 instead of below it: 24px
+ * (@spacing-150) below the previous section, with a 7px gap between the
+ * rule and the heading text. */
+body.mediawiki :is(.mw-body .mw-heading2,
+    .mw-body h2,
+    .mw-body-content h2,
+    .mw-body-content .mw-heading2) {
+    border-bottom: 0;
+    border-top: @border-width-base @border-style-base @border-color-base;
+    margin: @spacing-150 0 0.25em 0;
+    padding-top: 7px;
+    padding-bottom: 0;
+}
+
+/* Remove the duplicate rule and padding when the h2 is wrapped in a
+ * .mw-heading2 div (both match the selector above). */
+body.mediawiki .mw-body .mw-heading2 h2 {
+    border-top: 0;
+    padding-top: 0;
 }

@@ -1,0 +1,12 @@
+/* Link interaction colors. The :where() wrappers keep specificity at zero
+ * so skin and content styles still win where they set their own colors. */
+
+a:where( :not([ role="button"])):hover,
+a:where( :not([ role="button"])):active {
+    color: var(--color-progressive);
+}
+
+a:where(.new:not([ role="button"])):hover,
+a:where(.new:not([ role="button"])):active {
+    color: var(--color-destructive);
+}

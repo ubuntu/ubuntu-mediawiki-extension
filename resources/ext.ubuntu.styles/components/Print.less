@@ -1,0 +1,35 @@
+/**
+ * Print adjustments for content headings.
+ *
+ * The section-heading rule moves above the h2 in print as it does on screen
+ * (see Typography.less). Kept out of the screen block in common.less so it
+ * only applies to print media. The `body.mediawiki` prefix keeps these
+ * rules ahead of the skins' own print styles, which load after this module
+ * with otherwise-equal specificity.
+ */
+@media print {
+
+    /* No rule beneath the page title; keep the overflow guard so floated
+	 * elements do not collide with the heading. */
+    body.mediawiki .firstHeading {
+        overflow: hidden;
+        border-bottom: 0;
+    }
+
+    /* Section-heading rule above the h2 rather than below it, with a 7px
+	 * gap between the rule and the heading text. */
+    body.mediawiki :is(.mw-heading2, h2) {
+        overflow: hidden;
+        border-bottom: 0;
+        border-top: 2px solid @color-emphasized;
+        padding-top: 7px;
+        padding-bottom: 0;
+    }
+
+    /* Remove the duplicate rule and padding when the h2 is wrapped in a
+	 * .mw-heading2 div (both match the selector above). */
+    body.mediawiki .mw-heading2 h2 {
+        border-top: 0;
+        padding-top: 0;
+    }
+}

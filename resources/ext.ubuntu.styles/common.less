@@ -17,10 +17,12 @@
 // codex-tokens.less is self-contained: it imports vendor/ubuntu-palette.less.
 @import './codex-tokens.less';
 
-// Fonts: @font-face declarations (all media).
+// Components; each file scopes itself to the media it applies to.
 @import './components/Fonts.less';
-
-// On-wiki template styles (all media).
+@import './components/Footer.less';
+@import './components/ContentClasses.less';
+@import './components/CodeMirror.less';
+@import './components/Print.less';
 @import './components/templates/Admonitions.less';
 @import './components/templates/StatusMessages.less';
 @import './components/templates/RelatedArticles.less';
@@ -49,7 +51,7 @@
 		}
 	}
 
-	// Components
 	@import './components/Typography.less';
+	@import './components/Links.less';
 	@import './components/CodeBlock.less';
 }
