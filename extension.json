@@ -132,9 +132,11 @@
             "value": {
                 "legal": "https://canonical.com/legal",
                 "privacy": "https://canonical.com/legal/data-privacy",
-                "codeofconduct": "https://ubuntu.com/community/docs/ethos/code-of-conduct"
+                "codeofconduct": "https://ubuntu.com/community/docs/ethos/code-of-conduct",
+                "about": null,
+                "disclaimers": null
             },
-            "description": "Footer link targets (name => wiki page title or external URL). The 'privacy' name replaces the default footer privacy link instead of adding a new one. Set a name to null to drop the link; labels come from the ubuntu-footer-<name>-desc messages (the built-in 'privacy' message for the privacy link).",
+            "description": "Footer link targets (name => wiki page title or external URL). The 'privacy' name replaces the default footer privacy link instead of adding a new one; the default 'about' and 'disclaimers' links are blanked out. Set a name to null to drop the link; labels come from the ubuntu-footer-<name>-desc messages (the built-in 'privacy' message for the privacy link).",
             "merge_strategy": "array_replace"
         }
     },

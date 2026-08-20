@@ -1,0 +1,6 @@
+/* Blanked-out default footer links (see Hooks::onSkinAddFooterLinks) leave
+ * only a marker span inside their list item; hide the whole item so no gap
+ * is left behind. */
+li:has(> .ubuntu-footer-blank:only-child) {
+    display: none;
+}

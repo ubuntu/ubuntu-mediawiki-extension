@@ -70,7 +70,10 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook
      * default footer links by key, so reusing the 'privacy' key replaces the
      * default privacy link's target instead of adding a second link. Its
      * label is the built-in 'privacy' message. A null target blanks out the
-     * default link entirely.
+     * default link entirely; the same works for the other core default keys
+     * ('about', 'disclaimers'). Blanked items are replaced with an empty
+     * element (not an empty string, which is falsy and would re-render the
+     * default message text).
      *
      * The cookie-settings link is always added: it reopens the consent banner
      * via its .js-revoke-cookie-manager class when the cookie consent module
@@ -91,9 +94,12 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook
         if (array_key_exists('privacy', $links)) {
             $privacyMsg = $skin->msg('privacy');
             if ($links['privacy'] === null) {
-                // An empty string still overrides the default link, and the
-                // resulting empty list item renders nothing.
-                $footerlinks['privacy'] = '';
+                // Blank out the default privacy link entirely: the marker
+                // element is truthy (unlike an empty string) so
+                // SkinComponentLink does not fall back to the default
+                // message text, and the .ubuntu-footer-blank rule in
+                // ext.ubuntu.styles hides the whole list item.
+                $footerlinks['privacy'] = $this->blankFooterLink();
             } elseif (!$privacyMsg->inContentLanguage()->isDisabled()) {
                 $link = $this->buildFooterLink($links['privacy'], $privacyMsg->text());
                 if ($link !== null) {
@@ -105,6 +111,16 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook
 
         foreach ($links as $name => $target) {
             if ($target === null) {
+                // Blank out a core default footer link: override the item by
+                // key with a marker element. The html must be truthy — an
+                // empty string is falsy in SkinComponentLink, which would
+                // fall through and re-render the default message text
+                // ('about' -> 'About'). The .ubuntu-footer-blank rule in
+                // ext.ubuntu.styles hides the whole list item. Unknown names
+                // have no default to blank, so they are simply not added.
+                if (in_array($name, ['about', 'disclaimers'], true)) {
+                    $footerlinks[$name] = $this->blankFooterLink();
+                }
                 continue;
             }
             $descMsg = $skin->msg("ubuntu-footer-$name-desc");
@@ -121,6 +137,18 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook
             'href' => '#',
             'class' => 'js-revoke-cookie-manager',
         ], $skin->msg('ubuntu-manage-trackers-button-label')->escaped());
+    }
+
+    /**
+     * HTML marker for a blanked-out footer link. The element is truthy but
+     * empty, and the .ubuntu-footer-blank rule in ext.ubuntu.styles hides
+     * the whole list item so no gap is left behind.
+     *
+     * @return string HTML
+     */
+    private function blankFooterLink(): string
+    {
+        return Html::element('span', ['class' => 'ubuntu-footer-blank']);
     }
 
     /**
