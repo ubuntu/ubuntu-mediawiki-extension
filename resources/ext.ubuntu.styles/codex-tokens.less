@@ -3,16 +3,26 @@
  *
  * Maps the Codex design tokens (https://doc.wikimedia.org/codex/latest/design-tokens/color.html)
  * onto the Vanilla Framework palette custom properties declared in
- * vendor/ubuntu-palette.less. All rules are mixins and produce no output
+ * vendor/ubuntu-palette.less (imported below, so this file is
+ * self-contained). All rules are mixins and produce no output
  * until invoked; the base application per theme lives in common.less.
  *
  * Skins with the UbuntuWiki extension as a dependency can @import this file
- * by bare filename (the extension registers this directory in
- * SkinLessImportPaths) to re-apply a theme map inside a container —
- * e.g. `.my-header { .vf-codex-token-map-dark(); }` — for special cases
- * that deliberately ignore the user's color preference. The import must
- * pull in the palette first: `@import 'vendor/ubuntu-palette.less';`.
+ * to re-apply a theme map inside a container — e.g.
+ * `.my-header { .vf-codex-token-map-dark(); }` — for special cases
+ * that deliberately ignore the user's color preference.
+ *
+ * IMPORTANT: import by RELATIVE path, not bare filename. Core's
+ * SkinLessImportPaths attribute allows only ONE directory per skin name
+ * (last registration wins, no merge), and the skin's own entry — needed
+ * for mediawiki.skin.variables.less — takes it. This directory is
+ * therefore never on the import path. From a file in the skin's
+ * resources/ tree, e.g.:
+ *   @import (reference) '../../../../../extensions/UbuntuWiki/resources/ext.ubuntu.styles/codex-tokens.less';
+ * (adjust the ../ depth to the importing file). The nested palette import
+ * below resolves relative to THIS file, so the importer needs nothing else.
  */
+@import './vendor/ubuntu-palette.less';
 
 /* Other colors */
 // MediaWiki generally expects solid colors, but VF uses a lot of transparency.
@@ -72,6 +82,8 @@
     --background-color-base: var(--vf-color-background-default);
     --background-color-neutral: var(--vf-color-background-neutral-default);
     --background-color-neutral-subtle: var(--vf-color-background-code);
+    // Known-broken upstream (LESS arithmetic can't operate through var());
+    // kept as-is for now — see the styling notes in the repo README.
     --background-color-inverted: (#fff - var(--vf-color-background-default));
 
     --background-color-progressive--focus: var(--vf-color-focus);
