@@ -1,5 +1,5 @@
 /**
- * Cookie consent integration for the Ubuntu skin.
+ * Cookie consent integration.
  *
  * Initialises the Canonical cookie-policy library and Google Consent Mode v2.
  * The vendor shim (cookieConsent-vendor.js) uses indirect eval to execute the
