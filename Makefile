@@ -54,6 +54,10 @@ seed:
 		php maintenance/run.php importTextFiles \
 			--user Admin --summary "Seed test content" --overwrite \
 			/tmp/seed/*.txt'
+	# Pages imported early in the glob (e.g. Main_Page) link to pages created
+	# later (e.g. Template examples); the backlink refresh jobs are queued but
+	# not run during CLI import, so run them now or those links stay red.
+	docker compose exec -T mediawiki php maintenance/run.php runJobs
 
 lint:
 	composer test
