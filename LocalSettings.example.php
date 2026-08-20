@@ -28,18 +28,13 @@ $wgUpgradeKey = "change-me";
 $wgEnableUploads = false;
 $wgUseInstantCommons = true;
 
-# The extension under test. This repository is live-mounted at
-# extensions/UbuntuWiki, so edits to src/ and resources/ apply on reload.
+# The extension under test, live-mounted at extensions/UbuntuWiki.
 wfLoadExtension('UbuntuWiki');
 
-# Skin
 # Vector (default) and MinervaNeue ship with the MediaWiki tarball. Minerva
 # stays enabled to test the minerva skin styles — append ?useskin=minerva
-# to any URL.
-#
-# Note: the Ubuntu skin is intentionally not used here for now — its current
-# release still declares UbuntuCookieConsentEnabled itself, which fatals when
-# loaded together with this extension.
+# to any URL. The Ubuntu skin is not installed: its current release declares
+# UbuntuCookieConsentEnabled itself, which fatals alongside this extension.
 wfLoadSkin('Vector');
 wfLoadSkin('MinervaNeue');
 $wgDefaultSkin = 'vector-2022';
@@ -49,7 +44,6 @@ $wgMFAutodetectMobileView = true;
 $wgDefaultMobileSkin = 'minerva';
 
 # Logo — uses the Ubuntu logo bundled in this extension.
-# Replace with your own image path to use a custom logo.
 $wgLogos = [
     '1x'   => "$wgResourceBasePath/extensions/UbuntuWiki/resources/images/Tag-CoF-Orange-Digital.svg",
     'icon' => "$wgResourceBasePath/extensions/UbuntuWiki/resources/images/Tag-CoF-Orange-Digital.svg",
@@ -57,22 +51,17 @@ $wgLogos = [
 
 unset($wgFooterIcons['poweredby']);
 
-# Cookie consent & Google Tag Manager
-# Enable the Canonical cookie policy consent banner. The extension also adds
-# a "Manage your tracker settings" footer link that reopens the banner.
+# Canonical cookie policy consent banner. The extension also adds a "Manage
+# your tracker settings" footer link that reopens the banner.
 $wgUbuntuCookieConsentEnabled = true;
 
-# Google Tag Manager container ID (leave empty/null to disable GTM).
-# The GTM snippet is injected via the BeforePageDisplay hook below.
+# Google Tag Manager container ID (leave empty to disable).
 $wgGTMContainerID = '';
 
 # Google Tag Manager injection.
-# The cookie-policy vendor IIFE is loaded by the skin's ResourceLoader module
-# (skins.ubuntu.cookieConsent). Its addGoogleConsentMode() sets
-# gtag('consent','default',...) with all categories denied. The GTM snippet
-# must load AFTER the vendor so that consent defaults are set before GTM
-# initialises. When the user accepts cookies, the vendor library calls
-# gtag('consent','update',...) automatically.
+# Google Tag Manager injection. The snippet must load after the cookie-policy
+# vendor (which sets gtag consent defaults to denied), so consent is
+# established before GTM initialises.
 $wgHooks['BeforePageDisplay'][] = function (MediaWiki\Output\OutputPage $out, MediaWiki\Skin\Skin $skin) use (&$wgGTMContainerID) {
     if ($wgGTMContainerID) {
         $id = htmlspecialchars($wgGTMContainerID, ENT_QUOTES);
