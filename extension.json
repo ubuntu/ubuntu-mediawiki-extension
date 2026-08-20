@@ -61,7 +61,7 @@
                 ]
             }
         },
-        "ext.ubuntu.styles.minerva": {
+        "zzz.ext.ubuntu.styles.minerva": {
             "styles": [
                 "ext.ubuntu.styles.minerva/minerva.less"
             ],
@@ -69,7 +69,34 @@
                 "minerva": [
                     "ext.ubuntu.styles.minerva/minerva.less"
                 ]
-            }
+            },
+            "skins": [
+                "minerva"
+            ]
+        },
+        "zzz.ext.ubuntu.styles.vector": {
+            "styles": [
+                "ext.ubuntu.styles.vector/vector.less"
+            ],
+            "skinStyles": {
+                "default": [
+                    "ext.ubuntu.styles.vector/vector.less"
+                ],
+                "ubuntu": [
+                    "ext.ubuntu.styles.vector/vector.less"
+                ],
+                "vector": [
+                    "ext.ubuntu.styles.vector/vector.less"
+                ],
+                "vector-2022": [
+                    "ext.ubuntu.styles.vector/vector.less"
+                ]
+            },
+            "skins": [
+                "ubuntu",
+                "vector",
+                "vector-2022"
+            ]
         },
         "ext.ubuntu.cookieConsent": {
             "styles": [
@@ -95,9 +122,6 @@
     "ResourceFileModulePaths": {
         "localBasePath": "resources",
         "remoteExtPath": "UbuntuWiki/resources"
-    },
-    "SkinLessImportPaths": {
-        "ubuntu": "resources/ext.ubuntu.styles"
     },
     "config": {
         "UbuntuCookieConsentEnabled": {

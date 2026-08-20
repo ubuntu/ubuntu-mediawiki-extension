@@ -1,0 +1,208 @@
+/**
+ * Ubuntu header branding for Vector-2022-based skins (ubuntu, vector-2022).
+ *
+ * The skin keeps its layout mechanics; the branding/theme layer lives here
+ * so the whole Ubuntu wiki theme ships from this extension. Theme mixins
+ * come from the shared layer (../../ext.ubuntu.styles/codex-tokens.less),
+ * which is self-contained.
+ *
+ * IMPORTANT: no skin-chrome markup changes may happen in this file — it must
+ * be possible to understand the skin's HTML from the skin repo alone. This
+ * file only colors and re-themes the skin's own classes.
+ *
+ * Applies at all media widths; selectors match only markup
+ * emitted by Vector-2022-class skins, so other skins are unaffected.
+ */
+@import '../../ext.ubuntu.styles/codex-tokens.less';
+
+/* --- LOGO WORDMARK COLOR LOGIC --- */
+
+/* Wordmark text is white against the dark header */
+.vector-header-container a.mw-logo .mw-logo-wordmark {
+	color: var(--color-inverted-fixed) !important;
+}
+
+/* Don't underline the wiki title on hover. */
+.vector-header-container a.mw-logo:hover {
+	text-decoration: none;
+}
+
+/* Keep the logo and wordmark the same color in all modes by overriding
+ * the .skin-invert filter that flips the wordmark from white to black in dark mode. */
+html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.skin-invert {
+	filter: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+	html.skin-theme-clientpref-os .vector-header-container .mw-logo-container.skin-invert {
+		filter: none !important;
+	}
+}
+
+.vector-header-container {
+	gap: 0 !important;
+}
+
+/* ----- Dark grey background for the entire header ----- */
+.vector-header,
+.vector-header-container {
+
+	// We still want to change links for the sticky header
+	&:not(.vector-sticky-header-container) {
+		.vf-codex-token-map-dark();
+		background-color: var(--vf-color-background-default) !important;
+	}
+
+	a,
+	a:visited {
+		color: var(--color-base) !important;
+	}
+}
+
+// Use different background color for dark theme
+@media screen {
+	html.skin-theme-clientpref-night {
+
+		.vector-header,
+		.vector-header-container:not(.vector-sticky-header-container) {
+			background-color: var(--vf-color-background-alt) !important;
+		}
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	html.skin-theme-clientpref-os {
+
+		.vector-header,
+		.vector-header-container:not(.vector-sticky-header-container) {
+			background-color: var(--vf-color-background-alt) !important;
+		}
+	}
+}
+
+/* Children that should follow the page theme, not the dark header.
+  Re-declare the token map so they override the dark tokens inherited
+  from .vector-header. Default = light, matching :root. */
+.vector-header-container .vector-dropdown-content,
+.vector-header-container .vector-search-box,
+.vector-header-container .vector-typeahead-search-container {
+	.vf-codex-token-map-light();
+}
+
+@media screen {
+	html.skin-theme-clientpref-night {
+
+		.vector-header-container .vector-dropdown-content,
+		.vector-header-container .vector-search-box,
+		.vector-header-container .vector-typeahead-search-container {
+			.vf-codex-token-map-dark();
+		}
+
+		.vector-dropdown-content {
+			border: 1px solid var(--border-color-base);
+		}
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	html.skin-theme-clientpref-os {
+
+		.vector-header-container .vector-dropdown-content,
+		.vector-header-container .vector-search-box,
+		.vector-header-container .vector-typeahead-search-container {
+			.vf-codex-token-map-dark();
+		}
+
+		.vector-dropdown-content {
+			border: 1px solid var(--border-color-base);
+		}
+	}
+}
+
+/*Header spacing*/
+.vector-header {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+/* Ensure all header sections have consistent height and styling */
+.vector-header-start,
+.vector-header-end {
+	min-height: 50px !important;
+	display: flex !important;
+	align-items: center !important;
+	margin: 0 !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	border: none !important;
+}
+
+/* Fix logo area for rectangular (tall) logo - reduced padding */
+.vector-header-start .vector-logo {
+	display: flex !important;
+	padding: 0 12px !important;
+}
+
+/* Align icon to top, text to bottom, matching ubuntu.com tagged-logo layout */
+.vector-header-start {
+	align-items: start !important;
+}
+
+/* Vertically center the hamburger menu button within the header */
+.vector-header-start .vector-main-menu-landmark {
+	align-self: center;
+}
+
+.vector-header-start .vector-logo {
+	align-items: stretch !important;
+	height: 50px !important;
+}
+
+.vector-header-start a.mw-logo {
+	align-items: flex-end;
+}
+
+/* Wiki title styles */
+.vector-header-start .mw-logo-wordmark {
+	font-size: 1.3rem !important;
+	font-weight: 300 !important;
+	line-height: 1rem !important;
+	margin-bottom: 0.25rem !important;
+	white-space: nowrap !important;
+}
+
+.vector-header-start .mw-logo {
+	display: flex;
+	gap: 0.25rem;
+}
+
+.vector-header-start .mw-logo-container {
+	float: none;
+	max-width: none;
+}
+
+/* Style the logo image */
+.mw-logo-icon {
+	float: none;
+	max-height: 42px;
+	width: auto;
+	margin: 0;
+}
+
+/* Re-theme the legacy (no-JS) search box with the header's dark tokens
+ * instead of hardcoding colors — the skin's own styles consume
+ * --color-emphasized / --background-color-* from here.
+ */
+.vector-header-container .vector-search-box {
+	.vf-codex-token-map-dark();
+}
+
+.vector-search-box-vue {
+	display: flex !important;
+	align-items: center !important;
+}
+
+/* Remove duplicate search icon in the sticky header*/
+.cdx-button.vector-sticky-header-search-toggle {
+	display: none;
+}

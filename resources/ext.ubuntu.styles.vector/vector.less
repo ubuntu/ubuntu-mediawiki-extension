@@ -1,0 +1,13 @@
+/**
+ * Entry point for the Vector-family style layer (zzz.ext.ubuntu.styles.vector).
+ *
+ * Branding for Vector-2022-class skins (ubuntu, vector-2022, vector):
+ * dark header, logo and search-box theming. The zzz prefix sorts this module
+ * after every skins.* module in the combined stylesheet, so its rules win
+ * ties by source order. Applied per skin via the module's own skinStyles in
+ * extension.json (with a `default` fallback), after the shared base styles.
+ *
+ * Import-only by convention (see resources/README.md); declarations live in
+ * per-component files beside this one.
+ */
+@import './components/Header.less';
