@@ -9,27 +9,27 @@
  */
 @media print {
 
-    /* No rule beneath the page title; keep the overflow guard so floated
+	/* No rule beneath the page title; keep the overflow guard so floated
 	 * elements do not collide with the heading. */
-    body.mediawiki .firstHeading {
-        overflow: hidden;
-        border-bottom: 0;
-    }
+	body.mediawiki .firstHeading {
+		overflow: hidden;
+		border-bottom: 0;
+	}
 
-    /* Section-heading rule above the h2 rather than below it, with a 7px
+	/* Section-heading rule above the h2 rather than below it, with a 7px
 	 * gap between the rule and the heading text. */
-    body.mediawiki :is(.mw-heading2, h2) {
-        overflow: hidden;
-        border-bottom: 0;
-        border-top: 2px solid @color-emphasized;
-        padding-top: 7px;
-        padding-bottom: 0;
-    }
+	body.mediawiki :is( .mw-heading2, h2 ) {
+		overflow: hidden;
+		border-bottom: 0;
+		border-top: 2px solid @color-emphasized;
+		padding-top: 7px;
+		padding-bottom: 0;
+	}
 
-    /* Remove the duplicate rule and padding when the h2 is wrapped in a
+	/* Remove the duplicate rule and padding when the h2 is wrapped in a
 	 * .mw-heading2 div (both match the selector above). */
-    body.mediawiki .mw-heading2 h2 {
-        border-top: 0;
-        padding-top: 0;
-    }
+	body.mediawiki .mw-heading2 h2 {
+		border-top: 0;
+		padding-top: 0;
+	}
 }
