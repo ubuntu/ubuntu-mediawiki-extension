@@ -1,7 +1,0 @@
-<includeonly><div class="ubuntu-template-message">
-<p>[[File:{{{image|OOjs UI icon information.svg}}}|48px|link=|alt=]]</p>
-<p>'''{{{title|Message}}}'''</p>
-<div>{{{text|{{{1|}}}}}}</div>
-</div></includeonly><noinclude>Creates an Ubuntu status message with an icon, title, and body. The default image comes from Wikimedia Commons through InstantCommons.
-
-Usage: <nowiki>{{Message|title=Status title|text=Status text|image=OOjs UI icon information.svg}}</nowiki></noinclude>

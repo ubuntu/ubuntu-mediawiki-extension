@@ -98,11 +98,6 @@ wfLoadExtension('WikiEditor');
 wfLoadExtension('VisualEditor');
 wfLoadExtension('SyntaxHighlight_GeSHi');
 
-# CodeMirror (cloned into .ext/ by make setup), on by default for both the
-# wikitext and source editors.
-wfLoadExtension('CodeMirror');
-$wgDefaultUserOptions['usecodemirror'] = 1;
-
 $wgDefaultUserOptions['visualeditor-newwikitext'] = 1;
 $wgHiddenPrefs[] = 'visualeditor-newwikitext';
 

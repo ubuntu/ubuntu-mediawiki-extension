@@ -5,7 +5,7 @@ This wiki runs the [https://github.com/ubuntu/ubuntu-mediawiki-extension UbuntuW
 == Test pages ==
 
 * [[Code block examples]] — the copy button on <code>.ubuntu-code-block</code> markup in regular wikitext
-* [[Template examples]] — shared admonition, status-message, and related-articles template styles
+* [[Template examples]] — shared admonition template styles across all variants
 * [[CAPTCHA testing]] — the copy button inside the ConfirmEdit CAPTCHA form (outside wikitext rendering)
 
 == Useful things to try ==

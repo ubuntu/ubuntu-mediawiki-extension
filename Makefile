@@ -8,7 +8,7 @@ ADMIN_PASSWORD := UbuntuWiki2026!
 PORT := $(or $(UBUNTU_WIKI_PORT),8088)
 export UBUNTU_WIKI_PORT
 
-setup: LocalSettings.php .ext/MobileFrontend .ext/CodeMirror
+setup: LocalSettings.php .ext/MobileFrontend
 	docker compose up -d
 	@echo "Waiting for database..."
 	@until docker compose exec -T mediawiki bash -c "php -r \"new mysqli('db', 'mediawiki', 'mediawiki', 'mediawiki');\"" > /dev/null 2>&1; do printf '.'; sleep 2; done
@@ -31,7 +31,7 @@ deploy: LocalSettings.php
 	docker compose cp LocalSettings.php mediawiki:/var/www/html/LocalSettings.php
 	docker compose exec mediawiki php maintenance/run.php update --quick
 
-up: LocalSettings.php .ext/MobileFrontend .ext/CodeMirror
+up: LocalSettings.php .ext/MobileFrontend
 	docker compose up -d
 	docker compose cp LocalSettings.php mediawiki:/var/www/html/LocalSettings.php
 
@@ -59,6 +59,12 @@ seed:
 	# not run during CLI import, so run them now or those links stay red.
 	docker compose exec -T mediawiki php maintenance/run.php runJobs
 
+# Run a MediaWiki maintenance script, e.g.:
+#   make run deleteBatch -- --reason "cleanup" --u Admin /tmp/del.txt
+# Files referenced by the script are staged from ./.tmp into the container.
+run:
+	docker compose exec -T mediawiki php maintenance/run.php $(SCRIPT)
+
 lint:
 	composer test
 
@@ -77,7 +83,3 @@ LocalSettings.php:
 .ext/MobileFrontend:
 	git clone --depth 1 --branch REL1_46 \
 		https://github.com/wikimedia/mediawiki-extensions-MobileFrontend.git $@
-
-.ext/CodeMirror:
-	git clone --depth 1 --branch REL1_46 \
-		https://github.com/wikimedia/mediawiki-extensions-CodeMirror.git $@
