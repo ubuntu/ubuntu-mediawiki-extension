@@ -1,0 +1,3 @@
+<includeonly>{{Admonition|type=doccan|text={{{text|{{{1|}}}}}}}}</includeonly><noinclude>Creates an Ubuntu Canonical-documentation admonition.
+
+Usage: <nowiki>{{DocCan|Documentation text}}</nowiki></noinclude>

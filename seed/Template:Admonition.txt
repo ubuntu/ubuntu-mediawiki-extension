@@ -1,0 +1,7 @@
+<includeonly><div class="ubuntu-template-box ubuntu-template-box-{{{type|note}}}">
+{{{text|{{{1|}}}}}}
+</div></includeonly><noinclude>Creates an Ubuntu admonition box. The type selects the icon and accent colour: <code>note</code>, <code>warning</code>, <code>tip</code>, <code>doccan</code>, <code>info</code>, or <code>danger</code>.
+
+Usage: <nowiki>{{Admonition|type=note|text=Admonition text}}</nowiki>
+
+Use the named <code>text</code> parameter when the text contains a pipe character.</noinclude>

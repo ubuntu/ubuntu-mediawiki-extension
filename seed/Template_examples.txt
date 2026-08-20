@@ -1,0 +1,36 @@
+The Ubuntu wiki's shared template styles are produced by on-wiki templates that emit <code>ubuntu-template-*</code> markup. The same templates should render consistently in Vector, Minerva, and the Ubuntu skin.
+
+== Admonitions ==
+
+{{Note|A note gives readers supplementary information without interrupting the surrounding instructions.}}
+
+{{Warning|A warning identifies an action or configuration that needs extra care.}}
+
+{{Tip|A tip suggests a shorter or easier way to complete the task.}}
+
+{{DocCan|A Canonical documentation notice points readers at maintained documentation.}}
+
+{{Info|An information notice highlights context that explains the current page.}}
+
+{{Danger|A danger notice warns about an action that could lose data or break the system.}}
+
+== Status messages ==
+
+{{In use}}
+
+{{Message|title=Needs review|text=This page has a generic status message with a custom title and body.}}
+
+== Related articles ==
+
+The box floats beside this paragraph on desktop and becomes an inline list below 720px. Resize the browser or append <code>?useskin=minerva</code> to check the responsive layout.
+
+{{Related articles|title=Related articles|items=<ul><li>[[Main Page]]</li><li>[[Code block examples]]</li><li>[[CAPTCHA testing]]</li></ul>}}
+
+This paragraph is intentionally long enough to wrap beside the related-articles box on a wide viewport. It helps confirm the float, heading, list styling, and contrast in both light and dark themes without needing production wiki content.
+
+== Template pages ==
+
+* [[Template:Admonition]] — generic admonition used by the typed wrappers
+* [[Template:Note]], [[Template:Warning]], [[Template:Tip]], [[Template:DocCan]], [[Template:Info]], [[Template:Danger]] — typed admonitions
+* [[Template:Message]] and [[Template:In use]] — status messages
+* [[Template:Related articles]] — related-articles box

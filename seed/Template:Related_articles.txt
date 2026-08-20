@@ -1,0 +1,6 @@
+<includeonly><div class="ubuntu-template-meta-related-articles">
+<p>{{{title|Related articles}}}</p>
+{{{items|{{{1|<ul><li>[[Main Page]]</li></ul>}}}}}}
+</div></includeonly><noinclude>Creates a related-articles box. Pass a <code>&lt;ul&gt;</code> list in the <code>items</code> parameter.
+
+Usage: <nowiki>{{Related articles|title=Related articles|items=<ul><li>[[Main Page]]</li></ul>}}</nowiki></noinclude>

@@ -1,0 +1,3 @@
+<includeonly>{{Admonition|type=tip|text={{{text|{{{1|}}}}}}}}</includeonly><noinclude>Creates an Ubuntu tip admonition.
+
+Usage: <nowiki>{{Tip|Tip text}}</nowiki></noinclude>

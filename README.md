@@ -35,6 +35,8 @@ Note: don't run this and the skin repo's environment at the same time — both b
 - **Main Page** — overview and links
 - **Code block examples** — `.ubuntu-code-block` markup in regular wikitext: template-driven blocks, raw HTML blocks, custom copy labels, tabindex/focus-order cases, and a SyntaxHighlight comparison
 - **Template:Code block** — the template used by the examples page
+- **Template examples** — shared admonition, status-message, and related-articles styles across all variants
+- **Template:Admonition, Template:Message, Template:In use, Template:Related articles** — generic template implementations, plus typed admonition wrappers for note, warning, tip, doccan, info, and danger
 - **CAPTCHA testing** — instructions for the CAPTCHA scenario
 
 ### Testing code blocks outside wikitext (CAPTCHA)

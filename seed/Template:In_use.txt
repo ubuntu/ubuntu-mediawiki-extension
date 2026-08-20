@@ -1,0 +1,3 @@
+<includeonly>{{Message|title=In use|image={{{image|OOjs UI icon information.svg}}}|text={{{text|{{{1|This page is undergoing a major edit. Please avoid editing it until this notice is removed.}}}}}}}}</includeonly><noinclude>Creates an "in use" status message.
+
+Usage: <nowiki>{{In use}}</nowiki> or <nowiki>{{In use|Custom status text}}</nowiki></noinclude>
