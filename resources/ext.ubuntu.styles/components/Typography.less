@@ -53,6 +53,20 @@ body.mediawiki :is(.mw-body .mw-heading2,
     padding-bottom: 0;
 }
 
+/* A section heading that is the very first child of the content sits right
+ * below the page toolbar; drop its overline and the spacing that goes with it
+ * so the two bars don't stack. :first-child (not :first-of-type) is what
+ * matters — it only matches when no text or other element precedes the
+ * heading. Covers the article form (h2 wrapped in .mw-heading2 inside
+ * .mw-parser-output) and the special-page form (a bare h2 under
+ * .mw-body-content, e.g. Special:Version). */
+body.mediawiki .mw-parser-output > .mw-heading2:first-child,
+body.mediawiki .mw-body-content > h2:first-child {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
 /* Remove the duplicate rule and padding when the h2 is wrapped in a
  * .mw-heading2 div (both match the selector above). */
 body.mediawiki .mw-body .mw-heading2 h2 {
