@@ -12,7 +12,7 @@ Prerequisites: Docker (with the compose plugin) and git. Vector is the default s
 make setup   # first run: start containers, install MediaWiki, seed test pages
 ```
 
-Then open <http://localhost:8080> (user `admin`, password `UbuntuWiki2026!`).
+Then open <http://localhost:8088> (user `admin`, password `UbuntuWiki2026!`).
 
 | Target        | What it does                                                     |
 | ------------- | ---------------------------------------------------------------- |
@@ -26,7 +26,7 @@ Then open <http://localhost:8080> (user `admin`, password `UbuntuWiki2026!`).
 | `make lint`   | Run phpcs, parallel-lint and minus-x locally                     |
 | `make shell`  | Open a shell in the mediawiki container                          |
 
-Note: don't run this and the skin repo's environment at the same time — both bind port 8080.
+The environment binds port 8088 by default (the skin repo's environment uses 8080, so both can run side by side). To use a different port — e.g. to run several copies of this environment at once — set `UBUNTU_WIKI_PORT` before running make: `UBUNTU_WIKI_PORT=9090 make setup`.
 
 ### Seeded test pages
 

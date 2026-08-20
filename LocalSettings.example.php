@@ -7,7 +7,7 @@ if (!defined('MEDIAWIKI')) {
 
 # Site
 $wgSitename = "Ubuntu Wiki";
-$wgServer = "http://localhost:8080";
+$wgServer = "http://localhost:" . (getenv('UBUNTU_WIKI_PORT') ?: '8088');
 $wgScriptPath = "";
 $wgResourceBasePath = $wgScriptPath;
 $wgLanguageCode = "en";

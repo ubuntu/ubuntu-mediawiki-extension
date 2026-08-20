@@ -3,6 +3,11 @@
 # Password for the initial admin account created by `make setup`
 ADMIN_PASSWORD := UbuntuWiki2026!
 
+# Host port for the test wiki; override with UBUNTU_WIKI_PORT=<port> to run
+# alongside other MediaWiki environments (see docker-compose.yml).
+PORT := $(or $(UBUNTU_WIKI_PORT),8088)
+export UBUNTU_WIKI_PORT
+
 setup: LocalSettings.php .ext/MobileFrontend
 	docker compose up -d
 	@echo "Waiting for database..."
@@ -18,7 +23,7 @@ setup: LocalSettings.php .ext/MobileFrontend
 	$(MAKE) --no-print-directory seed
 	@echo ""
 	@echo "Setup complete!"
-	@echo "  URL:      http://localhost:8080"
+	@echo "  URL:      http://localhost:$(PORT)"
 	@echo "  Username: admin"
 	@echo "  Password: $(ADMIN_PASSWORD)"
 

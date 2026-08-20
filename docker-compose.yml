@@ -11,8 +11,13 @@ services:
 
   mediawiki:
     image: mediawiki:1.46
+    environment:
+      # Passed to LocalSettings.php so $wgServer matches the published port.
+      UBUNTU_WIKI_PORT: ${UBUNTU_WIKI_PORT:-8088}
     ports:
-      - "8080:80"
+      # Default port 8088 avoids clashing with other environments on 8080.
+      # Override with UBUNTU_WIKI_PORT=<port> to run multiple at once.
+      - "${UBUNTU_WIKI_PORT:-8088}:80"
     volumes:
       # Extension files are served directly from this directory (live mount)
       - .:/var/www/html/extensions/UbuntuWiki
