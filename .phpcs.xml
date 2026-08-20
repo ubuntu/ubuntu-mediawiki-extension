@@ -4,4 +4,9 @@
     <file>.</file>
     <arg name="extensions" value="php" />
     <arg name="encoding" value="UTF-8" />
+    Local development config copies; not shipped extension code.
+    <exclude-pattern>/LocalSettings\.php$</exclude-pattern>
+    <exclude-pattern>/LocalSettings\.example\.php$</exclude-pattern>
+    <!-- Extensions fetched by `make setup` for the Docker test environment. -->
+    <exclude-pattern>/\.ext/</exclude-pattern>
 </ruleset>
