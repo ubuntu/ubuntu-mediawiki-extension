@@ -1,14 +1,16 @@
 /**
  * Common Ubuntu wiki styles, applied to every supported skin.
  *
- * Loaded on both the ubuntu skin and minerva via ResourceModuleSkinStyles.
- * The ubuntu skin (ubuntu-mediawiki-skin fork) also depends on resources
- * here directly — notably the palette custom properties — so treat the
- * tokens exposed by this module as a stable contract.
+ * Loaded on every page view by Hooks::onBeforePageDisplay. The ubuntu skin
+ * (ubuntu-mediawiki-skin fork) also depends on resources here directly —
+ * notably the palette custom properties — so treat the tokens exposed by
+ * this module as a stable contract.
  *
  * This entry point only imports; keep declarations in the component and
  * vendor/ files so concerns stay separated. Styling of the ubuntu skin
- * itself lives in the ubuntu-mediawiki-skin repo, not here.
+ * itself lives in the ubuntu-mediawiki-skin repo, not here; styles for
+ * on-wiki templates are content-level styles and belong here so every skin
+ * renders them consistently.
  */
 @import './variables.less';
 @import './mixins.less';
@@ -17,6 +19,11 @@
 
 // Fonts: @font-face declarations (all media).
 @import './components/Fonts.less';
+
+// On-wiki template styles (all media).
+@import './components/templates/Admonitions.less';
+@import './components/templates/StatusMessages.less';
+@import './components/templates/RelatedArticles.less';
 
 @media screen {
 
