@@ -56,3 +56,20 @@ jobs:
                 || { echo "Invalid JSON: $f"; exit 1; }
           done
           echo "All JSON files valid."
+
+  less-lint:
+    name: LESS lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+
+      - name: Install stylelint
+        run: npm install --no-save stylelint stylelint-config-wikimedia
+
+      - name: Lint LESS files
+        run: npx stylelint "resources/**/*.less"
