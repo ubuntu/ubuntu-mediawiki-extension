@@ -13,17 +13,33 @@
 @import './variables.less';
 @import './mixins.less';
 @import './vendor/ubuntu-palette.less';
+@import './codex-tokens.less';
 
 // Fonts: @font-face declarations (all media).
 @import './components/Fonts.less';
 
 @media screen {
 
-	// Apply the light theme palette at the root by default.
-	// Dark/paper themes are applied by the skins where supported.
-	:root {
-		.vf-theme-light-colors();
-		.vf-static-colors();
+	// Apply the Codex token map for the light theme at the root by default;
+	// the dark theme is applied below based on the active client preference.
+	// `html:root` and the doubled clientpref classes keep these declarations
+	// ahead of the skins' own token defaults (e.g. Vector's
+	// `:root, .skin-invert, .notheme` and `html.skin-theme-clientpref-night`),
+	// which load after this module with otherwise-equal specificity.
+	html:root {
+		.vf-codex-token-map-light();
+	}
+
+	// Manual night theme.
+	html.skin-theme-clientpref-night.skin-theme-clientpref-night {
+		.vf-codex-token-map-dark();
+	}
+
+	// OS-based dark theme.
+	@media (prefers-color-scheme: dark) {
+		html.skin-theme-clientpref-os.skin-theme-clientpref-os {
+			.vf-codex-token-map-dark();
+		}
 	}
 
 	// Components

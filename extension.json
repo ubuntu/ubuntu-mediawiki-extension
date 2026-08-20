@@ -96,6 +96,9 @@
         "localBasePath": "resources",
         "remoteExtPath": "UbuntuWiki/resources"
     },
+    "SkinLessImportPaths": {
+        "ubuntu": "resources/ext.ubuntu.styles"
+    },
     "config": {
         "UbuntuCookieConsentEnabled": {
             "value": false,
