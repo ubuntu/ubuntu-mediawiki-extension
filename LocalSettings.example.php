@@ -31,13 +31,13 @@ $wgUseInstantCommons = true;
 # The extension under test, live-mounted at extensions/UbuntuWiki.
 wfLoadExtension('UbuntuWiki');
 
-# Vector (default) and MinervaNeue ship with the MediaWiki tarball. Minerva
-# stays enabled to test the minerva skin styles — append ?useskin=minerva
-# to any URL. The Ubuntu skin is not installed: its current release declares
-# UbuntuCookieConsentEnabled itself, which fatals alongside this extension.
-wfLoadSkin('Vector');
+# The Ubuntu skin (shallow-cloned into .ext/UbuntuSkin and mounted at
+# skins/Ubuntu) is the default.
+# MinervaNeue ships with the MediaWiki tarball and stays enabled to
+# test the minerva skin styles — append ?useskin=minerva to any URL.
+wfLoadSkin('Ubuntu');
 wfLoadSkin('MinervaNeue');
-$wgDefaultSkin = 'vector-2022';
+$wgDefaultSkin = 'ubuntu';
 
 wfLoadExtension('MobileFrontend');
 $wgMFAutodetectMobileView = true;
