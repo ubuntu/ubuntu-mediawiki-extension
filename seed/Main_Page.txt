@@ -10,6 +10,6 @@ This wiki runs the [https://github.com/ubuntu/ubuntu-mediawiki-extension UbuntuW
 
 == Useful things to try ==
 
-* Append <code>?useskin=vector</code> or <code>?useskin=minerva</code> to any page URL — the extension ships per-skin styles
+* Append <code>?useskin=minerva</code> to any page URL — the extension ships per-skin styles (Vector is not loaded in this environment: its skin.json DefaultUserOptions collide with the Ubuntu skin's)
 * [[Special:Version]] — loaded extensions and skins
 * The footer shows the extension's Ubuntu links and the "Manage your tracker settings" consent button

@@ -8,7 +8,7 @@ ADMIN_PASSWORD := UbuntuWiki2026!
 PORT := $(or $(UBUNTU_WIKI_PORT),8088)
 export UBUNTU_WIKI_PORT
 
-setup: LocalSettings.php .ext/MobileFrontend
+setup: LocalSettings.php .ext/MobileFrontend .ext/UbuntuSkin
 	docker compose up -d
 	@echo "Waiting for database..."
 	@until docker compose exec -T mediawiki bash -c "php -r \"new mysqli('db', 'mediawiki', 'mediawiki', 'mediawiki');\"" > /dev/null 2>&1; do printf '.'; sleep 2; done
@@ -31,7 +31,7 @@ deploy: LocalSettings.php
 	docker compose cp LocalSettings.php mediawiki:/var/www/html/LocalSettings.php
 	docker compose exec mediawiki php maintenance/run.php update --quick
 
-up: LocalSettings.php .ext/MobileFrontend
+up: LocalSettings.php .ext/MobileFrontend .ext/UbuntuSkin
 	docker compose up -d
 	docker compose cp LocalSettings.php mediawiki:/var/www/html/LocalSettings.php
 
@@ -83,3 +83,7 @@ LocalSettings.php:
 .ext/MobileFrontend:
 	git clone --depth 1 --branch REL1_46 \
 		https://github.com/wikimedia/mediawiki-extensions-MobileFrontend.git $@
+
+.ext/UbuntuSkin:
+	git clone --depth 1 \
+		https://github.com/ubuntu/ubuntu-mediawiki-skin.git $@

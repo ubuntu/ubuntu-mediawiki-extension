@@ -1,4 +1,4 @@
-The Ubuntu wiki's shared template styles are produced by on-wiki templates that emit <code>ubuntu-template-*</code> markup. The same templates should render consistently in Vector, Minerva, and the Ubuntu skin.
+The Ubuntu wiki's shared template styles are produced by on-wiki templates that emit <code>ubuntu-template-*</code> markup. The same templates should render consistently in Minerva and the Ubuntu skin.
 
 == Admonitions ==
 
