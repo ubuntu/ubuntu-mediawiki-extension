@@ -73,3 +73,17 @@ jobs:
 
       - name: Lint LESS files
         run: npx stylelint "resources/**/*.less"
+
+  unit-test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # Spin up the same docker environment used for local testing, then
+      # install core's pinned phpunit in-container and run the suite there.
+      - name: Start MediaWiki test environment
+        run: make setup
+
+      - name: Run unit tests
+        run: make test-unit

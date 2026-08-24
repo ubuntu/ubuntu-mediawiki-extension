@@ -44,7 +44,8 @@
             "minus-x check ."
         ],
         "phan": "phan -d . --long-progress-bar",
-        "phpcs": "phpcs -sp --cache"
+        "phpcs": "phpcs -sp --cache",
+        "test-unit": "make --no-print-directory test-unit"
     },
     "config": {
         "allow-plugins": {

@@ -68,6 +68,37 @@ run:
 lint:
 	composer test
 
+# Run the unit tests inside the mediawiki container. The image ships core
+# with prod-only vendor deps and a root-owned docroot, so the first
+# invocation stages core in a writable /tmp copy, strips core's other dev
+# tools (phan, codesniffer, ...), and installs phpunit (the version pinned
+# by core) via a throwaway composer phar. The extension directory is
+# symlinked into the staging dir, so tests run against the working tree.
+test-unit:
+	docker compose exec -T mediawiki bash -c '\
+		if [ ! -x /tmp/mwtest/vendor/bin/phpunit ]; then \
+			rm -rf /tmp/mwtest && mkdir -p /tmp/mwtest/vendor && \
+			tar -C /var/www/html -cf - --exclude=extensions --exclude=vendor . | tar -xf - -C /tmp/mwtest && \
+			rm -f /tmp/mwtest/composer.lock && \
+			chown -R root:root /tmp/mwtest && \
+			curl -sSL -o /tmp/composer.phar https://getcomposer.org/download/2.9.2/composer.phar && \
+			php /var/www/html/extensions/UbuntuWiki/tests/phpunit/strip-core-dev-deps.php \
+				/tmp/mwtest/composer.json && \
+			php /tmp/composer.phar --working-dir=/tmp/mwtest --no-interaction \
+				update --no-audit --no-scripts && \
+			php /tmp/composer.phar --working-dir=/tmp/mwtest --no-interaction \
+				dump-autoload && \
+			chown -R www-data:www-data /tmp/mwtest; \
+		fi'
+	docker compose exec -T mediawiki bash -c '\
+		mkdir -p /tmp/mwtest/extensions && \
+		ln -sfn /var/www/html/extensions/UbuntuWiki /tmp/mwtest/extensions/UbuntuWiki'
+	docker compose exec -T mediawiki \
+		env MW_INSTALL_PATH=/tmp/mwtest \
+		php /tmp/mwtest/vendor/bin/phpunit \
+			/tmp/mwtest/extensions/UbuntuWiki/tests/phpunit/unit \
+			--bootstrap /tmp/mwtest/extensions/UbuntuWiki/tests/phpunit/bootstrap.php
+
 shell:
 	docker compose exec mediawiki bash
 
