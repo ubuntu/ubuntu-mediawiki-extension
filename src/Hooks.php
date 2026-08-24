@@ -59,24 +59,26 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook {
 	/**
 	 * Add Ubuntu footer links to the 'places' footer section.
 	 *
-	 * Targets come from the `UbuntuFooterLinks` config (a name => target map
-	 * where target is a wiki page title or an external URL); labels come
-	 * from the `ubuntu-footer-<name>-desc` messages, which can be overridden
-	 * on-wiki via the MediaWiki: namespace. Set a target to null to drop the
-	 * link entirely.
+	 * Targets come from the `UbuntuFooterLinks` config (name => wiki title or
+	 * URL); labels from the `ubuntu-footer-<name>-desc` messages. A null
+	 * target drops the link — for the core default keys ('privacy', 'about',
+	 * 'disclaimers') that means blanking the default item with a truthy
+	 * marker element (an empty string would fall back to the default text).
 	 *
-	 * The 'privacy' name is special: core merges hook-provided items over the
-	 * default footer links by key, so reusing the 'privacy' key replaces the
-	 * default privacy link's target instead of adding a second link. Its
-	 * label is the built-in 'privacy' message. A null target blanks out the
-	 * default link entirely; the same works for the other core default keys
-	 * ('about', 'disclaimers'). Blanked items are replaced with an empty
-	 * element (not an empty string, which is falsy and would re-render the
-	 * default message text).
+	 * Core merges hook items over the default list by key, and a replaced key
+	 * keeps the default item's position. So 'privacy' never reuses the core
+	 * key: the default slot is blanked and the link added as 'ubuntu-privacy',
+	 * making the order fully ours.
 	 *
 	 * The cookie-settings link is always added: it reopens the consent banner
-	 * via its .js-revoke-cookie-manager class when the cookie consent module
-	 * is loaded, and is a harmless '#' link otherwise.
+	 * via its .js-revoke-cookie-manager class, and is a harmless '#' link
+	 * when the consent module is not loaded.
+	 *
+	 * Render order follows insertion order: the blanked core defaults keep
+	 * their leading positions but are hidden by the .ubuntu-footer-blank
+	 * rule, so the visible links come out in config order (Legal, Data
+	 * privacy, Code of Conduct) followed by Tracker settings. MobileFrontend
+	 * appends its Mobile view toggle after this hook runs.
 	 *
 	 * @param Skin $skin
 	 * @param string $key Footer section key ('places', 'info', ...)
@@ -89,36 +91,16 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook {
 
 		$links = $this->config->get( 'UbuntuFooterLinks' );
 
-		if ( array_key_exists( 'privacy', $links ) ) {
-			$privacyMsg = $skin->msg( 'privacy' );
-			if ( $links['privacy'] === null ) {
-				// Blank out the default privacy link entirely: the marker
-				// element is truthy (unlike an empty string) so
-				// SkinComponentLink does not fall back to the default
-				// message text, and the .ubuntu-footer-blank rule in
-				// ext.ubuntu.styles hides the whole list item.
-				$footerlinks['privacy'] = $this->blankFooterLink();
-			} elseif ( !$privacyMsg->inContentLanguage()->isDisabled() ) {
-				$link = $this->buildFooterLink( $links['privacy'], $privacyMsg->text() );
-				if ( $link !== null ) {
-					$footerlinks['privacy'] = $link;
-				}
-			}
-			unset( $links['privacy'] );
-		}
-
 		foreach ( $links as $name => $target ) {
+			if ( $name === 'privacy' ) {
+				// Blank the default slot (see docblock); the link is re-added
+				// below under an extension-owned key in config order.
+				$footerlinks['privacy'] = $this->blankFooterLink();
+			} elseif ( $target === null && in_array( $name, [ 'about', 'disclaimers' ], true ) ) {
+				// Blank a core default link by key; unknown names aren't added.
+				$footerlinks[$name] = $this->blankFooterLink();
+			}
 			if ( $target === null ) {
-				// Blank out a core default footer link: override the item by
-				// key with a marker element. The html must be truthy — an
-				// empty string is falsy in SkinComponentLink, which would
-				// fall through and re-render the default message text
-				// ('about' -> 'About'). The .ubuntu-footer-blank rule in
-				// ext.ubuntu.styles hides the whole list item. Unknown names
-				// have no default to blank, so they are simply not added.
-				if ( in_array( $name, [ 'about', 'disclaimers' ], true ) ) {
-					$footerlinks[$name] = $this->blankFooterLink();
-				}
 				continue;
 			}
 			$descMsg = $skin->msg( "ubuntu-footer-$name-desc" );
