@@ -55,43 +55,11 @@ unset($wgFooterIcons['poweredby']);
 # your tracker settings" footer link that reopens the banner.
 $wgUbuntuCookieConsentEnabled = true;
 
-# Google Tag Manager container ID (leave empty to disable).
-$wgGTMContainerID = '';
-
-# Google Tag Manager injection.
-# Google Tag Manager injection. The snippet must load after the cookie-policy
-# vendor (which sets gtag consent defaults to denied), so consent is
+# Google Tag Manager container ID (leave empty to disable). The extension
+# injects the GTM snippets itself; when the consent banner is enabled, gtag
+# consent defaults are set to denied inline ahead of GTM, so consent is
 # established before GTM initialises.
-$wgHooks['BeforePageDisplay'][] = function (MediaWiki\Output\OutputPage $out, MediaWiki\Skin\Skin $skin) use (&$wgGTMContainerID) {
-    if ($wgGTMContainerID) {
-        $id = htmlspecialchars($wgGTMContainerID, ENT_QUOTES);
-
-        // Google Tag Manager — official <head> snippet
-        // https://developers.google.com/tag-manager/quickstart
-        $out->addHeadItem(
-            'gtm-head',
-            <<<HTML
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','{$id}');</script>
-<!-- End Google Tag Manager -->
-HTML
-        );
-
-        // Google Tag Manager — official <noscript> body snippet
-        $out->addHTML(
-            <<<HTML
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={$id}"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-HTML
-        );
-    }
-};
+$wgUbuntuGTMContainerID = '';
 
 # Extensions bundled with the MediaWiki tarball, enabled for testing.
 wfLoadExtension('WikiEditor');

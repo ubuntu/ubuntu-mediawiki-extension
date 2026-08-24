@@ -128,6 +128,10 @@
             "value": false,
             "description": "Enable the Canonical cookie-policy consent banner."
         },
+        "UbuntuGTMContainerID": {
+            "value": "",
+            "description": "Google Tag Manager container ID (e.g. GTM-XXXXXX). Empty or whitespace-only disables GTM injection entirely. When the cookie consent banner is also enabled, gtag consent defaults are set to denied before GTM initialises."
+        },
         "UbuntuFooterLinks": {
             "value": {
                 "legal": "https://canonical.com/legal",

@@ -54,6 +54,27 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook {
 		if ( $this->config->get( 'UbuntuCookieConsentEnabled' ) ) {
 			$out->addModules( [ 'ext.ubuntu.cookieConsent' ] );
 		}
+
+		// Google Tag Manager injection. Dormant unless a container ID is
+		// configured (blank IDs yield no snippets). When the cookie consent
+		// banner is enabled, gtag consent defaults are emitted inline first:
+		// the ResourceLoader consent module sets the same defaults, but is
+		// not guaranteed to execute before the async gtm.js request starts,
+		// so the inline defaults guarantee consent is "denied" before GTM
+		// initialises and any tags fire.
+		$gtmContainerId = (string)$this->config->get( 'UbuntuGTMContainerID' );
+		$gtmHead = GoogleTagManager::buildHeadSnippet( $gtmContainerId );
+		$gtmNoscript = GoogleTagManager::buildNoscriptSnippet( $gtmContainerId );
+		if ( $gtmHead !== null && $gtmNoscript !== null ) {
+			if ( $this->config->get( 'UbuntuCookieConsentEnabled' ) ) {
+				$out->addHeadItem(
+					'ubuntu-gtm-consent-defaults',
+					GoogleTagManager::buildConsentDefaultsSnippet()
+				);
+			}
+			$out->addHeadItem( 'ubuntu-gtm-head', $gtmHead );
+			$out->addHTML( $gtmNoscript );
+		}
 	}
 
 	/**
