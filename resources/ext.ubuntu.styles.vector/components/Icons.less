@@ -1,11 +1,25 @@
 /* Vector-chrome icon button sizing and spacing. */
 
-/* Reduce padding around icons on hover */
+/* Compact the header icon buttons: 4px padding, and no Codex 32px minimums
+ * so they hug the icon. Echo badges get the same treatment, matching how they
+ * render on real Vector-2022-class forks without skin-vector-2022 gating:
+ * Echo's own rules pin them to a fixed 20px border-box via ID selectors
+ * (which beat class selectors regardless of source order), so their fixed
+ * size is lifted with ID-scoped selectors to let the badges size to content
+ * like the other buttons. */
 .vector-user-links .cdx-button--icon-only,
 #pt-watchlist-2 .cdx-button--icon-only {
 	padding: 4px !important;
 	min-width: auto !important;
 	min-height: auto !important;
+}
+
+#pt-notifications-alert .mw-echo-notifications-badge,
+#pt-notifications-alert .mw-echo-notification-badge-nojs,
+#pt-notifications-notice .mw-echo-notifications-badge,
+#pt-notifications-notice .mw-echo-notification-badge-nojs {
+	width: auto;
+	height: auto;
 }
 
 /* Target the search toggle specifically */
@@ -18,9 +32,7 @@ a.search-toggle.cdx-button--icon-only:hover {
 }
 
 /* Adjust the hover background size of icon-only buttons. Must live in this
- * zzz module: Codex's own padding rules (in skins.*, which load earlier
- * than ext.ubuntu.styles but earlier still than this module) would beat it
- * by source order if it shipped in the shared layer. */
+ * zzz module so it beats Codex's padding rules by source order. */
 .cdx-button--icon-only:hover,
 .cdx-button.cdx-button--fake-button--enabled:hover {
 	padding: 4px !important;
