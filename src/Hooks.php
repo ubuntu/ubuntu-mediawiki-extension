@@ -97,9 +97,10 @@ class Hooks implements BeforePageDisplayHook, SkinAddFooterLinksHook {
 	 *
 	 * Render order follows insertion order: the blanked core defaults keep
 	 * their leading positions but are hidden by the .ubuntu-footer-blank
-	 * rule, so the visible links come out in config order (Legal, Data
-	 * privacy, Code of Conduct) followed by Tracker settings. MobileFrontend
-	 * appends its Mobile view toggle after this hook runs.
+	 * rule, so the visible links come out with the core 'about' link in its
+	 * leading default position, followed by the links in config order
+	 * (Legal, Data privacy, Code of Conduct) and then Tracker settings.
+	 * MobileFrontend appends its Mobile view toggle after this hook runs.
 	 *
 	 * @param Skin $skin
 	 * @param string $key Footer section key ('places', 'info', ...)
