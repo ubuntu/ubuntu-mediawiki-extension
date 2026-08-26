@@ -1,0 +1,281 @@
+/**
+ * Main Page layout
+ */
+:root {
+	--ubuntu-grid-col-gap: 2.5rem;
+	--ubuntu-grid-row-gap: 2.75rem;
+	--ubuntu-button-radius: 0;
+	--ubuntu-button-border-width: 1.5px;
+	--ubuntu-rule: 1px solid var( --vf-color-border-default, rgba( 0, 0, 0, 0.25 ) );
+}
+
+/* The section grid */
+div.ubuntu-grid {
+	display: grid;
+	grid-template-columns: repeat( 3, minmax( 0, 1fr ) );
+	grid-auto-flow: row dense;
+	gap: var( --ubuntu-grid-row-gap ) var( --ubuntu-grid-col-gap );
+	align-items: start;
+	margin: 2.5rem 0;
+
+	> .ubuntu-card--col2 {
+		grid-column: span 2;
+	}
+
+	> .ubuntu-card--col3 {
+		grid-column: span 3;
+	}
+}
+
+/* Section: a top rule and label, with no surrounding box */
+div.ubuntu-card {
+	display: flex;
+	flex-direction: column;
+	gap: 0.85rem;
+	min-width: 0;
+	padding: 1.1rem 0 0;
+	border-top: var( --ubuntu-rule );
+
+	> p {
+		margin: 0;
+		color: var( --vf-color-text-default, inherit );
+		font-size: 0.95rem;
+		line-height: 1.5;
+		max-width: 34ch;
+	}
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+}
+
+/* A single section whose body is split into two connected columns under one
+ * continuous top rule */
+div.ubuntu-card.ubuntu-card--split {
+	display: grid;
+	grid-template-columns: minmax( 0, 1fr ) minmax( 0, 2fr );
+	gap: 0.5rem var( --ubuntu-grid-col-gap );
+	align-items: start;
+
+	> .ubuntu-card__label {
+		grid-column: 1;
+		grid-row: 1;
+	}
+
+	> p {
+		grid-column: 1;
+		grid-row: 2;
+	}
+
+	> .ubuntu-button-links {
+		grid-column: 2;
+		grid-row: 1 / span 2;
+	}
+}
+
+/* Uppercase eyebrow above a section's content. Uses the default text colour
+ * (not muted) so it reads like the wiki's own section headings.
+ * We don't want default wiki section headers because we want the homepage
+ * to be visually distinct and we don't want to invite section edits from users
+ * NOTE: An alternative might be to use the default headers but disable
+ * section editing in the config (if that's possible).
+ */
+.ubuntu-card__label {
+	margin: 0;
+	color: var( --vf-color-text-default, inherit );
+	font-size: 0.72rem;
+	font-weight: bold;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+}
+
+/* Link list with row dividers */
+ul.ubuntu-card__list {
+	display: flex;
+	flex-direction: column;
+	margin: 0.15rem 0 0;
+	padding: 0;
+	list-style: none;
+
+	> li {
+		padding: 0.55rem 0;
+		border-bottom: 1px solid var( --vf-color-border-low-contrast, rgba( 0, 0, 0, 0.1 ) );
+		font-size: 0.98rem;
+		line-height: 1.35;
+
+		&:first-child {
+			padding-top: 0;
+		}
+
+		&:last-child {
+			padding-bottom: 0;
+			border-bottom: 0;
+		}
+
+		> p {
+			display: contents;
+		}
+	}
+}
+
+/* Filled button links (grid, so docs wrap into columns) */
+div.ubuntu-button-links {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 9rem, 1fr ) );
+	gap: 0.75rem;
+	margin-top: 0.15rem;
+
+	p {
+		display: contents;
+	}
+}
+
+/* Button links in neutral Vanilla style */
+.ubuntu-button-link {
+	display: block;
+	padding: 0;
+	background: var( --vf-color-background-default, #fff );
+	border: var( --ubuntu-button-border-width, 1.5px ) solid var( --vf-color-border-high-contrast, #707070 );
+	border-radius: var( --ubuntu-button-radius );
+	color: var( --vf-color-text-default, inherit );
+	font-size: 1rem;
+	font-weight: normal;
+	text-align: center;
+	transition: background-color 100ms ease, border-color 100ms ease;
+
+	&:hover {
+		background: var( --vf-color-background-hover, rgba( 0, 0, 0, 0.03 ) );
+		border-color: var( --vf-color-border-high-contrast, #707070 );
+	}
+
+	&:active {
+		background: var( --vf-color-background-active, rgba( 0, 0, 0, 0.06 ) );
+		border-color: var( --vf-color-border-high-contrast, #707070 );
+	}
+}
+
+.mw-parser-output .ubuntu-button-link a {
+	display: block;
+	padding: 0.6rem 1rem;
+	// Button labels are always the theme's default text colour (black on light,
+	// white on dark) rather than link-blue, so they read as buttons.
+	color: var( --vf-color-text-default, inherit );
+	text-decoration: none;
+}
+
+/* Drop MediaWiki's external-link icon inside buttons
+ * NOTE: it would be OK to have the icons within the button but I couldn't
+ * accommodate it easily in my testing.
+ */
+.mw-parser-output .ubuntu-button-link a.external {
+	padding-right: 1rem;
+	background-image: none;
+}
+
+/* Optional platform icon shown to the left of the label. */
+.mw-parser-output .ubuntu-button-link--icon-desktop a,
+.mw-parser-output .ubuntu-button-link--icon-machines a,
+.mw-parser-output .ubuntu-button-link--icon-containers a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.45rem;
+}
+
+.ubuntu-button-link--icon-desktop a::before,
+.ubuntu-button-link--icon-machines a::before,
+.ubuntu-button-link--icon-containers a::before {
+	content: '';
+	display: block;
+	flex: none;
+	width: 1.25rem;
+	height: 1.25rem;
+	background-color: currentcolor;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+}
+
+/* TODO: to replace with imported Vanilla icons */
+.ubuntu-button-link--icon-desktop a::before {
+	-webkit-mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.5 3.5H13.5V10.5H2.5L2.5 3.5ZM1 3.5C1 2.67157 1.67157 2 2.5 2H13.5C14.3284 2 15 2.67157 15 3.5V10.5C15 11.3284 14.3284 12 13.5 12H8.75V13.25H11V14.75H5V13.25H7.25V12H2.5C1.67157 12 1 11.3284 1 10.5V3.5Z' fill='%23000'/%3E%3C/svg%3E" );
+	mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.5 3.5H13.5V10.5H2.5L2.5 3.5ZM1 3.5C1 2.67157 1.67157 2 2.5 2H13.5C14.3284 2 15 2.67157 15 3.5V10.5C15 11.3284 14.3284 12 13.5 12H8.75V13.25H11V14.75H5V13.25H7.25V12H2.5C1.67157 12 1 11.3284 1 10.5V3.5Z' fill='%23000'/%3E%3C/svg%3E" );
+}
+
+.ubuntu-button-link--icon-machines a::before {
+	-webkit-mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .99a3 3 0 013 3v1.75c0 .938-.431 1.776-1.106 2.326A2.989 2.989 0 0115 10.392v1.75a3 3 0 01-3 3H4a3 3 0 01-3-3v-1.75c0-.94.431-1.777 1.106-2.327A2.989 2.989 0 011 5.739V3.99a3 3 0 013-3h8zm0 7.902H4a1.5 1.5 0 00-1.493 1.355l-.007.145v1.75a1.5 1.5 0 001.356 1.493l.144.007h8a1.5 1.5 0 001.493-1.356l.007-.144v-1.75a1.5 1.5 0 00-1.356-1.494L12 8.892zM11.5 10a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1zm.5-7.51H4a1.5 1.5 0 00-1.493 1.355l-.007.144v1.75a1.5 1.5 0 001.356 1.493L4 7.24h8a1.5 1.5 0 001.493-1.355l.007-.145V3.99a1.5 1.5 0 00-1.356-1.493L12 2.49zM11.5 4a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E" );
+	mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .99a3 3 0 013 3v1.75c0 .938-.431 1.776-1.106 2.326A2.989 2.989 0 0115 10.392v1.75a3 3 0 01-3 3H4a3 3 0 01-3-3v-1.75c0-.94.431-1.777 1.106-2.327A2.989 2.989 0 011 5.739V3.99a3 3 0 013-3h8zm0 7.902H4a1.5 1.5 0 00-1.493 1.355l-.007.145v1.75a1.5 1.5 0 001.356 1.493l.144.007h8a1.5 1.5 0 001.493-1.356l.007-.144v-1.75a1.5 1.5 0 00-1.356-1.494L12 8.892zM11.5 10a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1zm.5-7.51H4a1.5 1.5 0 00-1.493 1.355l-.007.144v1.75a1.5 1.5 0 001.356 1.493L4 7.24h8a1.5 1.5 0 001.493-1.355l.007-.145V3.99a1.5 1.5 0 00-1.356-1.493L12 2.49zM11.5 4a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E" );
+}
+
+.ubuntu-button-link--icon-containers a::before {
+	-webkit-mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.212 4.158l6.553 3.776v7.676l-6.693-3.704v-7.67l.14-.078zm3.57-1.976l6.81 3.923v7.647L9.265 15.04V7.013L2.76 3.301l2.022-1.119zM8 .402l6.928 3.835v7.669l-1.836 1.015V5.184L6.331 1.326 8 .402z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E" );
+	mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.212 4.158l6.553 3.776v7.676l-6.693-3.704v-7.67l.14-.078zm3.57-1.976l6.81 3.923v7.647L9.265 15.04V7.013L2.76 3.301l2.022-1.119zM8 .402l6.928 3.835v7.669l-1.836 1.015V5.184L6.331 1.326 8 .402z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E" );
+}
+
+/* Responsive column count */
+@media ( max-width: 1100px ) {
+	div.ubuntu-grid {
+		grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+		column-gap: 2rem;
+
+		// Full-width sections still span both columns; a two-column section
+		// drops to one so rows like Use cases + Project and community split
+		// into two equal halves instead of leaving a gap.
+		> .ubuntu-card--col2 {
+			grid-column: span 1;
+		}
+
+		> .ubuntu-card--col3 {
+			grid-column: span 2;
+		}
+	}
+}
+
+// Collapse to a single column only once the screen is genuinely small
+@media ( max-width: 600px ) {
+	div.ubuntu-grid {
+		grid-template-columns: minmax( 0, 1fr );
+		row-gap: 2rem;
+
+		> .ubuntu-card--col2,
+		> .ubuntu-card--col3 {
+			grid-column: span 1;
+		}
+	}
+
+	// One wide column now, so let descriptions fill it instead of keeping
+	// the narrower width used when there are multiple columns
+	div.ubuntu-card > p {
+		max-width: none;
+	}
+
+	// Stack the split section into a single column so its two halves flow
+	// vertically under the same continuous top rule
+	div.ubuntu-card.ubuntu-card--split {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+
+	// Smaller minimum width so the three platform buttons stay on one row
+	div.ubuntu-button-links {
+		grid-template-columns: repeat( auto-fit, minmax( 5rem, 1fr ) );
+	}
+
+	// Lay the longer doc list out as fixed two columns
+	div.ubuntu-card--split div.ubuntu-button-links {
+		grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
+	}
+}
+
+// On compact devices (<= 360px) three platform buttons across leave
+// each one too narrow: the icon crowds its label. Stack the platform
+// shortcuts one per row so every button has room for its icon and full label.
+@media ( max-width: 360px ) {
+	div.ubuntu-card:not( .ubuntu-card--split ) div.ubuntu-button-links {
+		grid-template-columns: minmax( 0, 1fr );
+	}
+}
