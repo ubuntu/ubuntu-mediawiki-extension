@@ -2,7 +2,9 @@
     "require": {
         "ubuntu/mediawiki-ubuntu-skin": "dev-main",
         "ubuntu/mediawiki-ubuntu-extension": "dev-main",
-        "x-mediawiki/mobile-frontend": "1.0.0"
+        "x-mediawiki/code-mirror": "1.0.0",
+        "x-mediawiki/mobile-frontend": "1.0.0",
+        "x-mediawiki/title-key": "1.0.0"
     },
     "repositories": [
         {
@@ -22,12 +24,38 @@
         {
             "type": "package",
             "package": {
+                "name": "x-mediawiki/code-mirror",
+                "type": "mediawiki-extension",
+                "version": "1.0.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/wikimedia/mediawiki-extensions-CodeMirror.git",
+                    "reference": "REL1_46"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "x-mediawiki/mobile-frontend",
                 "type": "mediawiki-extension",
                 "version": "1.0.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/wikimedia/mediawiki-extensions-MobileFrontend.git",
+                    "reference": "REL1_46"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "x-mediawiki/title-key",
+                "type": "mediawiki-extension",
+                "version": "1.0.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/wikimedia/mediawiki-extensions-TitleKey.git",
                     "reference": "REL1_46"
                 }
             }

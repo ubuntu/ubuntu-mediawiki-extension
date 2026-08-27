@@ -59,13 +59,39 @@ $wgUbuntuCookieConsentEnabled = true;
 # established before GTM initialises.
 $wgUbuntuGTMContainerID = '';
 
-# Extensions bundled with the MediaWiki tarball, enabled for testing.
+# Other extensions loaded for testing and validation.
+
+## Special pages
+wfLoadExtension('Linter');
+wfLoadExtension('Echo');
+
+## Editors
+wfLoadExtension('CodeEditor');
+wfLoadExtension('CodeMirror');
 wfLoadExtension('WikiEditor');
 wfLoadExtension('VisualEditor');
+
+## Parser hooks
 wfLoadExtension('SyntaxHighlight_GeSHi');
 
-$wgDefaultUserOptions['visualeditor-newwikitext'] = 1;
-$wgHiddenPrefs[] = 'visualeditor-newwikitext';
+## Other
+wfLoadExtension('DiscussionTools');
+wfLoadExtension('TitleKey');
+
+# CodeMirror https://www.mediawiki.org/wiki/Extension:CodeMirror#Using_CodeMirror_instead_of_CodeEditor
+// Desired modes that should use CodeMirror (mediawiki, i.e. wikitext, is enabled by default)
+$wgCodeMirrorEnabledModes['javascript'] = true;
+$wgCodeMirrorEnabledModes['json'] = true;
+$wgCodeMirrorEnabledModes['css'] = true;
+$wgCodeMirrorEnabledModes['lua'] = true;
+$wgCodeMirrorEnabledModes['vue'] = true;
+
+// If you're also using CodeEditor, disable the same modes there:
+$wgCodeEditorEnabledModes['javascript'] = false;
+$wgCodeEditorEnabledModes['json'] = false;
+$wgCodeEditorEnabledModes['css'] = false;
+$wgCodeEditorEnabledModes['lua'] = false;
+$wgCodeEditorEnabledModes['vue'] = false;
 
 # ---------------------------------------------------------------------------
 # Local testing only — do NOT copy to production.
