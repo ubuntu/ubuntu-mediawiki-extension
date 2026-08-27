@@ -7,7 +7,7 @@ if (!defined('MEDIAWIKI')) {
 
 # Site
 $wgSitename = "Ubuntu Wiki";
-$wgServer = "http://localhost:" . (getenv('UBUNTU_WIKI_PORT') ?: '8088');
+$wgServer = "http://localhost:" . (getenv('UBUNTU_EXT_PORT') ?: '8088');
 $wgScriptPath = "";
 $wgResourceBasePath = $wgScriptPath;
 $wgLanguageCode = "en";
@@ -31,8 +31,6 @@ $wgUseInstantCommons = true;
 # The extension under test, live-mounted at extensions/UbuntuWiki.
 wfLoadExtension('UbuntuWiki');
 
-# The Ubuntu skin (shallow-cloned into .ext/UbuntuSkin and mounted at
-# skins/Ubuntu) is the default.
 # MinervaNeue ships with the MediaWiki tarball and stays enabled to
 # test the minerva skin styles — append ?useskin=minerva to any URL.
 wfLoadSkin('Ubuntu');

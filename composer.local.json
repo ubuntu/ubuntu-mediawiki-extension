@@ -1,0 +1,36 @@
+{
+    "require": {
+        "ubuntu/mediawiki-ubuntu-skin": "dev-main",
+        "ubuntu/mediawiki-ubuntu-extension": "dev-main",
+        "x-mediawiki/mobile-frontend": "1.0.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/var/www/html/extensions/UbuntuWiki",
+            "options": {
+                "symlink": true,
+                "versions": {
+                    "ubuntu/mediawiki-ubuntu-extension": "dev-main"
+                }
+            }
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/ubuntu/ubuntu-mediawiki-skin.git"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "x-mediawiki/mobile-frontend",
+                "type": "mediawiki-extension",
+                "version": "1.0.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/wikimedia/mediawiki-extensions-MobileFrontend.git",
+                    "reference": "REL1_46"
+                }
+            }
+        }
+    ]
+}
