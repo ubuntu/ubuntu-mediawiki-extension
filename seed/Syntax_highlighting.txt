@@ -1,0 +1,48 @@
+Examples of SyntaxHighlight blocks in several languages and forms.
+
+== Bash ==
+
+<syntaxhighlight lang="bash">
+sudo apt update
+sudo apt install mediawiki
+</syntaxhighlight>
+
+== Inline ==
+
+Install updates with <syntaxhighlight lang="bash" inline>sudo apt update</syntaxhighlight> before upgrading packages.
+
+== Line ==
+
+<syntaxhighlight lang="php" line>
+$message = 'Hello, Ubuntu';
+echo $message;
+</syntaxhighlight>
+
+== Languages ==
+
+=== JavaScript ===
+
+<syntaxhighlight lang="javascript">
+const versions = ['22.04', '24.04'];
+versions.forEach((version) => console.log(version));
+</syntaxhighlight>
+
+=== JSON ===
+
+<syntaxhighlight lang="json">
+{
+  "string": "Jane Doe",
+  "list": ["Python", "JavaScript", "SQL"],
+  "nested": {
+    "place": "somewhere"
+  },
+  "null": null
+}
+</syntaxhighlight>
+
+== Copy ==
+
+<syntaxhighlight lang="python" copy>
+def quick_sort(arr):
+    less = []
+</syntaxhighlight>
