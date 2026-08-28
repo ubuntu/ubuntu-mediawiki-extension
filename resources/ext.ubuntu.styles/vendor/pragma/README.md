@@ -42,8 +42,10 @@ other stylesheet in this extension. The hand-maintained
 variables for now; the two coexist during this transition period per
 [the Pragma integration PoC map](https://github.com/ubuntu/ubuntu-mediawiki-extension/issues/37).
 
-Two structural differences block a drop-in swap, and are flagged here as
-findings for a follow-up decision ticket rather than resolved by this one:
+Two structural differences from `pragma-tokens.less` were flagged and
+resolved as decisions in
+[#43](https://github.com/ubuntu/ubuntu-mediawiki-extension/issues/43) (see
+[ADR 0001](../../../../docs/adr/0001-pragma-token-naming-and-theming.md)):
 
 1. **Variable naming.** The upstream token names (e.g. `--color-border`,
    `--color-focusRing`) drop the `-root` suffix and the `pragma-` prefix
@@ -51,21 +53,26 @@ findings for a follow-up decision ticket rather than resolved by this one:
    `--pragma-color-border-root`). Otherwise the taxonomy maps closely
    one-to-one (background/border/foreground/text/icon families, same
    semantic modifiers like `-branded`, `-destructive`, `-disabled`).
-   Adopting the vendored tokens means either renaming every consumer or
-   adding a translation layer.
+   **Decided:** keep `--pragma-color-*-root` as this extension's own stable
+   name — it's namespaced independently from Codex's own token vocabulary
+   and from a separately-maintained skin fork's stable-contract expectations
+   — and add a translation mixin rather than renaming consumers.
 2. **Theming model.** `modifiers.theme.css` emits a **single** `:root`
    block per token that resolves light vs. dark via the native CSS
    `light-dark()` function, gated on the `color-scheme` property (and,
    absent an explicit `color-scheme`, the `prefers-color-scheme` media
-   query). This extension's theming is **class-driven**
-   (`.codex-token-map-light()` / `-dark()` / `-paper()` are invoked
-   explicitly per theme class in `common.less`, independent of browser/OS
-   preference). There is no upstream "paper" theme; the existing
-   `.codex-token-map-paper()` mixin already reuses `.pragma-light-colors()`
-   for that case, so paper needs no separate token set — but reconciling
-   explicit-class switching with a `light-dark()`-based token set (e.g. by
-   scoping `color-scheme` per theme class instead of relying on the media
-   query) is unresolved and needs a decision before wiring these tokens in.
+   query). This extension's theming reassigns a full token set per
+   **theme class** instead (`html.skin-theme-clientpref-{day,night,os}`;
+   see `CONTEXT.md`), which several places (e.g. `Header.less`) already
+   assume. **Decided:** keep reassigning per theme class — a translation
+   mixin resolves each `light-dark()` pair once per theme class and assigns
+   `--pragma-color-*-root` explicitly, rather than emitting the vendored
+   tokens' single `light-dark()` block directly. Paper reuses the light
+   assignment, same as today's `.pragma-light-colors()`.
+
+The translation mixin itself is not yet implemented — this only resolves
+*how* it should work; building it is future work once component rendering
+(map #37's other tickets) is further along.
 
 See `sets.primitive.css` for the raw OKLCH colour ramp underlying the
 semantic tokens, and `modifiers.theme.css` for the semantic layer that

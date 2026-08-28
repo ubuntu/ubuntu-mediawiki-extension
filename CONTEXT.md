@@ -51,3 +51,17 @@ _Avoid_: Theme
 **Extension**:
 A MediaWiki plugin, registered via `extension.json`, that adds functionality to core without modifying it. This repo is one such extension (`UbuntuWiki`).
 _Avoid_: Plugin (in MediaWiki context, "extension" is the canonical term)
+
+**Theme class**:
+One of the three `html.skin-theme-clientpref-{day,night,os}` classes MediaWiki's Vector clientpref feature toggles on the document root. Each theme class fully (re)assigns this extension's Codex and Pragma token custom properties for that theme; `os` additionally wraps its assignment in `@media (prefers-color-scheme: dark)` rather than resolving via the CSS `color-scheme` property.
+_Avoid_: Clientpref (spell out on first use), color scheme (reserve for the CSS `color-scheme` property, a different mechanism this extension deliberately doesn't rely on)
+
+### Design token concepts
+
+**Codex token**:
+A CSS custom property belonging to MediaWiki's Codex design system (e.g. `--background-color-base`), consumed by this extension's `codex-tokens.less`, which maps Codex's expected variable names onto this extension's own color values.
+_Avoid_: Design token (too generic — see also **Pragma token**)
+
+**Pragma token**:
+A `--pragma-color-*-root` CSS custom property defined in `pragma-tokens.less`. This extension's own stable name for a Canonical Pragma color value, deliberately kept independent of both Codex tokens and upstream Pragma's own `--color-*` npm-package variable names — so a rename on either side doesn't collide with or silently reinterpret the other's namespace.
+_Avoid_: Design token, vendor token (the raw, untranslated upstream output in `vendor/pragma/`, distinct from the translated Pragma token consumed by `codex-tokens.less`)
