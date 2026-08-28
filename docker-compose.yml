@@ -13,21 +13,17 @@ services:
     image: mediawiki:1.46
     environment:
       # Passed to LocalSettings.php so $wgServer matches the published port.
-      UBUNTU_WIKI_PORT: ${UBUNTU_WIKI_PORT:-8088}
+      UBUNTU_EXT_PORT: ${UBUNTU_EXT_PORT:-8088}
     ports:
       # Default port 8088 avoids clashing with other environments on 8080.
       # Override with UBUNTU_WIKI_PORT=<port> to run multiple at once.
-      - "${UBUNTU_WIKI_PORT:-8088}:80"
+      - "${UBUNTU_EXT_PORT:-8088}:80"
     volumes:
       # Extension files are served directly from this directory (live mount)
       - .:/var/www/html/extensions/UbuntuWiki
-      # MobileFrontend is not bundled with the tarball; `make setup` clones
-      # it into .ext/ (gitignored) and it is mounted here.
-      - ./.ext/MobileFrontend:/var/www/html/extensions/MobileFrontend
-      # The Ubuntu skin is shallow-cloned into .ext/ (gitignored) by
-      # `make setup`/`make up` and mounted here.
-      - ./.ext/UbuntuSkin:/var/www/html/skins/Ubuntu
-      # LocalSettings.php is managed via: make deploy
+      # composer.local.json pulls in test extensions and skins;
+      # `make setup` / `make up` run composer inside the container to install it
+      - ./composer.local.json:/var/www/html/composer.local.json
     depends_on:
       - db
 

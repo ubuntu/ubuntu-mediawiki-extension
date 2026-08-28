@@ -5,8 +5,12 @@ This wiki runs the [https://github.com/ubuntu/ubuntu-mediawiki-extension UbuntuW
 == Test pages ==
 
 * [[Code block examples]] — the copy button on <code>.ubuntu-code-block</code> markup in regular wikitext
+* [[Tables]] — tables rendered from wikitext
+* [[Syntax highlighting]] — examples in several highlighted languages
+* [[TOC test]] — long article with many sections; exercises the sticky table of contents, section collapsing, and scroll spy
 * [[Template examples]] — shared admonition template styles across all variants
 * [[CAPTCHA testing]] — the copy button inside the ConfirmEdit CAPTCHA form (outside wikitext rendering)
+* [[Page that does not exist]] — an intentional red link for link styling checks
 
 == Useful things to try ==
 

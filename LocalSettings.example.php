@@ -7,7 +7,7 @@ if (!defined('MEDIAWIKI')) {
 
 # Site
 $wgSitename = "Ubuntu Wiki";
-$wgServer = "http://localhost:" . (getenv('UBUNTU_WIKI_PORT') ?: '8088');
+$wgServer = "http://localhost:" . (getenv('UBUNTU_EXT_PORT') ?: '8088');
 $wgScriptPath = "";
 $wgResourceBasePath = $wgScriptPath;
 $wgLanguageCode = "en";
@@ -31,8 +31,6 @@ $wgUseInstantCommons = true;
 # The extension under test, live-mounted at extensions/UbuntuWiki.
 wfLoadExtension('UbuntuWiki');
 
-# The Ubuntu skin (shallow-cloned into .ext/UbuntuSkin and mounted at
-# skins/Ubuntu) is the default.
 # MinervaNeue ships with the MediaWiki tarball and stays enabled to
 # test the minerva skin styles — append ?useskin=minerva to any URL.
 wfLoadSkin('Ubuntu');
@@ -61,13 +59,39 @@ $wgUbuntuCookieConsentEnabled = true;
 # established before GTM initialises.
 $wgUbuntuGTMContainerID = '';
 
-# Extensions bundled with the MediaWiki tarball, enabled for testing.
+# Other extensions loaded for testing and validation.
+
+## Special pages
+wfLoadExtension('Linter');
+wfLoadExtension('Echo');
+
+## Editors
+wfLoadExtension('CodeEditor');
+wfLoadExtension('CodeMirror');
 wfLoadExtension('WikiEditor');
 wfLoadExtension('VisualEditor');
+
+## Parser hooks
 wfLoadExtension('SyntaxHighlight_GeSHi');
 
-$wgDefaultUserOptions['visualeditor-newwikitext'] = 1;
-$wgHiddenPrefs[] = 'visualeditor-newwikitext';
+## Other
+wfLoadExtension('DiscussionTools');
+wfLoadExtension('TitleKey');
+
+# CodeMirror https://www.mediawiki.org/wiki/Extension:CodeMirror#Using_CodeMirror_instead_of_CodeEditor
+// Desired modes that should use CodeMirror (mediawiki, i.e. wikitext, is enabled by default)
+$wgCodeMirrorEnabledModes['javascript'] = true;
+$wgCodeMirrorEnabledModes['json'] = true;
+$wgCodeMirrorEnabledModes['css'] = true;
+$wgCodeMirrorEnabledModes['lua'] = true;
+$wgCodeMirrorEnabledModes['vue'] = true;
+
+// If you're also using CodeEditor, disable the same modes there:
+$wgCodeEditorEnabledModes['javascript'] = false;
+$wgCodeEditorEnabledModes['json'] = false;
+$wgCodeEditorEnabledModes['css'] = false;
+$wgCodeEditorEnabledModes['lua'] = false;
+$wgCodeEditorEnabledModes['vue'] = false;
 
 # ---------------------------------------------------------------------------
 # Local testing only — do NOT copy to production.
