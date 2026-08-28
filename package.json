@@ -4,6 +4,10 @@
     "description": "Shared resources and integrations for the Ubuntu Wiki. Dependencies here exist to be vendored into resources/, not to be shipped.",
     "license": "GPL-3.0",
     "dependencies": {
-        "@canonical/cookie-policy": "^3.8.0"
+        "@canonical/cookie-policy": "^3.8.0",
+        "@canonical/design-tokens": "0.8.2",
+        "@canonical/styles": "0.35.0",
+        "@canonical/styles-typography": "0.35.0",
+        "normalize.css": "8.0.1"
     }
 }

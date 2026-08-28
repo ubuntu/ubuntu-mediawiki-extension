@@ -6,6 +6,13 @@
  * in the skin, and references in the wiki content itself.
  *
  * Up to date as of 01/07/2026
+ *
+ * The upstream `@canonical/design-tokens` package is now vendored at
+ * vendor/pragma/design-tokens/ (see vendor/pragma/README.md), but is not
+ * yet wired in here: a variable-naming difference (no `-root` suffix) and
+ * a theming-model difference (native CSS `light-dark()` vs. this file's
+ * explicit per-theme mixins) need a decision first. This hand-maintained
+ * file remains the live source of `--pragma-color-*` until that's resolved.
  */
 
 // Fixed colors are technically not in spec.
