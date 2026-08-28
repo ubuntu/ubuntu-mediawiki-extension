@@ -49,32 +49,13 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 
 	// We still want to change links for the sticky header
 	&:not( .vector-sticky-header-container ) {
-		.vf-codex-token-map-dark();
-		background-color: var( --vf-color-background-default ) !important;
+		.codex-token-map-dark();
+		background-color: var( --pragma-color-background-layer2 ) !important;
 	}
 
 	a,
 	a:visited {
 		color: var( --color-base ) !important;
-	}
-}
-
-// Use different background color for dark theme
-@media screen {
-	html.skin-theme-clientpref-night {
-		.vector-header,
-		.vector-header-container:not( .vector-sticky-header-container ) {
-			background-color: var( --vf-color-background-alt ) !important;
-		}
-	}
-}
-
-@media ( prefers-color-scheme: dark ) {
-	html.skin-theme-clientpref-os {
-		.vector-header,
-		.vector-header-container:not( .vector-sticky-header-container ) {
-			background-color: var( --vf-color-background-alt ) !important;
-		}
 	}
 }
 
@@ -84,7 +65,7 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 .vector-header-container .vector-dropdown-content,
 .vector-header-container .vector-search-box,
 .vector-header-container .vector-typeahead-search-container {
-	.vf-codex-token-map-light();
+	.codex-token-map-light();
 }
 
 @media screen {
@@ -92,7 +73,7 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 		.vector-header-container .vector-dropdown-content,
 		.vector-header-container .vector-search-box,
 		.vector-header-container .vector-typeahead-search-container {
-			.vf-codex-token-map-dark();
+			.codex-token-map-dark();
 		}
 
 		.vector-dropdown-content {
@@ -106,7 +87,7 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
 		.vector-header-container .vector-dropdown-content,
 		.vector-header-container .vector-search-box,
 		.vector-header-container .vector-typeahead-search-container {
-			.vf-codex-token-map-dark();
+			.codex-token-map-dark();
 		}
 
 		.vector-dropdown-content {
@@ -187,7 +168,7 @@ html.skin-theme-clientpref-night .vector-header-container .mw-logo-container.ski
  * --color-emphasized / --background-color-* from here.
  */
 .vector-header-container .vector-search-box {
-	.vf-codex-token-map-dark();
+	.codex-token-map-dark();
 }
 
 .vector-search-box-vue {

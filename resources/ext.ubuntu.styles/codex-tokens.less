@@ -9,7 +9,7 @@
  *
  * Skins with the UbuntuWiki extension as a dependency can @import this file
  * to re-apply a theme map inside a container — e.g.
- * `.my-header { .vf-codex-token-map-dark(); }` — for special cases
+ * `.my-header { .codex-token-map-dark(); }` — for special cases
  * that deliberately ignore the user's color preference.
  *
  * IMPORTANT: import by RELATIVE path, not bare filename. Core's
@@ -23,160 +23,178 @@
  * below resolves relative to THIS file, so the importer needs nothing else.
  */
 @import './vendor/ubuntu-palette.less';
-
-/* Other colors */
-// MediaWiki generally expects solid colors, but VF uses a lot of transparency.
-.ubuntu-other-light-colors() {
-	// Background
-	--background-color-progressive: #0f6ed7; // color/foreground/primary/information/root
-	--background-color-progressive--hover: #0065cd; // color/foreground/primary/information/hover
-	--background-color-progressive--active: #0062ca; // color/foreground/primary/information/active
-
-	--background-color-progressive-subtle: #cedff6; // color/foreground/secondary/information/root
-	--background-color-progressive-subtle--hover: #c2d3e9; // color/foreground/secondary/information/hover
-	--background-color-progressive-subtle--active: #bbcce3; // color/foreground/secondary/information/active
-
-	--background-color-interactive: #ddd; // color/foreground/secondary/root
-	--background-color-interactive--hover: #d1d1d1; // color/foreground/secondary/hover
-	--background-color-interactive--active: #cacaca; // color/foreground/secondary/active
-
-	--background-color-interactive-subtle: #ddd; // color/foreground/secondary/root
-	--background-color-interactive-subtle--hover: #d1d1d1; // color/foreground/secondary/hover
-	--background-color-interactive-subtle--active: #cacaca; // color/foreground/secondary/active
-
-	// Text
-	--color-destructive: #d0192d; // color/foreground/primary/destructive/root
-	--color-destructive--hover: #c50024; // color/foreground/primary/destructive/hover
-	--color-destructive--active: #c20021; // color/foreground/primary/destructive/active
-}
-
-.ubuntu-other-dark-colors() {
-	// Background
-	--background-color-progressive: #368bf6; // color/foreground/primary/information/root
-	--background-color-progressive--hover: #1e78e2; // color/foreground/primary/information/hover
-	--background-color-progressive--active: #267ee8; // color/foreground/primary/information/active
-
-	--background-color-progressive-subtle: #133662; // color/foreground/secondary/information/root
-	--background-color-progressive-subtle--hover: #1a3d6a; // color/foreground/secondary/information/hover
-	--background-color-progressive-subtle--active: #204370; // color/foreground/secondary/information/active
-
-	--background-color-interactive: #363636; // color/foreground/secondary/root
-	--background-color-interactive--hover: #3d3d3d; // color/foreground/secondary/hover
-	--background-color-interactive--active: #424242; // color/foreground/secondary/active
-
-	--background-color-interactive-subtle: #363636; // color/foreground/secondary/root
-	--background-color-interactive-subtle--hover: #3d3d3d; // color/foreground/secondary/hover
-	--background-color-interactive-subtle--active: #424242; // color/foreground/secondary/active
-
-	// Text
-	--color-destructive: #f53e45; // color/foreground/primary/destructive/root
-	--color-destructive--hover: #db2a36; // color/foreground/primary/destructive/hover
-	--color-destructive--active: #e3333c; // color/foreground/primary/destructive/active
-}
+@import './pragma-tokens.less';
 
 /* Map colors */
-.vf-codex-token-map() {
+.codex-token-map() {
 	.vf-static-colors();
+	.pragma-fixed-colors();
 
 	/* Background */
-	--background-color-base: var( --vf-color-background-default );
-	--background-color-neutral: var( --vf-color-background-neutral-default );
-	--background-color-neutral-subtle: var( --vf-color-background-code );
-	// Known-broken upstream (LESS arithmetic can't operate through var());
-	// kept as-is for now — see the styling notes in the repo README.
-	--background-color-inverted: (#fff - var( --vf-color-background-default ));
+	--background-color-base: var( --pragma-color-background-root );
+	--background-color-base-fixed: var( --pragma-color-background-root-fixed );
 
-	--background-color-progressive--focus: var( --vf-color-focus );
-	--background-color-destructive--focus: var( --vf-color-focus );
+	--background-color-neutral: var( --pragma-color-background-layer2 );
+	--background-color-neutral-subtle: var( --pragma-color-foreground-secondary-root ); // Codeblocks
+
+	--background-color-interactive: var( --pragma-color-foreground-ghost-layer2-root );
+	--background-color-interactive--hover: var( --pragma-color-foreground-ghost-layer2-hover );
+	--background-color-interactive--active: var( --pragma-color-foreground-ghost-layer2-active );
+
+	--background-color-interactive-subtle: var( --pragma-color-foreground-secondary-root ); // Codeblocks
+	--background-color-interactive-subtle--hover: var( --pragma-color-foreground-secondary-hover );
+	--background-color-interactive-subtle--active: var( --pragma-color-foreground-secondary-active );
+
+	--background-color-progressive: var( --pragma-color-foreground-information-root );
+	--background-color-progressive--hover: var( --pragma-color-foreground-information-hover );
+	--background-color-progressive--active: var( --pragma-color-foreground-information-active );
+	--background-color-progressive--focus: var( --pragma-color-focus-ring-root );
+
+	--background-color-progressive-subtle: var( --pragma-color-foreground-secondary-information-root );
+	--background-color-progressive-subtle--hover: var( --pragma-color-foreground-secondary-information-hover );
+	--background-color-progressive-subtle--active: var( --pragma-color-foreground-secondary-information-active );
 
 	// -- Same color for destructive and error
-	--background-color-error: var( --color-destructive );
-	--background-color-error--hover: var( --color-destructive--hover );
-	--background-color-error--active: var( --color-destructive--active );
+	--background-color-destructive: var( --pragma-color-foreground-primary-destructive-root );
+	--background-color-destructive--hover: var( --pragma-color-foreground-primary-destructive-hover );
+	--background-color-destructive--active: var( --pragma-color-foreground-primary-destructive-active );
+	--background-color-destructive--focus: var( --pragma-color-focus-ring-error );
+
+	--background-color-destructive-subtle: var( --pragma-color-foreground-secondary-destructive-root );
+	--background-color-destructive-subtle--hover: var( --pragma-color-foreground-secondary-destructive-hover );
+	--background-color-destructive-subtle--active: var( --pragma-color-foreground-secondary-destructive-active );
+
+	--background-color-error: var( --pragma-color-foreground-primary-error-root );
+	--background-color-error--hover: var( --pragma-color-foreground-primary-error-hover );
+	--background-color-error--active: var( --pragma-color-foreground-primary-error-active );
+
+	--background-color-error-subtle: var( --pragma-color-foreground-secondary-error-root );
+	--background-color-error-subtle--hover: var( --pragma-color-foreground-secondary-error-hover );
+	--background-color-error-subtle--active: var( --pragma-color-foreground-secondary-error-active );
+
+	--background-color-warning-subtle: var( --pragma-color-foreground-secondary-warning-root );
+	--background-color-success-subtle: var( --pragma-color-foreground-secondary-success-root );
 
 	/* Text */
-	--color-base: var( --vf-color-text-default );
-	--color-subtle: var( --vf-color-text-muted );
-	--color-neutral: var( --vf-color-text-muted );
-	--color-disabled: var( --vf-color-text-inactive );
+	--color-base: var( --pragma-color-text-root );
+	--color-base-fixed: var( --pragma-color-text-root-fixed );
+	--color-base-hover: var( --pragma-color-text-muted-root );
+	--color-base-emphasized: var( --pragma-color-text-root );
 
-	--color-visited: var( --vf-color-link-visited );
-	--color-visited--hover: var( --vf-color-link-visited );
-	--color-visited--active: var( --vf-color-link-visited );
+	--color-neutral: var( --pragma-color-text-muted-root );
+	--color-subtle: var( --pragma-color-text-on-foreground-secondary-root );
+	--color-disabled: var( --pragma-color-text-disabled );
+	--color-disabled-emphasized: var( --pragma-color-text-disabled );
 
-	--color-progressive: var( --background-color-progressive );
-	--color-progressive--hover: var( --background-color-progressive--hover );
-	--color-progressive--active: var( --background-color-progressive--active );
-	--color-progressive--focus: var( --vf-color-focus );
+	--color-inverted: var( --pragma-color-text-on-foreground-primary-root );
+	--color-inverted-fixed: var( --pragma-color-text-on-foreground-primary-root-fixed );
 
-	--color-link: var( --vf-color-link-default );
-	--color-link--hover: var( --vf-color-link-default );
-	--color-link--active: var( --vf-color-link-default );
-	--color-link--focus: var( --vf-color-focus );
+	--color-progressive: var( --pragma-color-text-information-root );
+	--color-progressive--hover: var( --pragma-color-text-information-root );
+	--color-progressive--active: var( --pragma-color-text-information-root );
+	--color-progressive--focus: var( --pragma-color-focus-ring-root );
 
-	--color-link--visited: var( --vf-color-link-visited );
-	--color-link--visited--hover: var( --vf-color-link-visited );
-	--color-link--visited--active: var( --vf-color-link-visited );
+	--color-destructive: var( --pragma-color-text-destructive-root );
+	--color-destructive--hover: var( --pragma-color-text-destructive-root );
+	--color-destructive--active: var( --pragma-color-text-destructive-root );
+	--color-destructive--focus: var( --pragma-color-focus-ring-error );
+
+	--color-visited: var( --pragma-color-text-link-visited-root );
+	--color-visited--hover: var( --pragma-color-text-link-visited-root );
+	--color-visited--active: var( --pragma-color-text-link-visited-root );
+
+	--color-error: var( --pragma-color-text-error-root );
+	--color-error--hover: var( --pragma-color-text-error-root );
+	--color-error--active: var( --pragma-color-text-error-root );
+
+	--color-warning: var( --pragma-color-text-warning-root );
+	--color-success: var( --pragma-color-text-success-root );
+
+	/* Icon */
+	--color-icon-error: var( --pragma-color-icon-error-root );
+	--color-icon-warning: var( --pragma-color-icon-warning-root );
+	--color-icon-success: var( --pragma-color-icon-success-root );
+
+	--color-icon-progressive: var( --pragma-color-icon-information-root );
+
+	/* Link */
+	--color-link: var( --pragma-color-text-link-root );
+	--color-link--hover: var( --pragma-color-text-link-root );
+	--color-link--active: var( --pragma-color-text-link-root );
+	--color-link--focus: var( --pragma-color-focus-ring-root );
+
+	--color-link--visited: var( --pragma-color-text-link-visited-root );
+	--color-link--visited--hover: var( --pragma-color-text-link-visited-root );
+	--color-link--visited--active: var( --pragma-color-text-link-visited-root );
 
 	/* Border */
-	--border-color-base: var( --vf-color-border-default );
-	--border-color-emphasized: var( --vf-color-border-high-contrast );
-	--border-color-subtle: var( --vf-color-border-low-contrast );
-	--border-color-muted: var( --vf-color-border-neutral );
+	--border-color-base: var( --pragma-color-border-root );
+	--border-color-emphasized: var( --pragma-color-border-highlighted-root );
+	--border-color-subtle: var( --pragma-color-border-muted-root );
+	--border-color-muted: var( --pragma-color-border-muted-root );
 
-	--border-color-disabled: var( --vf-color-border-low-contrast );
+	--border-color-interactive: var( --pragma-color-border-root );
+	--border-color-interactive--hover: var( --pragma-color-border-root );
+	--border-color-interactive--active: var( --pragma-color-border-root );
 
-	--border-color-progressive: var( --background-color-progressive );
-	--border-color-progressive--hover: var( --background-color-progressive--hover );
-	--border-color-progressive--active: var( --background-color-progressive--active );
-	--border-color-progressive--focus: var( --vf-color-focus );
+	--border-color-disabled: var( --pragma-color-border-disabled );
 
-	--border-color-destructive: var( --color-destructive );
-	--border-color-destructive--hover: var( --color-destructive--hover );
-	--border-color-destructive--active: var( --color-destructive--active );
-	--border-color-destructive--focus: var( --vf-color-focus );
+	--border-color-progressive: var( --pragma-color-border-information-root );
+	--border-color-progressive--hover: var( --pragma-color-border-information-root );
+	--border-color-progressive--active: var( --pragma-color-border-information-root );
+	--border-color-progressive--focus: var( --pragma-color-focus-ring-root );
 
-	--border-color-error: var( --color-destructive );
-	--border-color-error--hover: var( --color-destructive--hover );
-	--border-color-error--active: var( --color-destructive--active );
+	--border-color-destructive: var( --pragma-color-border-error-root );
+	--border-color-destructive--hover: var( --pragma-color-border-error-root );
+	--border-color-destructive--active: var( --pragma-color-border-error-root );
+	--border-color-destructive--focus: var( --pragma-color-focus-ring-error );
 
-	--border-color-warning: var( --vf-color-border-caution );
-	--border-color-success: var( --vf-color-border-positive );
-	--border-color-notice: var( --vf-color-border-neutral );
+	--border-color-error: var( --pragma-color-border-error-root );
+	--border-color-error--hover: var( --pragma-color-border-error-root );
+	--border-color-error--active: var( --pragma-color-border-error-root );
 
-	--border-color-option-red: var( --color-destructive );
+	--border-color-warning: var( --pragma-color-border-warning-root );
+	--border-color-warning--hover: var( --pragma-color-border-warning-root );
+	--border-color-warning--active: var( --pragma-color-border-warning-root );
+
+	--border-color-success: var( --pragma-color-border-success-root );
+	--border-color-success--hover: var( --pragma-color-border-success-root );
+	--border-color-success--active: var( --pragma-color-border-success-root );
+
+	--border-color-notice: var( --pragma-color-border-notice-root );
+	--border-color-notice--hover: var( --pragma-color-border-notice-root );
+	--border-color-notice--active: var( --pragma-color-border-notice-root );
 
 	/* Box-shadow */
-	--box-shadow-color-progressive--active: var( --background-color-progressive--active );
-	--box-shadow-color-progressive--focus: var( --vf-color-focus );
-	--box-shadow-color-progressive-selected: var( --color-progressive );
-	--box-shadow-color-progressive-selected--hover: var( --color-progressive--hover );
-	--box-shadow-color-progressive-selected--active: var( --color-progressive--active );
+	--box-shadow-color-base: var( --pragma-color-border-root );
+	--box-shadow-color-progressive--active: var( --pragma-color-border-information-root );
+	--box-shadow-color-progressive--focus: var( --pragma-color-focus-ring-root );
+	--box-shadow-color-progressive-selected: var( --pragma-color-focus-ring-root );
+	--box-shadow-color-progressive-selected--hover: var( --pragma-color-border-information-root );
+	--box-shadow-color-progressive-selected--active: var( --pragma-color-border-information-root );
 
-	--box-shadow-color-destructive--focus: var( --vf-color-focus );
+	--box-shadow-color-destructive--focus: var( --pragma-color-focus-ring-error );
 
 	/* Other */
-	--color-accent: var( --vf-color-accent );
-
-	--color-icon-error: var( --color-destructive );
+	--color-accent: var( --pragma-color-background-logo );
 }
 
-.vf-codex-token-map-light() {
+.codex-token-map-light() {
 	.vf-theme-light-colors();
-	.vf-codex-token-map();
-	.ubuntu-other-light-colors();
+	.pragma-light-colors();
+	.codex-token-map();
 }
 
-.vf-codex-token-map-dark() {
+.codex-token-map-dark() {
 	.vf-theme-dark-colors();
-	.vf-codex-token-map();
-	.ubuntu-other-dark-colors();
+	.pragma-dark-colors();
+	.codex-token-map();
 
 	--mix-blend-mode-blend: screen;
 }
 
-.vf-codex-token-map-paper() {
+.codex-token-map-paper() {
 	.vf-theme-paper-colors();
-	.vf-codex-token-map();
-	.ubuntu-other-light-colors();
+	.pragma-light-colors();
+	.codex-token-map();
 }
