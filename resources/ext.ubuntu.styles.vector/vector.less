@@ -10,9 +10,15 @@
  * Import-only by convention (see resources/README.md); declarations live in
  * per-component files beside this one.
  */
-@import './components/Header.less';
-@import './components/Layout.less';
+// Import shared variables first
+@import '../ext.ubuntu.styles/variables.less';
+
+// Components
 @import './components/Body.less';
+@import './components/Header.less';
+@import './components/Icons.less';
+@import './components/Layout.less';
+@import './components/Menu.less';
 @import './components/PageTools.less';
 @import './components/PinnableHeader.less';
-@import './components/Icons.less';
+@import './components/Typography.less';
