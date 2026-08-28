@@ -1,0 +1,33 @@
+This page tests basic wikitext rendered tables.
+
+== Wide wikitable ==
+
+{| class="wikitable"
+! Column 1 !! Column 2 !! Column 3 !! Column 4 !! Column 5 !! Column 6 !! Column 7 !! Column 8 !! Column 9 !! Column 10
+|-
+| Alpha bravo charlie || Delta echo foxtrot || Golf hotel india || Juliett kilo lima || Mike november oscar || Papa quebec romeo || Sierra tango uniform || Victor whiskey x-ray || Yankee zulu alpha || Bravo charlie delta
+|-
+| One || Two || Three || Four || Five || Six || Seven || Eight || Nine || Ten
+|-
+| 1000000 || 2000000 || 3000000 || 4000000 || 5000000 || 6000000 || 7000000 || 8000000 || 9000000 || 10000000
+|}
+
+== Narrow table ==
+
+{| class="wikitable"
+! Name !! Value
+|-
+| Width || Should not scroll
+|-
+| Height || Fits fine
+|}
+
+== No styling table ==
+
+{|
+! Name !! Value
+|-
+| Width || Should not scroll
+|-
+| Height || Fits fine
+|}

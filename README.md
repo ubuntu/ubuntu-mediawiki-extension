@@ -34,6 +34,9 @@ The environment binds port 8088 by default (the skin repo's environment uses 808
 
 - **Main Page** — overview and links
 - **Code block examples** — `.ubuntu-code-block` markup in regular wikitext: template-driven blocks, raw HTML blocks, custom copy labels, tabindex/focus-order cases, and a SyntaxHighlight comparison
+- **Tables** — tables rendered from wikitext
+- **Syntax highlighting** — examples in several highlighted languages
+- **TOC test** — long article with many sections
 - **Template:Code block** — the template used by the examples page
 - **Template examples** — shared admonition styles across all variants
 - **Template:Admonition** — the generic admonition template, plus typed admonition wrappers for note, warning, tip, doccan, info, and danger
