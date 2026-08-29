@@ -65,3 +65,11 @@ _Avoid_: Design token (too generic — see also **Pragma token**)
 **Pragma token**:
 A `--pragma-color-*-root` CSS custom property defined in `pragma-tokens.less`. This extension's own stable name for a Canonical Pragma color value, deliberately kept independent of both Codex tokens and upstream Pragma's own `--color-*` npm-package variable names — so a rename on either side doesn't collide with or silently reinterpret the other's namespace.
 _Avoid_: Design token, vendor token (the raw, untranslated upstream output in `vendor/pragma/`, distinct from the translated Pragma token consumed by `codex-tokens.less`)
+
+**Pragma component**:
+A stable React component imported from `@canonical/react-ds-global` (e.g. `Button`, `Icon`, `Card`, `Tile`) and rendered into a MediaWiki page. Excludes anything under that package's `_work_in_progress/` folder, which this extension treats as unstable and out of scope regardless of how closely it matches a needed shape.
+_Avoid_: Design-system component, DS component
+
+**Homepage card**:
+A hand-rolled section on the Main Page (a top rule, an uppercase eyebrow label, and content), styled by this extension's own CSS rather than a Pragma component — there is no stable Pragma equivalent for this exact anatomy. Distinct from a **Pragma component** like `Card`/`Tile`, which may end up as the surface underneath a homepage card but doesn't by itself produce the rule/label layout.
+_Avoid_: Card (ambiguous with Pragma's `Card` component — say "homepage card" when talking about the Main Page's own section shape)
