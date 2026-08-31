@@ -49,3 +49,6 @@ LocalSettings.php
 
 # Extensions fetched by `make setup` for the Docker test environment
 /.ext/
+
+# Local issue-tracker working files
+/.scratch/
