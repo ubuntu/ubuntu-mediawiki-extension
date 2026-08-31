@@ -8,7 +8,7 @@ Before working in this repo, read `CONTEXT.md` for the project's domain vocabula
 
 ### Issue tracker
 
-Issues live as GitHub issues in `ubuntu/ubuntu-mediawiki-extension`, managed via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+Issues live as local Markdown files under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
