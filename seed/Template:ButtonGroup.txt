@@ -1,0 +1,12 @@
+<includeonly><div class="main-page-button-links">
+{{{1}}}
+</div></includeonly><noinclude>Wraps one or more [[Template:Button|Button]] calls in the container that lays them out as a
+responsive row of buttons.
+
+Usage:
+<pre>
+{{ButtonGroup|
+{{Button|text=Desktop|target=Category:Desktop|icon=desktop}}
+{{Button|text=Server|target=Category:Server|icon=machines}}
+}}
+</pre></noinclude>

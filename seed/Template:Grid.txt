@@ -1,0 +1,29 @@
+<includeonly><div class="main-page-grid-3col">
+{{{1}}}
+</div></includeonly><noinclude>Wraps a set of [[Template:Card|Card]] calls in the responsive section grid used
+on the homepage. Plain wikitext template — the cards inside are already
+fully-rendered by the time they're substituted here.
+
+Usage:
+<pre>
+{{Grid|
+{{Card|label=...|...}}
+{{Card|label=...|...}}
+}}
+</pre>
+<templatedata>
+{
+	"description": "Wraps a set of already-rendered {{Card}} calls in the responsive section grid used on the homepage.",
+	"params": {
+		"1": {
+			"label": "Cards",
+			"description": "One or more {{Card|...}} calls, placed one after another.",
+			"type": "content",
+			"required": true
+		}
+	},
+	"paramOrder": [
+		"1"
+	]
+}
+</templatedata></noinclude>
