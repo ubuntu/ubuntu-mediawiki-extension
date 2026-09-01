@@ -156,19 +156,43 @@ div.main-page-button-links {
 .mw-parser-output .main-page-button-link a {
 	display: block;
 	padding: 0.6rem 1rem;
-	// Button labels are always the theme's default text colour (black on light,
-	// white on dark) rather than link-blue, so they read as buttons.
-	color: var( --vf-color-text-default, inherit );
-	text-decoration: none;
+
+	// Don't use visited.active colors for button links
+	&,
+	&:visited,
+	&:hover,
+	&:active,
+	&:focus {
+		color: var( --vf-color-text-default, inherit );
+		text-decoration: none;
+	}
 }
 
-/* Drop MediaWiki's external-link icon inside buttons
- * NOTE: it would be OK to have the icons within the button but I couldn't
- * accommodate it easily in my testing.
- */
+// Use an external link icon for external link buttons
 .mw-parser-output .main-page-button-link a.external {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.35rem;
 	padding-right: 1rem;
 	background-image: none;
+
+	&::after {
+		content: '';
+		display: block;
+		flex: none;
+		width: 0.75rem;
+		height: 0.75rem;
+		background-color: currentcolor;
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		-webkit-mask-position: center;
+		mask-position: center;
+		-webkit-mask-size: contain;
+		mask-size: contain;
+		-webkit-mask-image: url( "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' d='M6 1h5v5L8.86 3.85 4.7 8 4 7.3l4.15-4.16zM2 3h2v1H2v6h6V8h1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1'/%3E%3C/svg%3E" );
+		mask-image: url( "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' d='M6 1h5v5L8.86 3.85 4.7 8 4 7.3l4.15-4.16zM2 3h2v1H2v6h6V8h1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1'/%3E%3C/svg%3E" );
+	}
 }
 
 /* Optional platform icon shown to the left of the label. */
