@@ -1,0 +1,42 @@
+local p = {}
+
+-- Renders a single button link with optional icon.
+-- Supports internal wiki links [[Page|text]] and external [https://url text].
+--
+-- Usage from wikitext:
+--   {{#invoke:ButtonLink|link|text=Label|target=Page}}                   -- internal link
+--   {{#invoke:ButtonLink|link|text=Label|url=https://example.com}}       -- external link
+--   {{#invoke:ButtonLink|link|text=Label|target=Page|icon=desktop}}      -- with icon
+
+function p.link(frame)
+	local text = frame.args.text or ''
+	local target = frame.args.target or ''
+	local url = frame.args.url or ''
+	local icon = frame.args.icon or ''
+
+	-- A leading colon on [[:target]] is required for namespaced targets
+	-- The colon is fine for normal article links.
+	local linkWikitext = ''
+	if url ~= '' then
+		linkWikitext = '[' .. url .. ' ' .. text .. ']'
+	elseif target ~= '' then
+		linkWikitext = '[[:' .. target .. '|' .. text .. ']]'
+	else
+		linkWikitext = text
+	end
+
+	local linkHtml = frame:preprocess(linkWikitext)
+
+	local button = mw.html.create('span')
+		:addClass('main-page-button-link')
+
+	if icon ~= '' then
+		button:addClass('main-page-button-link--icon-' .. icon)
+	end
+
+	button:wikitext(linkHtml)
+
+	return tostring(button)
+end
+
+return p

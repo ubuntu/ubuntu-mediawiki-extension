@@ -1,0 +1,94 @@
+__NOTOC__
+<!--NOTE: this is a Lua-templating experiment, compare against [[Homepage design]].-->
+<!--WARNING: avoid trying to make edits to the structure of this page.-->
+<!--TIP: it is recommended that you use Edit source for this page.-->
+<!--TIP: any major changes should be proposed in the Discussion page.-->
+The Ubuntu wiki makes it easy to find, add and connect ideas about Ubuntu.
+
+{{Grid|
+{{Card
+| label = Platform-specific wiki pages
+| variant = col2
+| content = {{ButtonGroup|
+{{Button|text=Desktop|target=Category:Desktop|icon=desktop}}
+{{Button|text=Server|target=Category:Server|icon=machines}}
+{{Button|text=WSL|target=Category:WSL|icon=containers}}
+}}{{tip|
+Any [[red link]] is a page that people want. Select one to create it. If you're new to the wiki, you [[Project:Autoconfirmed users| may first need to make a few edits]] before you can create pages.
+}}
+}}
+
+{{Card
+| label = Edit the wiki
+| body = Anyone can contribute to the wiki. [[Special:Search|Search]] to find a page, browse [[Special:RecentChanges|recent changes]] to see the latest edits, and select '''Edit''' on any page to start contributing.
+}}
+
+{{Card
+| label = Get started with Ubuntu
+| body = Ubuntu is the most popular Linux distro and can be used everywhere.
+| content = {{CardList
+| [[Getting started with Ubuntu|Installation methods]]
+| [[Ubuntu on different platforms|Ubuntu platform reference]]
+| [[Ubuntu Desktop components]]
+| [[Ubuntu as a first Linux distro]]
+}}
+}}
+
+{{Card
+| label = Applications
+| body = Debs and snaps are officially supported, but Ubuntu is flexible.
+| content = {{CardList
+| [[Managing software|Software management overview]]
+| [[Install Flatpaks|Install Flatpaks on Ubuntu]]
+| [[Alternative game launchers]]
+| [[Running Windows apps]]
+}}
+}}
+
+{{Card
+| label = Guides
+| body = The wiki has many specialist guides that don't appear in the official docs.
+| content = {{CardList
+| [[Run containers on Ubuntu]]
+| [[Develop games]]
+| [[Install Ubuntu on Raspberry Pi]]
+| [[Customize your desktop]]
+}}
+}}
+}}
+
+{{Grid|
+{{Card
+| label = Official documentation
+| variant = col3 split
+| body = Maintained by dedicated engineering teams, the official docs provide authoritative guides on key operations.
+| content = {{ButtonGroup|
+{{Button|text=Desktop|url=https://ubuntu.com}}
+{{Button|text=Server|url=https://ubuntu.com}}
+{{Button|text=WSL|url=https://ubuntu.com}}
+{{Button|text=Core|url=https://docs.ubuntu.com}}
+{{Button|text=Developer|url=https://canonical.com}}
+{{Button|text=Project|url=https://canonical.com}}
+{{Button|text=Security|url=https://canonical.com}}
+}}
+}}
+
+{{Card
+| label = Use cases
+| content = {{CardList
+| [[:Category:Developing on Ubuntu|Ubuntu for development]]
+| [[Ubuntu for science]]
+| [[Ubuntu for design]]
+}}
+}}
+
+{{Card
+| label = Project and community
+| variant = col2
+| content = {{CardList
+| [https://discourse.ubuntu.com/t/ubuntu-code-of-conduct-v2-0/33111 Code of conduct] — guidelines for the Ubuntu communities.
+| [[Getting involved]] — ways you can contribute to the Ubuntu community.
+| [https://github.com/ubuntu/wiki-archives Archive of old wikis] — public archive of older Ubuntu wikis.
+}}
+}}
+}}

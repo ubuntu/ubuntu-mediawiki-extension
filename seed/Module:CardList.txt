@@ -1,0 +1,24 @@
+local p = {}
+
+-- Renders a list of links/text in a card
+--
+-- Usage from wikitext (usually via Template:CardList):
+--   {{#invoke:CardList|list|[[Page one|Label one]]|[[Page two|Label two]]}}
+
+function p.list(frame)
+	local list = mw.html.create('ul')
+		:addClass('main-page-card__list')
+
+	-- Limit the size of the list to a reasonable number
+	for i = 1, 10 do
+		local item = frame.args[i]
+		if item and item ~= '' then
+			local itemHtml = frame:preprocess(item)
+			list:tag('li'):wikitext(itemHtml):done()
+		end
+	end
+
+	return tostring(list)
+end
+
+return p

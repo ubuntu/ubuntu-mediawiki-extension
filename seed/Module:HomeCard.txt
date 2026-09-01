@@ -1,0 +1,45 @@
+local p = {}
+
+-- A homepage section card: a label, an optional intro paragraph, and
+-- optional extra content (like a rendered ButtonGroup or CardList).
+--
+-- Usage from wikitext (usually via Template:Card):
+--   {{#invoke:HomeCard|card|label=Get started|body=Ubuntu is popular.|content={{CardList|...}}}}
+--   {{#invoke:HomeCard|card|label=Platform pages|variant=col2|content={{ButtonGroup|...}}}}
+--   {{#invoke:HomeCard|card|label=Docs|variant=col3 split|body=...|content={{ButtonGroup|...}}}}
+--
+-- variant is a space-separated list of modifier suffixes appended as
+-- `main-page-card--<suffix>` classes (e.g. "col2", "col3 split").
+
+function p.card(frame)
+	local label = frame.args.label or ''
+	local body = frame.args.body or ''
+	local content = frame.args.content or ''
+	local variant = frame.args.variant or ''
+
+	local card = mw.html.create('div')
+		:addClass('main-page-card')
+
+	for token in variant:gmatch('%S+') do
+		card:addClass('main-page-card--' .. token)
+	end
+
+	card:tag('div')
+		:addClass('main-page-card__label')
+		:wikitext(label)
+		:done()
+
+	if body ~= '' then
+		card:tag('p')
+			:wikitext(frame:preprocess(body))
+			:done()
+	end
+
+	if content ~= '' then
+		card:wikitext(content)
+	end
+
+	return tostring(card)
+end
+
+return p
