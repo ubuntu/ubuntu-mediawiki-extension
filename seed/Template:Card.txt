@@ -1,0 +1,21 @@
+<includeonly>{{#invoke:HomeCard|card|label={{{label|}}}|body={{{body|}}}|content={{{content|}}}|variant={{{variant|}}}}}</includeonly><noinclude>Renders a homepage section card via [[Module:HomeCard]].
+
+Usage:
+<pre>
+{{Card
+| label = Get started with Ubuntu
+| body = Ubuntu is the most popular Linux distro and can be used everywhere.
+| content = {{CardList
+    | [[Getting started with Ubuntu|Installation methods]]
+  }}
+}}
+</pre>
+
+Parameters:
+* '''label''' (required) &ndash; the card's uppercase heading.
+* '''body''' (optional) &ndash; an intro paragraph, rendered as wikitext.
+* '''content''' (optional) &ndash; extra content below/beside the body, usually a
+  nested {{[[Template:ButtonGroup|ButtonGroup]]}} or {{[[Template:CardList|CardList]]}} call.
+* '''variant''' (optional) &ndash; space-separated modifiers: <code>col2</code>,
+  <code>col3</code>, and/or <code>split</code> (a two-column layout with
+  <code>content</code> beside <code>label</code>/<code>body</code>).</noinclude>

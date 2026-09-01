@@ -1,0 +1,13 @@
+<includeonly>{{#invoke:CardList|list|{{{1|}}}|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}|{{{6|}}}|{{{7|}}}|{{{8|}}}}}</includeonly><noinclude>Renders a bullet list of links styled as the homepage's row-divided card list
+via [[Module:CardList]]. Empty slots are skipped.
+
+Usage:
+<pre>
+{{CardList
+| [[Getting started with Ubuntu|Installation methods]]
+| [[Ubuntu on different platforms|Ubuntu platform reference]]
+}}
+</pre>
+
+Each item is plain wikitext (a link, optionally followed by descriptive text) — write
+it exactly as you would inside a normal <code><nowiki><li></nowiki></code>.</noinclude>
