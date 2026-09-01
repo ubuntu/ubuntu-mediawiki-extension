@@ -280,25 +280,7 @@ div.main-page-button-links {
 	div.main-page-card.main-page-card--split {
 		display: flex;
 		flex-direction: column;
+		align-items: stretch;
 		gap: 0.85rem;
-	}
-
-	// Smaller minimum width so the three platform buttons stay on one row
-	div.main-page-button-links {
-		grid-template-columns: repeat( auto-fit, minmax( 5rem, 1fr ) );
-	}
-
-	// Lay the longer doc list out as fixed two columns
-	div.main-page-card--split div.main-page-button-links {
-		grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
-	}
-}
-
-// On compact devices (<= 360px) three platform buttons across leave
-// each one too narrow: the icon crowds its label. Stack the platform
-// shortcuts one per row so every button has room for its icon and full label.
-@media ( max-width: 360px ) {
-	div.main-page-card:not( .main-page-card--split ) div.main-page-button-links {
-		grid-template-columns: minmax( 0, 1fr );
 	}
 }
