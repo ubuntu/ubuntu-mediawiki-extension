@@ -6,6 +6,22 @@ Shared branding, styling, and integrations for the Ubuntu Wiki, layered on top o
 
 ### Ubuntu Wiki concepts
 
+**Editorial card collection**:
+A source-ordered group of content cards that uses compact, column-oriented visual flow for standard cards while placing featured cards in their own full-width sections. Its visual layout must not change the linear reading order exposed to keyboard and screen-reader users.
+_Avoid_: Masonry grid, reordered card grid
+
+**Featured card**:
+A card in an editorial card collection that is intentionally presented in a full-width section because its content benefits from more horizontal space than a standard card. This is a presentation role, not a different semantic content type.
+_Avoid_: Double-width card, hero card
+
+**Card composition classes**:
+The `ubuntu-card-*` CSS classes that provide reusable card collection, flow, featured-card, and card-internal layout roles. They may be used on any wiki page; homepage templates and Lua modules are convenience authoring interfaces, not the sole consumers.
+_Avoid_: Main-page CSS, homepage-only components
+
+**Card link directory**:
+A reusable card-internal arrangement pairing a contextual label and description with a group of navigational links. It adapts between side-by-side and stacked presentation according to the rendered card width.
+_Avoid_: Documentation-card split, homepage link panel
+
 **Code block**:
 A `.ubuntu-code-block` element in rendered wiki content (produced by the `Code block` template or raw HTML), enhanced client-side with a copy-to-clipboard button.
 _Avoid_: Snippet, terminal block

@@ -1,33 +1,126 @@
 /**
- * Main Page layout
+ * Editorial card composition
  */
 
-@grid-col-gap: 2.5rem;
-@grid-row-gap: 2.75rem;
+@card-col-gap: 2.5rem;
+@card-row-gap: 2.75rem;
+@card-flow-column-width: 17.5rem;
+@card-flow-two-column-width: ( @card-flow-column-width * 2 + @card-col-gap );
+@card-flow-three-column-width: ( @card-flow-column-width * 3 + @card-col-gap * 2 );
 @button-radius: 0;
 @button-border-width: 1.5px;
-@rule: 1px solid var( --vf-color-border-default, rgba( 0, 0, 0, 0.25 ) );
+@rule: 1px solid var( --border-color-base, rgba( 0, 0, 0, 0.25 ) );
 
-/* The section grid */
-div.main-page-grid-3col {
-	display: grid;
-	grid-template-columns: repeat( 3, minmax( 0, 1fr ) );
-	grid-auto-flow: row dense;
-	gap: @grid-row-gap @grid-col-gap;
-	align-items: start;
+/* A source-ordered collection of standard-card flows and featured cards. */
+div.ubuntu-card-collection {
+	display: flex;
+	flex-direction: column;
+	gap: @card-row-gap;
 	margin: 2.5rem 0;
+	container-type: inline-size;
+}
 
-	> .main-page-card--col2 {
-		grid-column: span 2;
-	}
+/* Standard cards flow into as many readable columns as the available width
+ * can accommodate. CSS columns change presentation only; the DOM remains the
+ * keyboard and screen-reader reading order. */
+div.ubuntu-card-flow {
+	container-type: inline-size;
+}
 
-	> .main-page-card--col3 {
-		grid-column: span 3;
+div.ubuntu-card-flow__content {
+	column-width: @card-flow-column-width;
+}
+
+div.ubuntu-card-flow__content > .ubuntu-card {
+	display: flex;
+	width: 100%;
+	margin: 0 0 @card-row-gap;
+	break-inside: avoid;
+	page-break-inside: avoid;
+}
+
+div.ubuntu-card-flow__content > .ubuntu-card:last-child {
+	margin-bottom: 0;
+}
+
+@container ( min-width: @card-flow-two-column-width ) {
+	div.ubuntu-card-flow:not( .ubuntu-card-flow--grid ) > .ubuntu-card-flow__content > .ubuntu-card:nth-child( 3 ):last-child {
+		column-span: all;
 	}
 }
 
+@container ( min-width: @card-flow-three-column-width ) {
+	div.ubuntu-card-flow:not( .ubuntu-card-flow--grid ) > .ubuntu-card-flow__content > .ubuntu-card:nth-child( 3 ):last-child {
+		column-span: none;
+	}
+}
+
+/* A grid flow is for source-ordered card arrangements that need explicit spans. */
+div.ubuntu-card-flow--grid > .ubuntu-card-flow__content {
+	columns: auto 1;
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( ~'min( @{card-flow-column-width}, 100% )', 1fr ) );
+	gap: @card-row-gap @card-col-gap;
+}
+
+div.ubuntu-card-flow--grid > .ubuntu-card-flow__content > .ubuntu-card {
+	width: auto;
+	margin: 0;
+	break-inside: auto;
+	page-break-inside: auto;
+}
+
+@container ( min-width: @card-flow-two-column-width ) {
+	div.ubuntu-card-flow--grid > .ubuntu-card-flow__content > .ubuntu-card--two-wide-fixed {
+		grid-column: span var( --card-flow-wide-span, 2 );
+	}
+}
+
+@container ( min-width: @card-flow-three-column-width ) {
+	div.ubuntu-card-flow--grid > .ubuntu-card-flow__content {
+		grid-template-columns: repeat( 3, minmax( 0, 1fr ) );
+	}
+
+	div.ubuntu-card-flow--grid > .ubuntu-card-flow__content > .ubuntu-card--two-wide {
+		grid-column: span var( --card-flow-wide-span, 2 );
+	}
+}
+
+/* Paired rows use fluid tracks. At the widest size, an emphasized card spans
+ * two of three slots so the other card lines up with the third card below. */
+div.ubuntu-card-row {
+	container-type: inline-size;
+}
+
+div.ubuntu-card-row__content {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( ~'min( 18rem, 100% )', 1fr ) );
+	gap: @card-row-gap @card-col-gap;
+}
+
+div.ubuntu-card-row__content > .ubuntu-card {
+	margin: 0;
+	break-inside: auto;
+	page-break-inside: auto;
+}
+
+@container ( min-width: @card-flow-three-column-width ) {
+	div.ubuntu-card-row__content {
+		grid-template-columns: repeat( 3, minmax( 0, 1fr ) );
+	}
+
+	div.ubuntu-card-row__content > .ubuntu-card--two-wide-fixed,
+	div.ubuntu-card-row__content > .ubuntu-card--two-wide {
+		grid-column: span var( --card-row-wide-span, 2 );
+	}
+}
+
+div.ubuntu-card--featured {
+	width: 100%;
+}
+
 /* Section: a top rule and label, with no surrounding box */
-div.main-page-card {
+div.ubuntu-card {
 	display: flex;
 	flex-direction: column;
 	gap: 0.85rem;
@@ -35,12 +128,12 @@ div.main-page-card {
 	padding: 1.1rem 0 0;
 	border-top: @rule;
 
-	> p {
+	> p,
+	.ubuntu-card-link-directory__content > p {
 		margin: 0;
-		color: var( --vf-color-text-default, inherit );
+		color: var( --color-base, inherit );
 		font-size: 0.95rem;
 		line-height: 1.5;
-		max-width: 34ch;
 	}
 
 	> :last-child {
@@ -48,27 +141,44 @@ div.main-page-card {
 	}
 }
 
-/* A single section whose body is split into two connected columns under one
- * continuous top rule */
-div.main-page-card.main-page-card--split {
-	display: grid;
-	grid-template-columns: minmax( 0, 1fr ) minmax( 0, 2fr );
-	gap: 0.5rem @grid-col-gap;
-	align-items: start;
+/* A card-local link directory keeps its contextual content beside its links
+ * while there is enough room, then stacks both parts within the card. */
+div.ubuntu-card-link-directory {
+	container-type: inline-size;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 0.85rem;
+	/* Stacking is the fallback for browsers without container query support. */
+}
 
-	> .main-page-card__label {
-		grid-column: 1;
-		grid-row: 1;
-	}
+div.ubuntu-card-link-directory__content {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 0.85rem;
+}
 
-	> p {
-		grid-column: 1;
-		grid-row: 2;
-	}
+@container ( min-width: @min-width-breakpoint-tablet ) {
+	div.ubuntu-card-link-directory__content {
+		display: grid;
+		grid-template-columns: minmax( 0, 1fr ) minmax( 0, 2fr );
+		gap: 0.5rem @card-col-gap;
 
-	> .main-page-button-links {
-		grid-column: 2;
-		grid-row: 1 / span 2;
+		> .ubuntu-card__label {
+			grid-column: 1;
+			grid-row: 1;
+		}
+
+		> p {
+			grid-column: 1;
+			grid-row: 2;
+		}
+
+		> .ubuntu-card-button-links {
+			grid-column: 2;
+			grid-row: 1 / span 2;
+		}
 	}
 }
 
@@ -79,9 +189,9 @@ div.main-page-card.main-page-card--split {
  * NOTE: An alternative might be to use the default headers but disable
  * section editing in the config (if that's possible).
  */
-.main-page-card__label {
+.ubuntu-card__label {
 	margin: 0;
-	color: var( --vf-color-text-default, inherit );
+	color: var( --color-base, inherit );
 	font-size: 0.72rem;
 	font-weight: bold;
 	letter-spacing: 0.07em;
@@ -89,7 +199,7 @@ div.main-page-card.main-page-card--split {
 }
 
 /* Link list with row dividers */
-ul.main-page-card__list {
+ul.ubuntu-card__list {
 	display: flex;
 	flex-direction: column;
 	margin: 0.15rem 0 0;
@@ -98,7 +208,7 @@ ul.main-page-card__list {
 
 	> li {
 		padding: 0.55rem 0;
-		border-bottom: 1px solid var( --vf-color-border-low-contrast, rgba( 0, 0, 0, 0.1 ) );
+		border-bottom: 1px solid var( --border-color-subtle, rgba( 0, 0, 0, 0.1 ) );
 		font-size: 0.98rem;
 		line-height: 1.35;
 
@@ -118,7 +228,7 @@ ul.main-page-card__list {
 }
 
 /* Filled button links (grid, so docs wrap into columns) */
-div.main-page-button-links {
+div.ubuntu-card-button-links {
 	display: grid;
 	grid-template-columns: repeat( auto-fit, minmax( 9rem, 1fr ) );
 	gap: 0.75rem;
@@ -130,31 +240,35 @@ div.main-page-button-links {
 }
 
 /* Button links in neutral Vanilla style */
-.main-page-button-link {
+.ubuntu-card-button-link {
 	display: block;
 	padding: 0;
-	background: var( --vf-color-background-default, #fff );
-	border: @button-border-width solid var( --vf-color-border-high-contrast, #707070 );
+	background: var( --background-color-base, #fff );
+	border: @button-border-width solid var( --border-color-emphasized, #707070 );
 	border-radius: @button-radius;
-	color: var( --vf-color-text-default, inherit );
+	color: var( --color-base, inherit );
 	font-size: 1rem;
 	font-weight: normal;
 	text-align: center;
 	transition: background-color 100ms ease, border-color 100ms ease;
 
 	&:hover {
-		background: var( --vf-color-background-hover, rgba( 0, 0, 0, 0.03 ) );
-		border-color: var( --vf-color-border-high-contrast, #707070 );
+		background: var( --background-color-interactive--hover, rgba( 0, 0, 0, 0.03 ) );
+		border-color: var( --border-color-emphasized, #707070 );
 	}
 
 	&:active {
-		background: var( --vf-color-background-active, rgba( 0, 0, 0, 0.06 ) );
-		border-color: var( --vf-color-border-high-contrast, #707070 );
+		background: var( --background-color-interactive--active, rgba( 0, 0, 0, 0.06 ) );
+		border-color: var( --border-color-emphasized, #707070 );
 	}
 }
 
-.mw-parser-output .main-page-button-link a {
-	display: block;
+.ubuntu-card-button-link.ubuntu-card-button-link a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	box-sizing: border-box;
 	padding: 0.6rem 1rem;
 
 	// Don't use visited.active colors for button links
@@ -163,18 +277,16 @@ div.main-page-button-links {
 	&:hover,
 	&:active,
 	&:focus {
-		color: var( --vf-color-text-default, inherit );
+		color: var( --color-base, inherit );
 		text-decoration: none;
 	}
 }
 
-// Use an external link icon for external link buttons
-.mw-parser-output .main-page-button-link a.external {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+// `external` is MediaWiki's link type class. Keep it narrowly scoped to the
+// component so external links elsewhere retain their standard treatment.
+/* stylelint-disable-next-line selector-class-pattern */
+.ubuntu-card-button-link.ubuntu-card-button-link a.external {
 	gap: 0.35rem;
-	padding-right: 1rem;
 	background-image: none;
 
 	&::after {
@@ -196,18 +308,18 @@ div.main-page-button-links {
 }
 
 /* Optional platform icon shown to the left of the label. */
-.mw-parser-output .main-page-button-link--icon-desktop a,
-.mw-parser-output .main-page-button-link--icon-machines a,
-.mw-parser-output .main-page-button-link--icon-containers a {
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-desktop a,
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-machines a,
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-containers a {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 0.45rem;
 }
 
-.main-page-button-link--icon-desktop a::before,
-.main-page-button-link--icon-machines a::before,
-.main-page-button-link--icon-containers a::before {
+.ubuntu-card-button-link--icon-desktop a::before,
+.ubuntu-card-button-link--icon-machines a::before,
+.ubuntu-card-button-link--icon-containers a::before {
 	content: '';
 	display: block;
 	flex: none;
@@ -223,64 +335,17 @@ div.main-page-button-links {
 }
 
 /* TODO: to replace with imported Vanilla icons */
-.main-page-button-link--icon-desktop a::before {
+.ubuntu-card-button-link--icon-desktop a::before {
 	-webkit-mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.5 3.5H13.5V10.5H2.5L2.5 3.5ZM1 3.5C1 2.67157 1.67157 2 2.5 2H13.5C14.3284 2 15 2.67157 15 3.5V10.5C15 11.3284 14.3284 12 13.5 12H8.75V13.25H11V14.75H5V13.25H7.25V12H2.5C1.67157 12 1 11.3284 1 10.5V3.5Z' fill='%23000'/%3E%3C/svg%3E" );
 	mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.5 3.5H13.5V10.5H2.5L2.5 3.5ZM1 3.5C1 2.67157 1.67157 2 2.5 2H13.5C14.3284 2 15 2.67157 15 3.5V10.5C15 11.3284 14.3284 12 13.5 12H8.75V13.25H11V14.75H5V13.25H7.25V12H2.5C1.67157 12 1 11.3284 1 10.5V3.5Z' fill='%23000'/%3E%3C/svg%3E" );
 }
 
-.main-page-button-link--icon-machines a::before {
+.ubuntu-card-button-link--icon-machines a::before {
 	-webkit-mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .99a3 3 0 013 3v1.75c0 .938-.431 1.776-1.106 2.326A2.989 2.989 0 0115 10.392v1.75a3 3 0 01-3 3H4a3 3 0 01-3-3v-1.75c0-.94.431-1.777 1.106-2.327A2.989 2.989 0 011 5.739V3.99a3 3 0 013-3h8zm0 7.902H4a1.5 1.5 0 00-1.493 1.355l-.007.145v1.75a1.5 1.5 0 001.356 1.493l.144.007h8a1.5 1.5 0 001.493-1.356l.007-.144v-1.75a1.5 1.5 0 00-1.356-1.494L12 8.892zM11.5 10a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1zm.5-7.51H4a1.5 1.5 0 00-1.493 1.355l-.007.144v1.75a1.5 1.5 0 001.356 1.493L4 7.24h8a1.5 1.5 0 001.493-1.355l.007-.145V3.99a1.5 1.5 0 00-1.356-1.493L12 2.49zM11.5 4a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E" );
 	mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .99a3 3 0 013 3v1.75c0 .938-.431 1.776-1.106 2.326A2.989 2.989 0 0115 10.392v1.75a3 3 0 01-3 3H4a3 3 0 01-3-3v-1.75c0-.94.431-1.777 1.106-2.327A2.989 2.989 0 011 5.739V3.99a3 3 0 013-3h8zm0 7.902H4a1.5 1.5 0 00-1.493 1.355l-.007.145v1.75a1.5 1.5 0 001.356 1.493l.144.007h8a1.5 1.5 0 001.493-1.356l.007-.144v-1.75a1.5 1.5 0 00-1.356-1.494L12 8.892zM11.5 10a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1zm.5-7.51H4a1.5 1.5 0 00-1.493 1.355l-.007.144v1.75a1.5 1.5 0 001.356 1.493L4 7.24h8a1.5 1.5 0 001.493-1.355l.007-.145V3.99a1.5 1.5 0 00-1.356-1.493L12 2.49zM11.5 4a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E" );
 }
 
-.main-page-button-link--icon-containers a::before {
+.ubuntu-card-button-link--icon-containers a::before {
 	-webkit-mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.212 4.158l6.553 3.776v7.676l-6.693-3.704v-7.67l.14-.078zm3.57-1.976l6.81 3.923v7.647L9.265 15.04V7.013L2.76 3.301l2.022-1.119zM8 .402l6.928 3.835v7.669l-1.836 1.015V5.184L6.331 1.326 8 .402z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E" );
 	mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.212 4.158l6.553 3.776v7.676l-6.693-3.704v-7.67l.14-.078zm3.57-1.976l6.81 3.923v7.647L9.265 15.04V7.013L2.76 3.301l2.022-1.119zM8 .402l6.928 3.835v7.669l-1.836 1.015V5.184L6.331 1.326 8 .402z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E" );
-}
-
-/* Responsive column count */
-@media ( max-width: 1100px ) {
-	div.main-page-grid-3col {
-		grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
-		column-gap: 2rem;
-
-		// Full-width sections still span both columns; a two-column section
-		// drops to one so rows like Use cases + Project and community split
-		// into two equal halves instead of leaving a gap.
-		> .main-page-card--col2 {
-			grid-column: span 1;
-		}
-
-		> .main-page-card--col3 {
-			grid-column: span 2;
-		}
-	}
-}
-
-// Collapse to a single column only once the screen is genuinely small
-@media ( max-width: 600px ) {
-	div.main-page-grid-3col {
-		grid-template-columns: minmax( 0, 1fr );
-		row-gap: 2rem;
-
-		> .main-page-card--col2,
-		> .main-page-card--col3 {
-			grid-column: span 1;
-		}
-	}
-
-	// One wide column now, so let descriptions fill it instead of keeping
-	// the narrower width used when there are multiple columns
-	div.main-page-card > p {
-		max-width: none;
-	}
-
-	// Stack the split section into a single column so its two halves flow
-	// vertically under the same continuous top rule
-	div.main-page-card.main-page-card--split {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		gap: 0.85rem;
-	}
 }
