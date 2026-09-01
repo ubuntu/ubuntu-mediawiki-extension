@@ -73,6 +73,10 @@ wfLoadExtension('VisualEditor');
 
 ## Parser hooks
 wfLoadExtension('SyntaxHighlight_GeSHi');
+wfLoadExtension('TemplateData');
+
+wfLoadExtension('Scribunto');
+$wgScribuntoDefaultEngine = 'luastandalone';
 
 ## Other
 wfLoadExtension('DiscussionTools');

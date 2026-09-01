@@ -4,7 +4,9 @@
         "ubuntu/mediawiki-ubuntu-extension": "dev-main",
         "x-mediawiki/code-mirror": "1.0.0",
         "x-mediawiki/mobile-frontend": "1.0.0",
-        "x-mediawiki/title-key": "1.0.0"
+        "x-mediawiki/title-key": "1.0.0",
+        "x-mediawiki/scribunto": "1.0.0",
+        "x-mediawiki/template-data": "1.0.0"
     },
     "repositories": [
         {
@@ -56,6 +58,32 @@
                 "source": {
                     "type": "git",
                     "url": "https://github.com/wikimedia/mediawiki-extensions-TitleKey.git",
+                    "reference": "REL1_46"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "x-mediawiki/scribunto",
+                "type": "mediawiki-extension",
+                "version": "1.0.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/wikimedia/mediawiki-extensions-Scribunto.git",
+                    "reference": "REL1_46"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "x-mediawiki/template-data",
+                "type": "mediawiki-extension",
+                "version": "1.0.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/wikimedia/mediawiki-extensions-TemplateData.git",
                     "reference": "REL1_46"
                 }
             }
