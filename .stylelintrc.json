@@ -60,16 +60,6 @@
             "rules": {
                 "selector-class-pattern": "^ubuntu-"
             }
-        },
-        {
-            "files": [
-                "resources/ext.ubuntu.styles/components/Links.less",
-                "resources/ext.ubuntu.styles/components/Print.less",
-                "resources/ext.ubuntu.styles/components/Typography.less"
-            ],
-            "rules": {
-                "selector-class-pattern": null
-            }
         }
     ]
 }
