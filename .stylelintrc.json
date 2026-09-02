@@ -31,7 +31,31 @@
     "overrides": [
         {
             "files": [
-                "resources/ext.ubuntu.styles/components/**/*.less"
+                "**/*.less"
+            ],
+            "rules": {
+                "plugin/no-unsupported-browser-features": [
+                    true,
+                    {
+                        "browsers": [
+                            "extends browserslist-config-wikimedia/modern",
+                            "not Safari < 16",
+                            "not ios_saf < 16"
+                        ],
+                        "severity": "warning",
+                        "ignore": [
+                            "mdn-text-decoration-shorthand",
+                            "text-decoration",
+                            "css-nesting"
+                        ],
+                        "ignorePartialSupport": true
+                    }
+                ]
+            }
+        },
+        {
+            "files": [
+                "resources/ext.ubuntu.styles/components/ubuntu/**/*.less"
             ],
             "rules": {
                 "selector-class-pattern": "^ubuntu-"
