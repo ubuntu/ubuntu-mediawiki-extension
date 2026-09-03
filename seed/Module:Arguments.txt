@@ -1,0 +1,59 @@
+--[[
+Module:Arguments
+
+Provides a standardized wrapper for fetching and normalizing arguments passed to
+Scribunto Lua modules from frame and parent frame contexts. Handles automatic
+whitespace trimming, empty value stripping, parameter precedence, and custom value mapping.
+--]]
+
+local Arguments = {}
+
+local function processValue(val, trim, removeBlanks)
+	if type(val) ~= 'string' then
+		return val
+	end
+	if trim then
+		val = val:match('^%s*(.-)%s*$')
+	end
+	if removeBlanks and val == '' then
+		return nil
+	end
+	return val
+end
+
+function Arguments.getArgs(frame, options)
+	options = options or {}
+	local trim = options.trim ~= false
+	local removeBlanks = options.removeBlanks ~= false
+	local valueFunc = options.valueFunc
+
+	local fargs = ( not options.parentOnly and type(frame) == 'table' and type(frame.args) == 'table' ) and frame.args or {}
+	local pargs = ( not options.frameOnly and type(frame) == 'table' and type(frame.getParent) == 'function' and frame:getParent() and frame:getParent().args ) or {}
+
+	local primary = options.parentFirst and pargs or fargs
+	local secondary = options.parentFirst and fargs or pargs
+
+	local function resolve(key, val)
+		if valueFunc then
+			return valueFunc(key, val)
+		end
+		return processValue(val, trim, removeBlanks)
+	end
+
+	-- Resolved eagerly (rather than via a lazy __index/__pairs metatable) so that
+	-- plain `pairs(args)` works: Scribunto's Lua 5.1 runtime never calls a
+	-- __pairs metamethod, so a lazily-populated table would appear empty to it.
+	local args = {}
+	for key, val in pairs(primary) do
+		args[key] = resolve(key, val)
+	end
+	for key, val in pairs(secondary) do
+		if args[key] == nil then
+			args[key] = resolve(key, val)
+		end
+	end
+
+	return args
+end
+
+return Arguments

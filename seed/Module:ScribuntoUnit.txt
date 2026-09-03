@@ -1,0 +1,85 @@
+-------------------------------------------------------------------------------
+-- Unit tests for Scribunto.
+-- Adopted from english Wikipedia: https://en.wikipedia.org/wiki/Module:ScribuntoUnit
+-------------------------------------------------------------------------------
+
+local ScribuntoUnit = {}
+ScribuntoUnit.__meta = {}
+
+local cfg = mw.loadData('Module:ScribuntoUnit/config')
+
+local function raise(details, level)
+	details.ScribuntoUnit = true
+	error(details, ( level or 1 ) + 1)
+end
+
+function ScribuntoUnit:assertEquals(expected, actual, message)
+	if expected ~= actual then
+		raise({
+			text = string.format('Failed to assert that %s equals expected %s', tostring(actual), tostring(expected)),
+			expected = expected,
+			actual = actual,
+			message = message,
+		}, 2)
+	end
+end
+
+function ScribuntoUnit:assertStringContains(pattern, text, plain, message)
+	if type(pattern) ~= 'string' or type(text) ~= 'string' then
+		raise({ text = 'Pattern and string must both be strings', message = message }, 2)
+	end
+	if not mw.ustring.find(text, pattern, nil, plain) then
+		raise({
+			text = string.format('Failed to find %s "%s" in string "%s"', plain and 'plain string' or 'pattern', pattern, text),
+			message = message,
+		}, 2)
+	end
+end
+
+ScribuntoUnit.__meta.__index = ScribuntoUnit
+function ScribuntoUnit.__meta:__newindex(key, value)
+	if type(key) == 'string' and key:find('^test') and type(value) == 'function' then
+		table.insert(self._tests, { name = key, test = value })
+	else
+		rawset(self, key, value)
+	end
+end
+
+function ScribuntoUnit.new()
+	local self = { _tests = {} }
+	setmetatable(self, ScribuntoUnit.__meta)
+	self.run = function(frame)
+		return ScribuntoUnit.run(self, frame)
+	end
+	return self
+end
+
+function ScribuntoUnit:runSuite(frame)
+	self.frame = frame or mw.getCurrentFrame()
+	local results = { successCount = 0, failureCount = 0, results = {} }
+	for _, testDetails in ipairs(self._tests) do
+		local success, details = pcall(testDetails.test, self)
+		if success then
+			results.successCount = results.successCount + 1
+		else
+			results.failureCount = results.failureCount + 1
+			table.insert(results.results, { name = testDetails.name, details = details })
+		end
+	end
+	return results
+end
+
+function ScribuntoUnit:run(frame)
+	local results = self:runSuite(frame)
+	if results.failureCount == 0 then
+		return self.frame:preprocess(cfg.successIndicator) .. ' ' .. cfg.successSummary
+	end
+	local output = self.frame:preprocess(cfg.failureIndicator) .. ' ' .. cfg.failureSummary:gsub('%$1', results.failureCount) .. '\n'
+	for _, result in ipairs(results.results) do
+		local details = result.details
+		output = output .. '* ' .. result.name .. ': ' .. ( type(details) == 'table' and details.text or tostring(details) ) .. '\n'
+	end
+	return output
+end
+
+return ScribuntoUnit
