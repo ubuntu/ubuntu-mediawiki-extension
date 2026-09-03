@@ -1,0 +1,64 @@
+local arguments = require('Module:Arguments')
+local composition = require('Module:CardComposition')
+
+local p = {}
+
+local cardNames = {
+	'platform',
+	'edit',
+	'get-started',
+	'applications',
+	'guides',
+	'documentation',
+	'use-cases',
+	'community',
+}
+
+local function cardData(args, name, role)
+	local data = role or {}
+	data.label = args[name .. '-label']
+	data.body = args[name .. '-body']
+	data.content = args[name .. '-content']
+	return data
+end
+
+-- Renders the fixed main-page arrangement from caller-provided card content.
+function p.render(frame, args)
+	args = args or arguments.getArgs(frame, { parentFirst = true })
+
+	local cards = {}
+	for _, name in ipairs(cardNames) do
+		cards[name] = cardData(args, name)
+	end
+	cards.platform.twoWideFixed = true
+	cards.documentation.featured = true
+	cards.documentation.linkDirectory = true
+	cards.community.twoWide = true
+
+	local introduction = ''
+	if args.introduction then
+		introduction = frame:preprocess(args.introduction)
+	end
+
+	return introduction .. composition.renderCollection(frame, {
+		{
+			type = 'flow',
+			class = 'ubuntu-card-flow--grid',
+			cards = {
+				cards.platform,
+				cards.edit,
+				cards.applications,
+				cards.guides,
+				cards['get-started'],
+			},
+		},
+		cards.documentation,
+		{ type = 'row', cards = { cards['use-cases'], cards.community } },
+	})
+end
+
+function p.main(frame)
+	return p.render(frame)
+end
+
+return p

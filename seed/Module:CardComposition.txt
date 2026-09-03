@@ -1,0 +1,125 @@
+local p = {}
+
+local cardModule = require('Module:Card')
+local buttonModule = require('Module:ButtonLink')
+local linkDirectoryModule = require('Module:CardLinkDirectory')
+
+-- Intent-neutral card-composition renderers. Callers provide content data and
+-- choose only the layout roles they need.
+
+local function addClasses(element, className)
+	for token in (className or ''):gmatch('%S+') do
+		element:addClass(token)
+	end
+end
+
+local function preprocess(frame, text)
+	return frame:preprocess(text or '')
+end
+
+local function renderButtonGroup(frame, buttons)
+	local group = mw.html.create('div')
+		:addClass('ubuntu-card-button-links')
+	local paragraph = group:tag('p')
+
+	for _, button in ipairs(buttons or {}) do
+		paragraph:wikitext(buttonModule.render(frame, button))
+	end
+
+	paragraph:done()
+	return tostring(group)
+end
+
+local function renderLinkDirectory(frame, links)
+	return linkDirectoryModule.render(frame, links)
+end
+
+local function renderCard(frame, data)
+	local cardData = {}
+	for key, value in pairs(data) do
+		if key ~= 'buttons' and key ~= 'links' then
+			cardData[key] = value
+		end
+	end
+
+	local content = {}
+	if data.buttons then
+		table.insert(content, renderButtonGroup(frame, data.buttons))
+	end
+	if data.links then
+		table.insert(content, renderLinkDirectory(frame, data.links))
+	end
+	if data.content then
+		table.insert(content, preprocess(frame, data.content))
+	end
+	if #content > 0 then
+		cardData.content = table.concat(content)
+	end
+
+	return cardModule.render(frame, cardData)
+end
+
+local function renderFlow(frame, data)
+	local flow = mw.html.create('div')
+		:addClass('ubuntu-card-flow')
+	addClasses(flow, data.class)
+
+	local content = flow:tag('div')
+		:addClass('ubuntu-card-flow__content')
+	for _, card in ipairs(data.cards or {}) do
+		content:wikitext(renderCard(frame, card))
+	end
+	content:done()
+
+	return tostring(flow)
+end
+
+local function renderRow(frame, data)
+	local row = mw.html.create('div')
+		:addClass('ubuntu-card-row')
+	addClasses(row, data.class)
+
+	local content = row:tag('div')
+		:addClass('ubuntu-card-row__content')
+	for _, card in ipairs(data.cards or {}) do
+		content:wikitext(renderCard(frame, card))
+	end
+	content:done()
+
+	return tostring(row)
+end
+
+local function renderCollection(frame, sections)
+	local collection = mw.html.create('div')
+		:addClass('ubuntu-card-collection')
+
+	for _, section in ipairs(sections or {}) do
+		if section.type == 'flow' then
+			collection:wikitext(renderFlow(frame, section))
+		elseif section.type == 'row' then
+			collection:wikitext(renderRow(frame, section))
+		else
+			collection:wikitext(renderCard(frame, section))
+		end
+	end
+
+	return tostring(collection)
+end
+
+function p.renderCard(frame, data)
+	return renderCard(frame, data)
+end
+
+function p.renderFlow(frame, data)
+	return renderFlow(frame, data)
+end
+
+function p.renderRow(frame, data)
+	return renderRow(frame, data)
+end
+
+function p.renderCollection(frame, sections)
+	return renderCollection(frame, sections)
+end
+
+return p

@@ -1,0 +1,18 @@
+<includeonly><div class="ubuntu-card-row {{{class|}}}"><div class="ubuntu-card-row__content">
+{{{1}}}
+</div></div></includeonly><noinclude>Wraps cards that share a paired row. At
+the widest size the row has three equal slots. Set <code>two-wide-fixed=yes</code>
+on one card to make it retain two slots whenever two or more fit. Set
+<code>two-wide=yes</code> to span only when three slots fit. The row uses
+two equal slots when three <code>18rem</code> minimums no longer fit, then stacks
+when two minimums no longer fit.
+
+Usage:
+<pre>
+{{CardRow|
+{{Card|label=Platform-specific wiki pages|wide=yes}}
+{{Card|label=Edit the wiki}}
+}}
+</pre>
+
+Rows collapse naturally when two readable tracks no longer fit.</noinclude>

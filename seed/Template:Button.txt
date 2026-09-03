@@ -13,4 +13,4 @@ Parameters:
 * '''icon''' (optional) &ndash; one of <code>desktop</code>, <code>machines</code>, <code>containers</code>. Leave blank for no icon.
 
 Multiple buttons placed next to each other are automatically laid out in a row if wrapped in
-<code><nowiki><div class="main-page-button-links">...</div></nowiki></code>.</noinclude>
+<code><nowiki><div class="ubuntu-card-button-links">...</div></nowiki></code>.</noinclude>

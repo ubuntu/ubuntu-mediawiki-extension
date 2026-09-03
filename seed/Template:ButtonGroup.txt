@@ -1,4 +1,4 @@
-<includeonly><div class="main-page-button-links">
+<includeonly><div class="ubuntu-card-button-links">
 {{{1}}}
 </div></includeonly><noinclude>Wraps one or more [[Template:Button|Button]] calls in the container that lays them out as a
 responsive row of buttons.

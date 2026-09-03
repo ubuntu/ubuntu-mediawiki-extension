@@ -5,91 +5,87 @@ __NOTOC__
 <!--TIP: any major changes should be proposed in the Discussion page.-->
 The Ubuntu wiki makes it easy to find, add and connect ideas about Ubuntu.
 
-<div class="main-page-grid-3col">
-<div class="main-page-card main-page-card--col2">
-<div class="main-page-card__label">Platform-specific wiki pages</div>
-<div class="main-page-button-links">
-<span class="main-page-button-link main-page-button-link--icon-desktop">[[:Category:Desktop|Desktop]]</span>
-<span class="main-page-button-link main-page-button-link--icon-machines">[[:Category:Server|Server]]</span>
-<span class="main-page-button-link main-page-button-link--icon-containers">[[:Category:WSL|WSL]]</span>
+<div class="ubuntu-card-collection">
+<div class="ubuntu-card-flow ubuntu-card-flow--grid"><div class="ubuntu-card-flow__content">
+<div class="ubuntu-card ubuntu-card--two-wide-fixed">
+<div class="ubuntu-card__label">Platform-specific wiki pages</div>
+<div class="ubuntu-card-button-links">
+<span class="ubuntu-card-button-link ubuntu-card-button-link--icon-desktop">[[:Category:Desktop|Desktop]]</span>
+<span class="ubuntu-card-button-link ubuntu-card-button-link--icon-machines">[[:Category:Server|Server]]</span>
+<span class="ubuntu-card-button-link ubuntu-card-button-link--icon-containers">[[:Category:WSL|WSL]]</span>
 </div>
 {{tip|
 Any [[red link]] is a page that people want. Select one to create it. If you're new to the wiki, you [[Project:Autoconfirmed users| may first need to make a few edits]] before you can create pages.
 }}
 </div>
-
-<div class="main-page-card">
-<div class="main-page-card__label">Edit the wiki</div>
+<div class="ubuntu-card">
+<div class="ubuntu-card__label">Edit the wiki</div>
 <p>Anyone can contribute to the wiki. [[Special:Search|Search]] to find a page, browse [[Special:RecentChanges|recent changes]] to see the latest edits, and select <strong>Edit</strong> on any page to start contributing.</p>
 </div>
-
-<div class="main-page-card">
-<div class="main-page-card__label">Get started with Ubuntu</div>
-<p>Ubuntu is the most popular Linux distro and can be used everywhere.</p>
-<ul class="main-page-card__list">
-<li>[[Getting started with Ubuntu|Installation methods]]</li>
-<li>[[Ubuntu on different platforms|Ubuntu platform reference]]</li>
-<li>[[Ubuntu Desktop components]]</li>
-<li>[[Ubuntu as a first Linux distro]]</li>
-</ul>
-</div>
-
-<div class="main-page-card">
-<div class="main-page-card__label">Applications</div>
+<div class="ubuntu-card">
+<div class="ubuntu-card__label">Applications</div>
 <p>Debs and snaps are officially supported, but Ubuntu is flexible.</p>
-<ul class="main-page-card__list">
+<ul class="ubuntu-card__list">
 <li>[[Managing software|Software management overview]]</li>
 <li>[[Install Flatpaks|Install Flatpaks on Ubuntu]]</li>
 <li>[[Alternative game launchers]]</li>
 <li>[[Running Windows apps]]</li>
 </ul>
 </div>
-
-<div class="main-page-card">
-<div class="main-page-card__label">Guides</div>
+<div class="ubuntu-card">
+<div class="ubuntu-card__label">Guides</div>
 <p>The wiki has many specialist guides that don't appear in the official docs.</p>
-<ul class="main-page-card__list">
+<ul class="ubuntu-card__list">
 <li>[[Run containers on Ubuntu]]</li>
 <li>[[Develop games]]</li>
 <li>[[Install Ubuntu on Raspberry Pi]]</li>
 <li>[[Customize your desktop]]</li>
 </ul>
 </div>
-
+<div class="ubuntu-card">
+<div class="ubuntu-card__label">Get started with Ubuntu</div>
+<p>Ubuntu is the most popular Linux distro and can be used everywhere.</p>
+<ul class="ubuntu-card__list">
+<li>[[Getting started with Ubuntu|Installation methods]]</li>
+<li>[[Ubuntu on different platforms|Ubuntu platform reference]]</li>
+<li>[[Ubuntu Desktop components]]</li>
+<li>[[Ubuntu as a first Linux distro]]</li>
+</ul>
 </div>
+</div></div>
 
-<div class="main-page-grid-3col">
-
-<div class="main-page-card main-page-card--col3 main-page-card--split">
-<div class="main-page-card__label">Official documentation</div>
+<div class="ubuntu-card ubuntu-card--featured ubuntu-card-link-directory">
+<div class="ubuntu-card-link-directory__content">
+<div class="ubuntu-card__label">Official documentation</div>
 <p>Maintained by dedicated engineering teams, the official docs provide authoritative guides on key operations.</p>
-<div class="main-page-button-links">
-<span class="main-page-button-link">[https://ubuntu.com/ Desktop docs]</span>
-<span class="main-page-button-link">[https://ubuntu.com/ Server docs]</span>
-<span class="main-page-button-link">[https://ubuntu.com/ WSL docs]</span>
-<span class="main-page-button-link">[https://docs.ubuntu.com/ Core docs]</span>
-<span class="main-page-button-link">[https://canonical.com/ Developer docs]</span>
-<span class="main-page-button-link">[https://canonical.com/ Project docs]</span>
-<span class="main-page-button-link">[https://canonical.com/ Security docs]</span>
+<div class="ubuntu-card-button-links">
+<span class="ubuntu-card-button-link">[https://ubuntu.com/ Desktop docs]</span>
+<span class="ubuntu-card-button-link">[https://ubuntu.com/ Server docs]</span>
+<span class="ubuntu-card-button-link">[https://ubuntu.com/ WSL docs]</span>
+<span class="ubuntu-card-button-link">[https://docs.ubuntu.com/ Core docs]</span>
+<span class="ubuntu-card-button-link">[https://canonical.com/ Developer docs]</span>
+<span class="ubuntu-card-button-link">[https://canonical.com/ Project docs]</span>
+<span class="ubuntu-card-button-link">[https://canonical.com/ Security docs]</span>
+</div>
 </div>
 </div>
 
-<div class="main-page-card">
-<div class="main-page-card__label">Use cases</div>
-<ul class="main-page-card__list">
+<div class="ubuntu-card-row"><div class="ubuntu-card-row__content">
+<div class="ubuntu-card">
+<div class="ubuntu-card__label">Use cases</div>
+<ul class="ubuntu-card__list">
 <li>[[:Category:Developing on Ubuntu|Ubuntu for development]]</li>
 <li>[[Ubuntu for science]]</li>
 <li>[[Ubuntu for design]]</li>
 </ul>
 </div>
-
-<div class="main-page-card main-page-card--col2">
-<div class="main-page-card__label">Project and community</div>
-<ul class="main-page-card__list">
+<div class="ubuntu-card ubuntu-card--two-wide">
+<div class="ubuntu-card__label">Project and community</div>
+<ul class="ubuntu-card__list">
 <li>[https://discourse.ubuntu.com/t/ubuntu-code-of-conduct-v2-0/33111 Code of conduct] — guidelines for the Ubuntu communities.</li>
 <li>[[Getting involved]] — ways you can contribute to the Ubuntu community.</li>
 <li>[https://github.com/ubuntu/wiki-archives Archive of old wikis] — public archive of older Ubuntu wikis.</li>
 </ul>
 </div>
-
+</div></div>
 </div>

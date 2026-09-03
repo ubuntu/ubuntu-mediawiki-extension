@@ -1,0 +1,52 @@
+local p = {}
+local arguments = require('Module:Arguments')
+
+local function linkWikitext(item)
+	if type(item) == 'table' then
+		local link
+		if item.url then
+			link = '[' .. item.url .. ' ' .. ( item.text or '' ) .. ']'
+		elseif item.target then
+			link = '[[:' .. item.target .. '|' .. ( item.text or '' ) .. ']]'
+		else
+			link = item.text or ''
+		end
+		return link .. ( item.description or '' )
+	end
+	return item or ''
+end
+
+-- Renders a directory of links in a card
+function p.render(frame, items)
+	local list = mw.html.create('ul')
+		:addClass('ubuntu-card__list')
+
+	for _, item in ipairs(items or {}) do
+		if item and item ~= '' then
+			local itemHtml = frame:preprocess(linkWikitext(item))
+			list:tag('li'):wikitext(itemHtml):done()
+		end
+	end
+
+	return tostring(list)
+end
+
+function p.list(frame)
+	local args = arguments.getArgs(frame, { parentFirst = true })
+
+	local items = {}
+	local lastIndex = 0
+	for key in pairs(args) do
+		local index = tonumber(key)
+		if index and index > lastIndex then
+			lastIndex = index
+		end
+	end
+	for i = 1, lastIndex do
+		items[i] = args[i]
+	end
+
+	return p.render(frame, items)
+end
+
+return p
