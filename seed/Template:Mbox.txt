@@ -1,0 +1,145 @@
+<noinclude>
+This template is a base message box.
+
+== Examples ==
+'''Note:'''
+{{{{FULLPAGENAME}}
+| type  = note
+| label = Note
+| text  = This is what a standard note message box looks like.
+}}
+
+'''Warning:'''
+{{{{FULLPAGENAME}}
+| type  = warning
+| label = Warning
+| text  = This is what a warning message box looks like.
+}}
+
+'''Danger:'''
+{{{{FULLPAGENAME}}
+| type  = danger
+| label = Danger
+| text  = This is what a danger message box looks like.
+}}
+
+'''Doccan:'''
+{{{{FULLPAGENAME}}
+| type  = doccan
+| label = Doccan
+| text  = This is what a doccan message box looks like.
+}}
+
+'''Info:'''
+{{{{FULLPAGENAME}}
+| type  = info
+| label = Info
+| text  = This is what an info message box looks like.
+}}
+
+'''Tip:'''
+{{{{FULLPAGENAME}}
+| type  = tip
+| label = Tip
+| text  = This is what a tip message box looks like.
+}}
+
+'''Ubuntu:'''
+{{{{FULLPAGENAME}}
+| type  = ubuntu
+| label = Ubuntu
+| text  = This is what the Ubuntu message box looks like: circle-of-friends icon, standard background, and an orange accent colour, used to highlight content of general interest to the Ubuntu community.
+}}
+
+'''Standard Box (No Type):'''
+{{{{FULLPAGENAME}}
+| label = Notice
+| text  = Because the type parameter is left blank, the icon space is automatically removed for a clean, full-width box.
+}}
+
+'''Inline Warning Box:'''
+{{{{FULLPAGENAME}}
+| type    = warning
+| inline  = yes
+| label   = Warning
+| text    = This is an inline warning box, allowing it to sit side-by-side with other elements.
+}}
+
+== TemplateData ==
+<templatedata>
+{
+    "description": "A message box to display notices, warnings, and tips.",
+    "format": "block",
+    "paramOrder": [
+        "type",
+        "label",
+        "text",
+        "inline",
+        "class",
+        "id",
+        "style",
+        "textstyle"
+    ],
+    "params": {
+        "type": {
+            "label": "Box Type",
+            "description": "The type of notice. Automatically sets the icon and color (e.g., note, warning, danger, doccan, info, tip, ubuntu). Leave blank for a plain box without an icon.",
+            "type": "string",
+            "suggestedvalues": [
+                "note",
+                "warning",
+                "danger",
+                "doccan",
+                "info",
+                "tip",
+                "ubuntu"
+            ],
+            "suggested": true
+        },
+        "label": {
+            "label": "Heading Label",
+            "description": "The title or label for the message box.",
+            "type": "string",
+            "required": true
+        },
+        "text": {
+            "label": "Message Text",
+            "description": "The main content of the message box.",
+            "type": "content",
+            "required": true
+        },
+        "inline": {
+            "label": "Inline Mode",
+            "description": "Set to 'yes' to change the display to inline-block, allowing the box to sit alongside other elements.",
+            "type": "boolean",
+            "suggested": true
+        },
+        "class": {
+            "label": "Additional CSS Classes",
+            "description": "Any additional space-separated classes to apply to the outer box.",
+            "type": "string"
+        },
+        "id": {
+            "label": "HTML ID",
+            "description": "An optional HTML id attribute for linking directly to this notice on a page.",
+            "type": "string"
+        },
+        "style": {
+            "label": "Outer Box Style",
+            "description": "Additional inline CSS styling for the outer container.",
+            "example": "margin-bottom: 1em;",
+            "type": "string"
+        },
+        "textstyle": {
+            "label": "Text Style",
+            "description": "Additional inline CSS styling for the text content area.",
+            "example": "font-size: 90%;",
+            "type": "string"
+        }
+    }
+}
+</templatedata>
+</noinclude><includeonly><div {{#if:{{{id|}}}|id="{{{id}}}"}} class="ubuntu-template-box {{#if:{{{type|}}}|ubuntu-template-box-{{{type}}}}} {{#if:{{{class|}}}|{{{class}}}}}" style="margin-top:0; {{#ifeq:{{{inline|}}}|yes|display: inline-block;}} {{#if:{{{type|}}}||padding-left: 15px;}} {{#if:{{{style|}}}|{{{style}}}}}">
+{{#if:{{{label|}}}|<strong>{{{label}}}</strong>}}
+<div {{#if:{{{textstyle|}}}|style="{{{textstyle}}}"}}>{{{text|}}}</div>
+</div></includeonly>
