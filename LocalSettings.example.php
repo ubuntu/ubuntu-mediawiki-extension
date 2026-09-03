@@ -77,6 +77,10 @@ wfLoadExtension('SyntaxHighlight_GeSHi');
 ## Other
 wfLoadExtension('DiscussionTools');
 wfLoadExtension('TitleKey');
+// Needed for Template:Mbox's {{#if:}}/{{#ifeq:}} logic.
+wfLoadExtension('ParserFunctions');
+// Needed for Template:Mbox's <templatedata> documentation block.
+wfLoadExtension('TemplateData');
 
 # CodeMirror https://www.mediawiki.org/wiki/Extension:CodeMirror#Using_CodeMirror_instead_of_CodeEditor
 // Desired modes that should use CodeMirror (mediawiki, i.e. wikitext, is enabled by default)
