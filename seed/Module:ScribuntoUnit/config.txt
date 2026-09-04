@@ -1,0 +1,16 @@
+-- The cfg table, created by this module, contains all localisable strings and
+-- configuration, to make it easier to port this module to another wiki.
+-- Adopted from english Wikipedia: https://en.wikipedia.org/wiki/Module:ScribuntoUnit/config
+local cfg = {} -- Do not edit this line.
+
+cfg.successIndicator = "{{tick}}"
+cfg.failureIndicator = "{{cross}}"
+cfg.nameString = "Name"
+cfg.expectedString = "Expected"
+cfg.actualString = "Actual"
+cfg.successSummary = "All tests passed."
+cfg.failureSummary = "'''$1 {{PLURAL:$1|test|tests}} failed'''."
+cfg.shortResultsFormat = "success: %d, error: %d, skipped: %d"
+cfg.failureCategory = "[[Category:Failed Lua testcases using Module:ScribuntoUnit]]"
+
+return cfg -- Do not edit this line.

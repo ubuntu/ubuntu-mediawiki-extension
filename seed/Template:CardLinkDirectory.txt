@@ -1,0 +1,16 @@
+<includeonly>{{#invoke:CardLinkDirectory|list}}</includeonly><noinclude>Renders a reusable directory of navigational links inside a card.
+The containing [[Template:Card|Card]] can use <code>link-directory=yes</code> to
+adapt its label, description, and link content to the rendered card width.
+Empty slots are skipped.
+
+Usage:
+<pre>
+{{CardLinkDirectory
+| [[Getting started with Ubuntu|Installation methods]]
+| [[Ubuntu on different platforms|Ubuntu platform reference]]
+}}
+</pre>
+
+Each item is plain wikitext, written as it would be inside a normal
+<code><nowiki><li></nowiki></code>. Positional items are forwarded without a
+fixed limit.</noinclude>

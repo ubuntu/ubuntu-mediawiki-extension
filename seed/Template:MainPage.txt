@@ -1,0 +1,16 @@
+<includeonly>{{#invoke:MainPage|main}}</includeonly><noinclude>Renders the fixed main-page card arrangement using caller-provided content.
+
+Each card supports <code>-label</code>, <code>-body</code>, and <code>-content</code>
+parameters. Content accepts arbitrary wikitext, including [[Template:ButtonGroup|ButtonGroup]],
+[[Template:CardLinkDirectory|CardLinkDirectory]], and admonition templates.
+
+Usage:
+<pre>
+{{MainPage
+| introduction = The Ubuntu wiki makes it easy to find, add and connect ideas about Ubuntu.
+| platform-label = Platform-specific wiki pages
+| platform-content = {{ButtonGroup|...}}
+| edit-label = Edit the wiki
+| edit-body = Anyone can contribute.
+}}
+</pre></noinclude>

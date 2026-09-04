@@ -1,0 +1,35 @@
+<includeonly><div class="ubuntu-card-collection">
+{{{1}}}
+</div></includeonly><noinclude>Wraps an editorial card collection. Plain wikitext
+template — the cards, [[Template:CardFlow|CardFlow]], and [[Template:CardRow|CardRow]]
+calls inside are already fully-rendered by the time they're substituted here.
+
+Usage:
+<pre>
+{{CardCollection|
+{{Card|label=...|...}}
+{{CardFlow|
+{{Card|label=...|...}}
+}}
+{{CardRow|
+{{Card|label=...|wide=yes}}
+{{Card|label=...|...}}
+}}
+}}
+</pre>
+<templatedata>
+{
+	"description": "Wraps already-rendered cards, flows, and featured cards in an editorial card collection.",
+	"params": {
+		"1": {
+			"label": "Cards",
+			"description": "One or more already-rendered card composition elements.",
+			"type": "content",
+			"required": true
+		}
+	},
+	"paramOrder": [
+		"1"
+	]
+}
+</templatedata></noinclude>

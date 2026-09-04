@@ -1,0 +1,28 @@
+<includeonly>{{#invoke:Card|card|label={{{label|}}}|body={{{body|}}}|content={{{content|}}}|featured={{{featured|}}}|two-wide={{{two-wide|}}}|two-wide-fixed={{{two-wide-fixed|}}}|link-directory={{{link-directory|}}}}}</includeonly><noinclude>Renders an editorial card via [[Module:Card]].
+
+Usage:
+<pre>
+{{Card
+| label = Get started with Ubuntu
+| body = Ubuntu is the most popular Linux distro and can be used everywhere.
+| content = {{CardLinkDirectory
+    | [[Getting started with Ubuntu|Installation methods]]
+  }}
+}}
+</pre>
+
+Parameters:
+* '''label''' (required) &ndash; the card's uppercase heading.
+* '''body''' (optional) &ndash; an intro paragraph, rendered as wikitext.
+* '''content''' (optional) &ndash; extra content below/beside the body, usually a
+  nested {{[[Template:ButtonGroup|ButtonGroup]]}} or
+  {{[[Template:CardLinkDirectory|CardLinkDirectory]]}} call.
+* '''featured''' (optional) &ndash; set to <code>yes</code> to present the card as a
+  full-width featured card.
+* '''two-wide''' (optional) &ndash; set to <code>yes</code> when the card should occupy
+  two slots when the containing flow or row has three slots.
+* '''two-wide-fixed''' (optional) &ndash; set to <code>yes</code> when the card should
+  retain two slots whenever the containing flow or row has at least two slots.
+* '''link-directory''' (optional) &ndash; set to <code>yes</code> when the card pairs
+  its label and description with a group of navigational links. The card adapts
+  that internal arrangement to its rendered width.</noinclude>

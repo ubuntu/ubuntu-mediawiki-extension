@@ -107,6 +107,15 @@ seed:
 		php maintenance/run.php importTextFiles \
 			--user Admin --summary "Seed test content" --overwrite \
 			/tmp/seed/*.txt'
+	$(MW_T) bash -c '\
+		find /tmp/seed -mindepth 2 -type f -name "*.txt" -print0 | \
+		while IFS= read -r -d "" file; do \
+			relative="$${file#/tmp/seed/}"; \
+			prefix="$${relative%/*}/"; \
+			php maintenance/run.php importTextFiles \
+				--user Admin --summary "Seed test content" --overwrite \
+				--prefix "$$prefix" "$$file"; \
+		done'
 	@# Pages imported early in the glob (e.g. Main_Page) link to pages created
 	@# later (e.g. TOC test); the backlink refresh jobs are queued but not run
 	@# during CLI import, so run them now or those links stay red.

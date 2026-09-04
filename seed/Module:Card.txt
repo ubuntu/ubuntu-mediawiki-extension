@@ -1,0 +1,70 @@
+local p = {}
+local arguments = require('Module:Arguments')
+
+local function isEnabled(value)
+	return value == 'yes' or value == 'true' or value == '1'
+end
+
+-- Renders a reusable editorial card.
+function p.render(frame, data)
+	local card = mw.html.create('div')
+		:addClass('ubuntu-card')
+
+	if data.featured then
+		card:addClass('ubuntu-card--featured')
+	end
+
+	if data.linkDirectory then
+		card:addClass('ubuntu-card-link-directory')
+	end
+
+	if data.twoWide then
+		card:addClass('ubuntu-card--two-wide')
+	end
+
+	if data.twoWideFixed then
+		card:addClass('ubuntu-card--two-wide-fixed')
+	end
+
+	local contentContainer = card
+	if data.linkDirectory then
+		contentContainer = card:tag('div')
+			:addClass('ubuntu-card-link-directory__content')
+	end
+
+	contentContainer:tag('div')
+		:addClass('ubuntu-card__label')
+		:wikitext(data.label or '')
+		:done()
+
+	if data.body and data.body ~= '' then
+		contentContainer:tag('p')
+			:wikitext(frame:preprocess(data.body))
+			:done()
+	end
+
+	if data.content then
+		contentContainer:wikitext(data.content)
+	end
+
+	if data.linkDirectory then
+		contentContainer:done()
+	end
+
+	return tostring(card)
+end
+
+function p.card(frame)
+	local args = arguments.getArgs(frame, { parentFirst = true })
+	return p.render(frame, {
+		label = args.label,
+		body = args.body,
+		content = args.content,
+		featured = isEnabled(args.featured or ''),
+		twoWide = isEnabled(args['two-wide'] or ''),
+		twoWideFixed = isEnabled(args['two-wide-fixed'] or ''),
+		linkDirectory = isEnabled(args['link-directory'] or ''),
+	})
+end
+
+return p

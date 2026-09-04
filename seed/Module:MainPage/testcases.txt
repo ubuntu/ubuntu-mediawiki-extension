@@ -1,0 +1,23 @@
+local MainPage = require('Module:MainPage')
+local ScribuntoUnit = require('Module:ScribuntoUnit')
+
+local suite = ScribuntoUnit.new()
+
+function suite:testUsesFixedCardArrangement()
+	local html = MainPage.render(self.frame, {
+		['platform-label'] = 'Platform',
+		['edit-label'] = 'Edit',
+		['get-started-label'] = 'Get started',
+		['applications-label'] = 'Applications',
+		['guides-label'] = 'Guides',
+		['documentation-label'] = 'Documentation',
+		['use-cases-label'] = 'Use cases',
+		['community-label'] = 'Community',
+	})
+	self:assertStringContains('ubuntu-card-flow', html, true)
+	self:assertStringContains('ubuntu-card--featured', html, true)
+	self:assertStringContains('Platform', html, true)
+	self:assertStringContains('Community', html, true)
+end
+
+return suite

@@ -1,0 +1,53 @@
+local p = {}
+local arguments = require('Module:Arguments')
+
+-- Renders a single button link with optional icon.
+-- Supports internal wiki links [[Page|text]] and external [https://url text].
+--
+-- Usage from wikitext:
+--   {{#invoke:ButtonLink|link|text=Label|target=Page}}                   -- internal link
+--   {{#invoke:ButtonLink|link|text=Label|url=https://example.com}}       -- external link
+--   {{#invoke:ButtonLink|link|text=Label|target=Page|icon=desktop}}      -- with icon
+
+function p.render(frame, data)
+	local text = data.text or ''
+	local target = data.target or ''
+	local url = data.url or ''
+	local icon = data.icon or ''
+
+	-- A leading colon on [[:target]] is required for namespaced targets
+	-- The colon is fine for normal article links.
+	local linkWikitext = ''
+	if url ~= '' then
+		linkWikitext = '[' .. url .. ' ' .. text .. ']'
+	elseif target ~= '' then
+		linkWikitext = '[[:' .. target .. '|' .. text .. ']]'
+	else
+		linkWikitext = text
+	end
+
+	local linkHtml = frame:preprocess(linkWikitext)
+
+	local button = mw.html.create('span')
+		:addClass('ubuntu-card-button-link')
+
+	if icon ~= '' then
+		button:addClass('ubuntu-card-button-link--icon-' .. icon)
+	end
+
+	button:wikitext(linkHtml)
+
+	return tostring(button)
+end
+
+function p.link(frame)
+	local args = arguments.getArgs(frame, { parentFirst = true })
+	return p.render(frame, {
+		text = args.text or args[1],
+		target = args.target,
+		url = args.url,
+		icon = args.icon,
+	})
+end
+
+return p

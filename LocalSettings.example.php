@@ -72,7 +72,9 @@ wfLoadExtension('WikiEditor');
 wfLoadExtension('VisualEditor');
 
 ## Parser hooks
+wfLoadExtension('Scribunto');
 wfLoadExtension('SyntaxHighlight_GeSHi');
+wfLoadExtension('TemplateData');
 
 ## Other
 wfLoadExtension('DiscussionTools');

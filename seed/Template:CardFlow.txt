@@ -1,0 +1,30 @@
+<includeonly><div class="ubuntu-card-flow {{{class|}}}"><div class="ubuntu-card-flow__content">
+{{{1}}}
+</div></div></includeonly><noinclude>Wraps a source-ordered run of standard [[Template:Card|Card]]
+calls in fluid columns. A three-card flow makes its final singleton span the
+available width when the flow is in its two-column range.
+
+Set <code>class=ubuntu-card-flow--grid</code> to use a source-ordered grid when
+individual cards need explicit spans. A <code>two-wide=yes</code> card spans two
+slots at three columns; <code>two-wide-fixed=yes</code> retains two slots at both.
+
+Usage:
+<pre>
+{{CardFlow|
+{{Card|label=...|...}}
+{{Card|label=...|...}}
+}}
+</pre>
+
+For a three-card flow, the final card automatically fills the incomplete
+two-column row:
+<pre>
+{{CardFlow|
+{{Card|label=...|...}}
+{{Card|label=...|...}}
+{{Card|label=...|...}}
+}}
+</pre>
+
+Featured cards belong directly in [[Template:CardCollection|CardCollection]],
+outside a CardFlow.</noinclude>

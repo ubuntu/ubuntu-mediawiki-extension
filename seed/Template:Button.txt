@@ -1,0 +1,16 @@
+<includeonly>{{#invoke:ButtonLink|link|text={{{text|{{{1|}}}}}}|target={{{target|}}}|url={{{url|}}}|icon={{{icon|}}}}}</includeonly><noinclude>Renders a single button-styled link via [[Module:ButtonLink]]. Use this template instead of calling
+<nowiki>{{#invoke:}}</nowiki> directly.
+
+Usage:
+* Link to a wiki page: <nowiki>{{Button|text=Desktop|target=Category:Desktop}}</nowiki>
+* Link to an external URL: <nowiki>{{Button|text=Desktop docs|url=https://ubuntu.com}}</nowiki>
+* With an icon: <nowiki>{{Button|text=Desktop|target=Category:Desktop|icon=desktop}}</nowiki>
+
+Parameters:
+* '''text''' (required) &ndash; the button label.
+* '''target''' &ndash; a wiki page to link to (mutually exclusive with <code>url</code>).
+* '''url''' &ndash; an external URL to link to (mutually exclusive with <code>target</code>).
+* '''icon''' (optional) &ndash; one of <code>desktop</code>, <code>machines</code>, <code>containers</code>. Leave blank for no icon.
+
+Multiple buttons placed next to each other are automatically laid out in a row if wrapped in
+<code><nowiki><div class="ubuntu-card-button-links">...</div></nowiki></code>.</noinclude>

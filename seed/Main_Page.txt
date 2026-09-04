@@ -11,6 +11,10 @@ This wiki runs the [https://github.com/ubuntu/ubuntu-mediawiki-extension UbuntuW
 * [[Template examples]] — shared admonition template styles across all variants
 * [[CAPTCHA testing]] — the copy button inside the ConfirmEdit CAPTCHA form (outside wikitext rendering)
 * [[Page that does not exist]] — an intentional red link for link styling checks
+* [[Homepage design]] — the raw editorial card collection reference
+* [[Homepage design components]] — same homepage, composed from generic templates
+* [[Homepage design main page]] — same homepage, composed from the main-page template
+* [[Lua modules]] — top-level seeded Lua modules
 
 == Useful things to try ==
 

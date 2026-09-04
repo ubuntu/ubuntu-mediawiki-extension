@@ -1,0 +1,9 @@
+The seeded Lua modules provide argument handling and reusable card-composition renderers.
+
+* [[Module:Arguments]] — standardizes arguments received by template-facing modules.
+* [[Module:ButtonLink]] — renders button-styled wiki and external links.
+* [[Module:Card]] — renders editorial cards.
+* [[Module:CardComposition]] — composes cards into collections, flows, and rows.
+* [[Module:CardLinkDirectory]] — renders card link directories.
+* [[Module:MainPage]] — assembles the fixed main-page arrangement used by [[Template:MainPage]].
+* [[Module:ScribuntoUnit]] — runs module test suites.
