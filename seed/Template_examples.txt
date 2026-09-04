@@ -14,7 +14,25 @@ The Ubuntu wiki's shared template styles are produced by on-wiki templates that 
 
 {{Danger|A danger notice warns about an action that could lose data or break the system.}}
 
+== Mbox ==
+
+{{Mbox|type=note|label=Note|text=A note gives readers supplementary information without interrupting the surrounding instructions.}}
+
+{{Mbox|type=warning|label=Warning|text=A warning identifies an action or configuration that needs extra care.}}
+
+{{Mbox|type=tip|label=Tip|text=A tip suggests a shorter or easier way to complete the task.}}
+
+{{Mbox|type=doccan|label=Doccan|text=A Canonical documentation notice points readers at maintained documentation.}}
+
+{{Mbox|type=info|label=Info|text=An information notice highlights context that explains the current page.}}
+
+{{Mbox|type=danger|label=Danger|text=A danger notice warns about an action that could lose data or break the system.}}
+
+{{Mbox|type=ubuntu|label=Ubuntu|text=An Ubuntu notice highlights content of general interest to the Ubuntu community, using the circle-of-friends icon and the standard box background.}}
+
 == Template pages ==
 
 * [[Template:Admonition]] — generic admonition used by the typed wrappers
 * [[Template:Note]], [[Template:Warning]], [[Template:Tip]], [[Template:DocCan]], [[Template:Info]], [[Template:Danger]] — typed admonitions
+* [[Template:Mbox]] — generic message box with a label parameter
+* [[Template:Ubuntu]] — circle-of-friends Mbox variant used for content of general interest to the Ubuntu community (e.g. the homepage welcome banner)

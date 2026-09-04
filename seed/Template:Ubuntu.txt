@@ -1,0 +1,3 @@
+<includeonly>{{Mbox|type=ubuntu|label={{{label|}}}|text={{{text|{{{1|}}}}}}}}</includeonly><noinclude>Creates an [[Template:Mbox|Mbox]] message box with the Canonical circle-of-friends icon, standard box background, and an orange <code>#e95420</code> left accent bar/icon colour, used to highlight content of general interest to the Ubuntu community (e.g. the homepage welcome banner).
+
+Usage: <nowiki>{{Ubuntu|label=Welcome|text=Welcome text}}</nowiki></noinclude>
