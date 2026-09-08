@@ -14,26 +14,26 @@ function p.render(frame, data)
 	local target = data.target or ''
 	local url = data.url or ''
 	local icon = data.icon or ''
+	local iconMarkup = ''
+	if icon ~= '' then
+		iconMarkup = '<span class="ubuntu-pragma-icon-' .. icon .. '" aria-hidden="true"></span>'
+	end
 
 	-- A leading colon on [[:target]] is required for namespaced targets
 	-- The colon is fine for normal article links.
 	local linkWikitext = ''
 	if url ~= '' then
-		linkWikitext = '[' .. url .. ' ' .. text .. ']'
+		linkWikitext = '[' .. url .. ' ' .. iconMarkup .. text .. ']'
 	elseif target ~= '' then
-		linkWikitext = '[[:' .. target .. '|' .. text .. ']]'
+		linkWikitext = '[[:' .. target .. '|' .. iconMarkup .. text .. ']]'
 	else
-		linkWikitext = text
+		linkWikitext = iconMarkup .. text
 	end
 
 	local linkHtml = frame:preprocess(linkWikitext)
 
 	local button = mw.html.create('span')
 		:addClass('ubuntu-card-button-link')
-
-	if icon ~= '' then
-		button:addClass('ubuntu-card-button-link--icon-' .. icon)
-	end
 
 	button:wikitext(linkHtml)
 

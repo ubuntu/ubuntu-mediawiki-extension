@@ -136,6 +136,12 @@ class TestInitialSync(VendorIconsTestCase):
         self.assertIn('url( ../icons/pragma/settings.svg )', less)
         self.assertIn(".ubuntu-pragma-icon-arrow-right::before", less)
         self.assertIn('url( ../icons/pragma/arrow-right.svg )', less)
+
+        # The documented public class is self-contained: an editor should not
+        # need to add the unsuffixed base class as a second class.
+        settings_selector = less.index(".ubuntu-pragma-icon-settings::before")
+        shared_rule_end = less.index("}", less.index(".ubuntu-pragma-icon::before"))
+        self.assertLess(settings_selector, shared_rule_end)
         # Report names what was added.
         self.assertIn("added:", result.stdout)
 

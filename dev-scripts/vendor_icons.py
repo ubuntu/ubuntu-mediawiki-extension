@@ -283,6 +283,9 @@ def check(
 
 def generate_less(source: str, names: list[str]) -> str:
     prefix = f"ubuntu-{source}-icon"
+    base_selectors = [f".{prefix}::before"] + [
+        f".{prefix}-{name}::before" for name in names
+    ]
     lines = [
         "/**",
         f" * Vendored {source} icons as CSS-mask classes.",
@@ -304,7 +307,7 @@ def generate_less(source: str, names: list[str]) -> str:
         " * and components/ubuntu/Fonts.less for the same mechanism).",
         " */",
         "",
-        f".{prefix}::before {{",
+        ",\n".join(base_selectors) + " {",
         "\tcontent: '';",
         "\tdisplay: inline-block;",
         "\tbackground-color: currentColor;",

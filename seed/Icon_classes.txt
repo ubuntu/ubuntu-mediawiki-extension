@@ -1,0 +1,26 @@
+__NOTOC__
+== Pragma icon classes ==
+
+These examples use the public <code>ubuntu-pragma-icon-<name></code> classes directly in wiki text. The icon classes are available on every page.
+
+=== Inherited colour ===
+<span style="color: var(--color-progressive);">This text and the <span class="ubuntu-pragma-icon-settings" aria-hidden="true"></span> settings icon use the same colour.</span>
+
+<span style="color: var(--color-destructive);">This text and the <span class="ubuntu-pragma-icon-warning" aria-hidden="true"></span> warning icon use the same colour.</span>
+
+=== Font-size scaling ===
+<span style="font-size: 1rem;">Body-sized <span class="ubuntu-pragma-icon-information" aria-hidden="true"></span> information icon.</span>
+
+<span style="font-size: 2rem;">Heading-sized <span class="ubuntu-pragma-icon-arrow-right" aria-hidden="true"></span> arrow icon.</span>
+
+=== Per-element size override ===
+This icon has the default size: <span class="ubuntu-pragma-icon-plus" aria-hidden="true"></span>
+
+This icon is twice as large: <span class="ubuntu-pragma-icon-plus" style="--ubuntu-icon-size: 2em;" aria-hidden="true"></span>
+
+=== Component usage ===
+The Button template uses the same public class contract:
+
+{{Button|text=Desktop|target=Category:Desktop|icon=desktop}}
+
+{{Button|text=Server|target=Category:Server|icon=machines}}
