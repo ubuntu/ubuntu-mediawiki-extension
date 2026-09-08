@@ -24,3 +24,12 @@ The Button template uses the same public class contract:
 {{Button|text=Desktop|target=Category:Desktop|icon=desktop}}
 
 {{Button|text=Server|target=Category:Server|icon=machines}}
+
+=== Legacy component button aliases ===
+These buttons keep the legacy component classes working while existing wiki text is migrated:
+
+<div class="ubuntu-card-button-links">
+<span class="ubuntu-card-button-link ubuntu-card-button-link--icon-desktop">[[:Category:Desktop|Desktop]]</span>
+<span class="ubuntu-card-button-link ubuntu-card-button-link--icon-machines">[[:Category:Server|Server]]</span>
+<span class="ubuntu-card-button-link ubuntu-card-button-link--icon-containers">[[:Category:Containers|Containers]]</span>
+</div>

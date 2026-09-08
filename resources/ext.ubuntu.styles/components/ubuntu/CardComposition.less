@@ -322,3 +322,46 @@ div.ubuntu-card-button-links {
 .ubuntu-card-button-link.ubuntu-card-button-link a.external > [ class*='ubuntu-pragma-icon-' ]::before {
 	margin-inline-end: 0;
 }
+
+/* Deprecated aliases for legacy card button icon classes. Remove after legacy
+ * card-button wikitext has migrated to public Pragma icon classes. */
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-desktop a,
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-machines a,
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-containers a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.45rem;
+}
+
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-desktop a::before,
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-machines a::before,
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-containers a::before {
+	content: '';
+	display: block;
+	flex: none;
+	width: 1.25rem;
+	height: 1.25rem;
+	background-color: currentcolor;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+}
+
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-desktop a::before {
+	-webkit-mask-image: url( ../icons/pragma/desktop.svg );
+	mask-image: url( ../icons/pragma/desktop.svg );
+}
+
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-machines a::before {
+	-webkit-mask-image: url( ../icons/pragma/machines.svg );
+	mask-image: url( ../icons/pragma/machines.svg );
+}
+
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-containers a::before {
+	-webkit-mask-image: url( ../icons/pragma/containers.svg );
+	mask-image: url( ../icons/pragma/containers.svg );
+}
