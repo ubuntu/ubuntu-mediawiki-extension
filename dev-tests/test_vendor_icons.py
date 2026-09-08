@@ -59,6 +59,7 @@ class VendorIconsTestCase(unittest.TestCase):
         self.icons_dir = self.root / "resources" / "icons" / "pragma"
         self.manifest_path = self.icons_dir / "MANIFEST.json"
         self.less_path = self.root / "resources" / "ext.ubuntu.styles" / "vendor" / "pragma-icons.less"
+        self.catalog_path = self.root / "seed" / "Icon_catalog.txt"
 
     def run_script(self, *args: str) -> subprocess.CompletedProcess:
         return subprocess.run(
@@ -137,6 +138,16 @@ class TestInitialSync(VendorIconsTestCase):
         self.assertIn(".ubuntu-pragma-icon-arrow-right::before", less)
         self.assertIn('url( ../icons/pragma/arrow-right.svg )', less)
 
+        catalog = self.catalog_path.read_text()
+        self.assertIn("AUTO-GENERATED", catalog)
+        self.assertIn('<span class="ubuntu-pragma-icon-settings" aria-hidden="true"></span>', catalog)
+        self.assertIn("| <code>settings</code>", catalog)
+        self.assertIn("| <code>ubuntu-pragma-icon-settings</code>", catalog)
+        self.assertIn(
+            "&lt;span class=&quot;ubuntu-pragma-icon-settings&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;",
+            catalog,
+        )
+
         # The documented public class is self-contained: an editor should not
         # need to add the unsuffixed base class as a second class.
         settings_selector = less.index(".ubuntu-pragma-icon-settings::before")
@@ -212,6 +223,10 @@ class TestVersionBump(VendorIconsTestCase):
         self.assertEqual(manifest["version"], "0.2.0")
         self.assertNotIn("old-name", manifest["icons"])
         self.assertIn("extra", manifest["icons"])
+        catalog = self.catalog_path.read_text()
+        self.assertNotIn("ubuntu-pragma-icon-old-name", catalog)
+        self.assertIn("ubuntu-pragma-icon-new-name", catalog)
+        self.assertIn("ubuntu-pragma-icon-extra", catalog)
 
     def test_bump_reports_every_change(self) -> None:
         result = self.sync_from_to()
@@ -314,6 +329,24 @@ class TestCheck(VendorIconsTestCase):
         result = self.check("0.1.0", icons=["settings"])
 
         self.assertNotEqual(result.returncode, 0)
+
+    def test_check_fails_when_the_generated_catalog_was_hand_edited(self) -> None:
+        self.sync("0.1.0", icons=["settings"])
+        self.catalog_path.write_text("<!-- hand edit -->\n")
+
+        result = self.check("0.1.0", icons=["settings"])
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Icon_catalog.txt", result.stdout)
+
+    def test_check_fails_when_the_generated_catalog_is_missing(self) -> None:
+        self.sync("0.1.0", icons=["settings"])
+        self.catalog_path.unlink()
+
+        result = self.check("0.1.0", icons=["settings"])
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Icon_catalog.txt", result.stdout)
 
 
 if __name__ == "__main__":
