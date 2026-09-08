@@ -15,6 +15,7 @@ stdlib only, per the repo's tooling conventions.
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import sys
 import tarfile
@@ -37,6 +38,9 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 ICONS_DIR_TEMPLATE = "resources/icons/{source}"
 MANIFEST_NAME = "MANIFEST.json"
 LESS_TEMPLATE = "resources/ext.ubuntu.styles/vendor/{source}-icons.less"
+ICON_USAGE_PATTERN = re.compile(
+    rf"\bubuntu-{SOURCE}-icon-([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)\b"
+)
 
 
 def main() -> int:
@@ -71,6 +75,7 @@ def main() -> int:
         package_icons = tmp_path / "package" / "icons"
 
         upstream = load_upstream(package_icons, version)
+        validate_icon_usages(repo, less_path, set(upstream))
         old = load_manifest(manifest_path)
 
         if args.check:
@@ -147,6 +152,31 @@ def load_manifest(manifest_path: Path) -> dict[str, Any]:
     if not manifest_path.exists():
         return {"version": None, "icons": {}}
     return json.loads(manifest_path.read_text())
+
+
+def validate_icon_usages(
+    repo: Path, generated_less_path: Path, available_names: set[str]
+) -> None:
+    missing: dict[str, set[str]] = {}
+    resources_dir = repo / "resources"
+    seed_dir = repo / "seed"
+    paths = sorted(resources_dir.rglob("*.less")) + sorted(seed_dir.rglob("*.txt"))
+    for path in paths:
+        if path == generated_less_path:
+            continue
+        relative_path = str(path.relative_to(repo))
+        for name in ICON_USAGE_PATTERN.findall(path.read_text()):
+            if name not in available_names:
+                missing.setdefault(name, set()).add(relative_path)
+
+    if not missing:
+        return
+
+    print("ERROR: icon usages reference icons absent from the synced set:")
+    for name in sorted(missing):
+        locations = ", ".join(sorted(missing[name]))
+        print(f"  - ubuntu-{SOURCE}-icon-{name} ({locations})")
+    raise SystemExit(1)
 
 
 def diff_report(old_icons: dict[str, Any], new_icons: dict[str, Any]) -> dict[str, Any]:

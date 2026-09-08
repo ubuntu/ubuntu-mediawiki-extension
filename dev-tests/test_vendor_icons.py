@@ -225,6 +225,61 @@ class TestVersionBump(VendorIconsTestCase):
         self.assertNotIn("removed:", result.stdout)
 
 
+class TestUsageScan(VendorIconsTestCase):
+    """Sync fails when authored content references removed icons."""
+
+    def write_usage(self) -> None:
+        less_dir = self.root / "resources" / "ext.ubuntu.styles" / "components"
+        less_dir.mkdir(parents=True)
+        (less_dir / "usage.less").write_text(
+            ".ubuntu-pragma-icon-old-name {}\n"
+        )
+        seed_dir = self.root / "seed"
+        seed_dir.mkdir()
+        (seed_dir / "Usage.txt").write_text(
+            '<span class="ubuntu-pragma-icon-removed-name"></span>\n'
+        )
+
+    def test_sync_fails_and_reports_every_missing_icon_usage(self) -> None:
+        self.write_usage()
+        self.sync(
+            "0.1.0",
+            icons=["old-name", "removed-name"],
+            metadata={
+                "old-name": {
+                    "deprecated": True,
+                    "replacedBy": "replacement",
+                    "since": "0.1.0",
+                }
+            },
+        )
+
+        result = self.sync("0.2.0", icons=["replacement"])
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("ubuntu-pragma-icon-old-name", result.stdout)
+        self.assertIn("ubuntu-pragma-icon-removed-name", result.stdout)
+
+    def test_sync_allows_deprecated_icon_usage(self) -> None:
+        self.write_usage()
+        self.sync("0.1.0", icons=["old-name", "removed-name"])
+
+        result = self.sync(
+            "0.2.0",
+            icons=["old-name", "removed-name"],
+            metadata={
+                "old-name": {
+                    "deprecated": True,
+                    "replacedBy": "replacement",
+                    "since": "0.2.0",
+                }
+            },
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("deprecated: old-name", result.stdout)
+
+
 class TestCheck(VendorIconsTestCase):
     """--check exits zero in sync and non-zero out of sync."""
 
