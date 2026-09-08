@@ -308,13 +308,17 @@ div.ubuntu-card-button-links {
 }
 
 .ubuntu-card-button-link.ubuntu-card-button-link a > [ class*='ubuntu-pragma-icon-' ] {
-	display: inline-block;
+	display: contents;
 	flex: none;
-	margin-inline-end: 0.45rem;
+	margin-inline-end: 0;
 	--ubuntu-icon-size: 1.25rem;
 }
 
+.ubuntu-card-button-link.ubuntu-card-button-link a > [ class*='ubuntu-pragma-icon-' ]::before {
+	margin-inline-end: 0.45rem;
+}
+
 /* stylelint-disable-next-line selector-class-pattern */
-.ubuntu-card-button-link.ubuntu-card-button-link a.external > [ class*='ubuntu-pragma-icon-' ] {
+.ubuntu-card-button-link.ubuntu-card-button-link a.external > [ class*='ubuntu-pragma-icon-' ]::before {
 	margin-inline-end: 0;
 }
