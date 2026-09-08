@@ -14,3 +14,22 @@
 	padding-left: 8px !important;
 	padding-right: 8px !important;
 }
+
+/* Other buttons in the toolbar row (Read, Edit, Watch, ...) are plain links
+ * inside `.vector-menu-tabs`, which Body.less forces to `color: inherit` so
+ * they pick up the row's ordinary (near-black in light mode) text color. */
+#vector-page-tools-dropdown > .vector-dropdown-label:not( .cdx-button--action-progressive ) {
+	color: inherit;
+}
+
+/* The Tools dropdown's real interactive element is the invisible checkbox
+ * stacked on top of the visible label (so it can capture the toggle click).
+ * That means the mouse is over the checkbox, not the label. */
+#vector-page-tools-dropdown-checkbox:hover ~ .vector-dropdown-label {
+	background-color: var( --background-color-interactive-subtle--hover );
+	mix-blend-mode: var( --mix-blend-mode-blend, multiply );
+}
+
+#vector-page-tools-dropdown-checkbox:active ~ .vector-dropdown-label {
+	background-color: var( --background-color-interactive-subtle--active );
+}
