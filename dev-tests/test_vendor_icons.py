@@ -1,0 +1,242 @@
+# Subprocess tests for dev-scripts/vendor_icons.py.
+#
+# The script is the one new seam (see .scratch/vendored-icons/spec.md,
+# "Testing decisions"): every test runs it as a subprocess against a small
+# fixture tarball shaped like the upstream `@canonical/ds-assets` npm package
+# (`package/icons/*.svg` + optional `package/icons/metadata.json`), into a
+# throwaway repository root. No network access is needed. These are
+# development-tooling tests, kept apart from dev-scripts/; tests/ is reserved
+# for tests against the extension implementation itself.
+
+import json
+import subprocess
+import tarfile
+import tempfile
+import unittest
+from datetime import date
+from io import BytesIO
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+SCRIPT = REPO_ROOT / "dev-scripts" / "vendor_icons.py"
+
+SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">'
+    "<path id=\"{name}\" d=\"M1 1h14v14H1z\"/></svg>\n"
+)
+
+
+def make_svg(name: str) -> bytes:
+    return SVG.format(name=name).encode()
+
+
+def make_tarball(
+    version: str,
+    icons: list[str],
+    metadata: dict[str, dict] | None = None,
+) -> bytes:
+    """Build a fake ds-assets npm tarball (`package/icons/...`) in memory."""
+    buf = BytesIO()
+    with tarfile.open(fileobj=buf, mode="w:gz") as tar:
+        def add(name: str, data: bytes) -> None:
+            info = tarfile.TarInfo(f"package/{name}")
+            info.size = len(data)
+            tar.addfile(info, BytesIO(data))
+
+        add("package.json", json.dumps({"name": "@canonical/ds-assets", "version": version}).encode())
+        if metadata:
+            add("icons/metadata.json", json.dumps({"icons": metadata}).encode())
+        for icon in icons:
+            add(f"icons/{icon}.svg", make_svg(icon))
+    return buf.getvalue()
+
+
+class VendorIconsTestCase(unittest.TestCase):
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmp.cleanup)
+        self.root = Path(self._tmp.name)
+        self.icons_dir = self.root / "resources" / "icons" / "pragma"
+        self.manifest_path = self.icons_dir / "MANIFEST.json"
+        self.less_path = self.root / "resources" / "ext.ubuntu.styles" / "vendor" / "pragma-icons.less"
+
+    def run_script(self, *args: str) -> subprocess.CompletedProcess:
+        return subprocess.run(
+            ["python3", str(SCRIPT), "--repo-root", str(self.root), *args],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+    def sync(self, version: str, **kwargs) -> subprocess.CompletedProcess:
+        return self.run_script("--tarball", self.write_tarball(version, **kwargs), "--version", version)
+
+    def check(self, version: str, **kwargs) -> subprocess.CompletedProcess:
+        return self.run_script("--check", "--tarball", self.write_tarball(version, **kwargs), "--version", version)
+
+    def write_tarball(self, version: str, **kwargs) -> str:
+        path = self.root / f"ds-assets-{version}.tgz"
+        path.write_bytes(make_tarball(version, **kwargs))
+        return str(path)
+
+    def tree_state(self) -> dict[str, bytes]:
+        return {
+            str(p.relative_to(self.root)): p.read_bytes()
+            for p in sorted(self.root.rglob("*"))
+            if p.is_file() and not p.name.startswith("ds-assets-")
+        }
+
+
+class TestInitialSync(VendorIconsTestCase):
+    """First sync into an empty tree copies, manifests, and generates."""
+
+    def test_initial_sync(self) -> None:
+        result = self.sync("0.1.0", icons=["arrow-right", "settings"])
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        # Unmodified SVGs land in the icon source directory.
+        self.assertEqual(
+            (self.icons_dir / "arrow-right.svg").read_bytes(),
+            make_svg("arrow-right"),
+        )
+        self.assertEqual(
+            (self.icons_dir / "settings.svg").read_bytes(),
+            make_svg("settings"),
+        )
+        # Manifest records source, pinned version, upstream URL, licence, date.
+        manifest = json.loads(self.manifest_path.read_text())
+        self.assertEqual(manifest["source"], "pragma")
+        self.assertEqual(manifest["version"], "0.1.0")
+        self.assertIn("npmjs.com", manifest["upstream"])
+        self.assertEqual(manifest["licence"], "LGPL-3.0")
+        self.assertEqual(manifest["synced"], date.today().isoformat())
+        # Generated LESS: do-not-edit header, shared base rule, one rule per icon.
+        less = self.less_path.read_text()
+        self.assertIn("do not edit", less.lower())
+        self.assertIn("background-color: currentColor", less)
+        self.assertIn("var( --ubuntu-icon-size, 1em )", less)
+        self.assertIn(".ubuntu-pragma-icon-settings::before", less)
+        self.assertIn('url( ../icons/pragma/settings.svg )', less)
+        self.assertIn(".ubuntu-pragma-icon-arrow-right::before", less)
+        self.assertIn('url( ../icons/pragma/arrow-right.svg )', less)
+        # Report names what was added.
+        self.assertIn("added:", result.stdout)
+
+    def test_initial_sync_reports_deprecated_icons(self) -> None:
+        result = self.sync(
+            "0.1.0",
+            icons=["settings", "old-thing"],
+            metadata={"old-thing": {"deprecated": True, "replacedBy": "new-thing", "since": "0.1.0"}},
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("deprecated:", result.stdout)
+        self.assertIn("old-thing", result.stdout)
+        # Deprecation metadata is recorded in the manifest.
+        manifest = json.loads(self.manifest_path.read_text())
+        self.assertEqual(
+            manifest["icons"]["old-thing"],
+            {"deprecated": True, "replacedBy": "new-thing", "since": "0.1.0"},
+        )
+
+
+class TestResyncIdempotent(VendorIconsTestCase):
+    """Re-running sync on an already-synced tree makes no changes."""
+
+    def test_resync_is_idempotent(self) -> None:
+        self.sync("0.1.0", icons=["arrow-right", "settings"])
+        before = self.tree_state()
+
+        result = self.sync("0.1.0", icons=["arrow-right", "settings"])
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.tree_state(), before)
+
+    def test_resync_keeps_the_original_sync_date(self) -> None:
+        # A re-sync on a later day must not rewrite the manifest: the tree
+        # stays clean until the upstream set actually changes.
+        self.sync("0.1.0", icons=["settings"])
+        original = json.loads(self.manifest_path.read_text())["synced"]
+
+        self.sync("0.1.0", icons=["settings"])
+
+        self.assertEqual(json.loads(self.manifest_path.read_text())["synced"], original)
+
+
+class TestVersionBump(VendorIconsTestCase):
+    """A version bump reports added, removed, renamed, and deprecated icons."""
+
+    def setUp(self) -> None:
+        super().setUp()
+        self.old_meta = {"old-name": {"deprecated": True, "replacedBy": "new-name", "since": "0.1.0"}}
+        self.result = None
+
+    def sync_from_to(self) -> subprocess.CompletedProcess:
+        self.sync("0.1.0", icons=["settings", "keep-me", "old-name"], metadata=self.old_meta)
+        return self.sync(
+            "0.2.0",
+            icons=["settings", "keep-me", "new-name", "extra"],
+            metadata={"extra": {"deprecated": True, "since": "0.2.0"}},
+        )
+
+    def test_bump_updates_tree_and_manifest(self) -> None:
+        result = self.sync_from_to()
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertFalse((self.icons_dir / "old-name.svg").exists())
+        self.assertEqual((self.icons_dir / "new-name.svg").read_bytes(), make_svg("new-name"))
+        self.assertEqual((self.icons_dir / "keep-me.svg").read_bytes(), make_svg("keep-me"))
+        manifest = json.loads(self.manifest_path.read_text())
+        self.assertEqual(manifest["version"], "0.2.0")
+        self.assertNotIn("old-name", manifest["icons"])
+        self.assertIn("extra", manifest["icons"])
+
+    def test_bump_reports_every_change(self) -> None:
+        result = self.sync_from_to()
+
+        self.assertIn("renamed: old-name -> new-name", result.stdout)
+        self.assertIn("added:", result.stdout)
+        self.assertIn("extra", result.stdout)
+        self.assertIn("deprecated:", result.stdout)
+        self.assertIn("extra", result.stdout)
+        # A rename is not double-reported as a removal.
+        self.assertNotIn("removed:", result.stdout)
+
+
+class TestCheck(VendorIconsTestCase):
+    """--check exits zero in sync and non-zero out of sync."""
+
+    def test_check_passes_when_in_sync(self) -> None:
+        self.sync("0.1.0", icons=["arrow-right", "settings"])
+
+        result = self.check("0.1.0", icons=["arrow-right", "settings"])
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_check_fails_when_a_vendored_svg_was_hand_edited(self) -> None:
+        self.sync("0.1.0", icons=["arrow-right", "settings"])
+        (self.icons_dir / "settings.svg").write_bytes(b"<svg>hand-edited</svg>")
+
+        result = self.check("0.1.0", icons=["arrow-right", "settings"])
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("settings.svg", result.stdout + result.stderr)
+
+    def test_check_fails_when_the_pinned_version_differs(self) -> None:
+        self.sync("0.1.0", icons=["settings"])
+
+        result = self.check("0.2.0", icons=["settings"])
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("0.2.0", result.stdout + result.stderr)
+
+    def test_check_fails_when_the_generated_less_was_hand_edited(self) -> None:
+        self.sync("0.1.0", icons=["settings"])
+        self.less_path.write_text("/* hand edit */\n")
+
+        result = self.check("0.1.0", icons=["settings"])
+
+        self.assertNotEqual(result.returncode, 0)
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -52,3 +52,6 @@ LocalSettings.php
 
 # Local issue-tracker working files
 /.scratch/
+
+# Python bytecode
+__pycache__/

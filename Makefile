@@ -1,7 +1,14 @@
 .DEFAULT_GOAL := help
 
 .PHONY: help setup up down restart clean distclean settings db-update \
-	composer composer-update seed logs shell run jobs
+	composer composer-update seed logs shell run jobs \
+	vendor-icons check-vendor-icons
+
+# Pinned upstream version of @canonical/ds-assets (Canonical Pragma icons).
+# Bump this to sync a new icon set; `make vendor-icons` syncs the pinned
+# version and `make vendor-icons VERSION=<v>` overrides it.
+PRAGMA_ICONS_VERSION := 0.37.0
+VERSION ?= $(PRAGMA_ICONS_VERSION)
 
 # Password for the initial admin account created by `make setup`
 ADMIN_PASSWORD := UbuntuWiki2026!
@@ -164,6 +171,16 @@ shell:
 ## run: Run a MediaWiki maintenance script, e.g. make run SCRIPT="runJobs --maxjobs 5"
 run:
 	$(MW_T) php maintenance/run.php $(SCRIPT)
+
+### Vendoring
+
+## vendor-icons: Sync vendored Pragma icons from the pinned version (VERSION=<v> to bump)
+vendor-icons:
+	python3 dev-scripts/vendor_icons.py --version $(VERSION)
+
+## check-vendor-icons: Verify vendored icons match the pinned version (CI check)
+check-vendor-icons:
+	python3 dev-scripts/vendor_icons.py --check --version $(VERSION)
 
 LocalSettings.php:
 	cp LocalSettings.example.php LocalSettings.php

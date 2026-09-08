@@ -14,7 +14,7 @@ instead, the vendoring script scans our own LESS and seed content for
 `ubuntu-<source>-icon-<name>` usages and fails loudly when a name is removed or
 renamed upstream. The generated LESS and a per-source `MANIFEST.json` are
 committed (deployment needs no build step); a Python 3 stdlib script
-(`scripts/vendor_icons.py`, run via `make vendor-icons`) performs sync and
+(`dev-scripts/vendor_icons.py`, run via `make vendor-icons`) performs sync and
 `--check`, and a scheduled GitHub workflow auto-opens a PR when a new upstream
 version exists. Vendored Pragma icons are LGPL-3.0; accepted.
 
