@@ -25,6 +25,7 @@ from pathlib import Path
 from typing import Any
 
 SOURCE = "pragma"
+PACKAGE_NAME = "@canonical/ds-assets"
 NPM_TARBALL_TEMPLATE = (
     "https://registry.npmjs.org/@canonical/ds-assets/-/ds-assets-{version}.tgz"
 )
@@ -40,7 +41,6 @@ LESS_TEMPLATE = "resources/ext.ubuntu.styles/vendor/{source}-icons.less"
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--version", required=True, help="Pinned upstream version")
     parser.add_argument("--tarball", help="Path to a local tarball (skip download)")
     parser.add_argument(
         "--check",
@@ -56,6 +56,7 @@ def main() -> int:
     args = parser.parse_args()
 
     repo = args.repo_root
+    version = load_package_version(repo / "package.json")
     source_dir = repo / ICONS_DIR_TEMPLATE.format(source=SOURCE)
     less_path = repo / LESS_TEMPLATE.format(source=SOURCE)
     manifest_path = source_dir / MANIFEST_NAME
@@ -63,18 +64,18 @@ def main() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         tarball = (
-            Path(args.tarball) if args.tarball else download(args.version, tmp_path)
+            Path(args.tarball) if args.tarball else download(version, tmp_path)
         )
         with tarfile.open(tarball) as tar:
             tar.extractall(tmp_path, filter="data")
         package_icons = tmp_path / "package" / "icons"
 
-        upstream = load_upstream(package_icons, args.version)
+        upstream = load_upstream(package_icons, version)
         old = load_manifest(manifest_path)
 
         if args.check:
             return check(
-                repo, source_dir, less_path, manifest_path, upstream, args.version, old
+                repo, source_dir, less_path, manifest_path, upstream, version, old
             )
 
         report = sync(
@@ -83,7 +84,7 @@ def main() -> int:
             less_path,
             manifest_path,
             upstream,
-            args.version,
+            version,
             old,
             package_icons,
         )
@@ -98,6 +99,21 @@ def download(version: str, dest: Path) -> Path:
     with urllib.request.urlopen(url, timeout=60) as response, path.open("wb") as fh:
         shutil.copyfileobj(response, fh)
     return path
+
+
+def load_package_version(package_json_path: Path) -> str:
+    try:
+        package = json.loads(package_json_path.read_text())
+        version = package["dependencies"][PACKAGE_NAME]
+    except (FileNotFoundError, KeyError, TypeError, json.JSONDecodeError) as error:
+        raise SystemExit(
+            f"ERROR: {package_json_path} does not declare {PACKAGE_NAME}"
+        ) from error
+    if not isinstance(version, str) or not version:
+        raise SystemExit(
+            f"ERROR: {package_json_path} has an invalid version for {PACKAGE_NAME}"
+        )
+    return version
 
 
 def load_upstream(package_icons: Path, version: str) -> dict[str, Any]:

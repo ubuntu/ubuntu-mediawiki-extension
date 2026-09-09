@@ -4,11 +4,8 @@
 	composer composer-update seed logs shell run jobs \
 	vendor-icons check-vendor-icons
 
-# Pinned upstream version of @canonical/ds-assets (Canonical Pragma icons).
-# Bump this to sync a new icon set; `make vendor-icons` syncs the pinned
-# version and `make vendor-icons VERSION=<v>` overrides it.
-PRAGMA_ICONS_VERSION := 0.37.0
-VERSION ?= $(PRAGMA_ICONS_VERSION)
+# The icon version is read from package.json so dependency update tools can
+# discover and bump it.
 
 # Password for the initial admin account created by `make setup`
 ADMIN_PASSWORD := UbuntuWiki2026!
@@ -174,13 +171,13 @@ run:
 
 ### Vendoring
 
-## vendor-icons: Sync vendored Pragma icons from the pinned version (VERSION=<v> to bump)
+## vendor-icons: Sync vendored Pragma icons from package.json
 vendor-icons:
-	python3 dev-scripts/vendor_icons.py --version $(VERSION)
+	python3 dev-scripts/vendor_icons.py
 
-## check-vendor-icons: Verify vendored icons match the pinned version (CI check)
+## check-vendor-icons: Verify vendored icons match package.json (CI check)
 check-vendor-icons:
-	python3 dev-scripts/vendor_icons.py --check --version $(VERSION)
+	python3 dev-scripts/vendor_icons.py --check
 
 LocalSettings.php:
 	cp LocalSettings.example.php LocalSettings.php

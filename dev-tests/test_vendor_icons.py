@@ -69,15 +69,22 @@ class VendorIconsTestCase(unittest.TestCase):
         )
 
     def sync(self, version: str, **kwargs) -> subprocess.CompletedProcess:
-        return self.run_script("--tarball", self.write_tarball(version, **kwargs), "--version", version)
+        self.write_package_json(version)
+        return self.run_script("--tarball", self.write_tarball(version, **kwargs))
 
     def check(self, version: str, **kwargs) -> subprocess.CompletedProcess:
-        return self.run_script("--check", "--tarball", self.write_tarball(version, **kwargs), "--version", version)
+        self.write_package_json(version)
+        return self.run_script("--check", "--tarball", self.write_tarball(version, **kwargs))
 
     def write_tarball(self, version: str, **kwargs) -> str:
         path = self.root / f"ds-assets-{version}.tgz"
         path.write_bytes(make_tarball(version, **kwargs))
         return str(path)
+
+    def write_package_json(self, version: str) -> None:
+        (self.root / "package.json").write_text(
+            json.dumps({"dependencies": {"@canonical/ds-assets": version}})
+        )
 
     def tree_state(self) -> dict[str, bytes]:
         return {
@@ -89,6 +96,16 @@ class VendorIconsTestCase(unittest.TestCase):
 
 class TestInitialSync(VendorIconsTestCase):
     """First sync into an empty tree copies, manifests, and generates."""
+
+    def test_sync_uses_package_json_version_by_default(self) -> None:
+        self.write_package_json("0.1.0")
+
+        result = self.run_script(
+            "--tarball", self.write_tarball("0.1.0", icons=["settings"])
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(self.manifest_path.read_text())["version"], "0.1.0")
 
     def test_initial_sync(self) -> None:
         result = self.sync("0.1.0", icons=["arrow-right", "settings"])
