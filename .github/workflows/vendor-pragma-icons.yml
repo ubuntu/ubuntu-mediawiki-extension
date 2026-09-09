@@ -73,7 +73,7 @@ jobs:
         if: >-
           steps.diff.outputs.diff == 'true' &&
           github.event_name != 'pull_request' &&
-          inputs.dry-run != true
+          inputs['dry-run'] != 'true'
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
