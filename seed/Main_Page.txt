@@ -14,6 +14,7 @@ This wiki runs the [https://github.com/ubuntu/ubuntu-mediawiki-extension UbuntuW
 * [[Homepage design]] — the raw editorial card collection reference
 * [[Homepage design components]] — same homepage, composed from generic templates
 * [[Homepage design main page]] — same homepage, composed from the main-page template
+* [[Icon catalog]] — browse vendored Pragma icons and copy their markup
 * [[Lua modules]] — top-level seeded Lua modules
 
 == Useful things to try ==

@@ -1,7 +1,11 @@
 .DEFAULT_GOAL := help
 
 .PHONY: help setup up down restart clean distclean settings db-update \
-	composer composer-update seed logs shell run jobs
+	composer composer-update seed logs shell run jobs \
+	vendor-icons check-vendor-icons
+
+# The icon version is read from package.json so dependency update tools can
+# discover and bump it.
 
 # Password for the initial admin account created by `make setup`
 ADMIN_PASSWORD := UbuntuWiki2026!
@@ -164,6 +168,16 @@ shell:
 ## run: Run a MediaWiki maintenance script, e.g. make run SCRIPT="runJobs --maxjobs 5"
 run:
 	$(MW_T) php maintenance/run.php $(SCRIPT)
+
+### Vendoring
+
+## vendor-icons: Sync vendored Pragma icons from package.json
+vendor-icons:
+	python3 dev-scripts/vendor_icons.py
+
+## check-vendor-icons: Verify vendored icons match package.json (CI check)
+check-vendor-icons:
+	python3 dev-scripts/vendor_icons.py --check
 
 LocalSettings.php:
 	cp LocalSettings.example.php LocalSettings.php

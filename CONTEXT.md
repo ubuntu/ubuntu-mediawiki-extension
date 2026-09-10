@@ -50,6 +50,18 @@ _Avoid_: Skin override, skin theme
 A separate extension/skin, maintained in another repository, forked from Vector 2022, registered in MediaWiki as `Ubuntu`. It is this extension's primary compatibility target — Vector and Vector 2022 compatibility matter mainly as a side effect of that fork lineage, not as goals in their own right. A parallel Ubuntu Minerva fork is expected in the future, at which point Minerva compatibility becomes mandatory too.
 _Avoid_: Ubuntu Skin (capital S), UbuntuSkin repo
 
+**Vendored icon**:
+An SVG icon file copied unmodified from an external design system into this repository (under `resources/icons/`), never hand-edited, and refreshed only by the vendoring script. Its wiki-visible interface is the generated icon class, not the file.
+_Avoid_: Bundled icon, asset copy
+
+**Icon source**:
+An external design system from which icons are vendored (currently Canonical Pragma). Identified by a short lowercase token (e.g. `pragma`) used consistently as the vendor directory name and the class-name segment. One directory + one manifest per source.
+_Avoid_: Icon vendor, icon provider
+
+**Icon class contract**:
+The public CSS class naming scheme `.ubuntu-<source>-icon-<name>` (e.g. `.ubuntu-pragma-icon-settings`) used in wiki text and extension components alike. Icon names pass through from the upstream source unchanged; the classes are the stable contract, the underlying files are not.
+_Avoid_: Icon alias, icon mapping
+
 ### MediaWiki concepts
 
 **Hook**:

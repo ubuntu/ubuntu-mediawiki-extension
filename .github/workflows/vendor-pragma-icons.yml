@@ -1,0 +1,99 @@
+name: Update Pragma icon vendor files
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "package.json"
+      - ".github/workflows/vendor-pragma-icons.yml"
+  pull_request:
+    paths:
+      - "package.json"
+      - ".github/workflows/vendor-pragma-icons.yml"
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Dry run: sync files but skip creating a pull request"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # checkout the repository and push the bot PR branch
+      pull-requests: write # open or update the bot PR
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Sync vendored icons from the pinned package version
+        run: |
+          set -o pipefail
+          python3 dev-scripts/vendor_icons.py \
+            | tee /tmp/pragma-icons-diff-report.txt
+
+      - name: Check for vendor file changes
+        id: diff
+        uses: canonical/desktop-engineering/gh-actions/common/has-diff@v2
+        with:
+          working-directory: .
+          fail-on-diff: "false"
+
+      - name: Verify vendored icons are in sync
+        run: python3 dev-scripts/vendor_icons.py --check
+
+      - name: Write pull request body
+        if: steps.diff.outputs.diff == 'true'
+        run: |
+          version=$(python3 -c 'import json; print(json.load(open("package.json"))["dependencies"]["@canonical/ds-assets"])')
+          cat > /tmp/pragma-icons-pr-body.md <<EOF
+          Automated update of vendored Canonical Pragma icons.
+
+          **Upstream package:** [\`@canonical/ds-assets\`](https://www.npmjs.com/package/@canonical/ds-assets)
+          **Pinned version:** \`${version}\`
+          **Triggered by:** \`${{ github.event_name }}\` ([run ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}))
+
+          ## Diff report
+
+          \`\`\`
+          $(cat /tmp/pragma-icons-diff-report.txt)
+          \`\`\`
+
+          ## Validation
+
+          The vendored tree was regenerated from the pinned package version and passed \`--check\`. The usage scan runs before sync; any missing icon usage fails the workflow before a pull request is created.
+          EOF
+
+      - name: Create or update pull request
+        id: create-pr
+        if: >-
+          steps.diff.outputs.diff == 'true' &&
+          github.event_name != 'pull_request' &&
+          inputs['dry-run'] != 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: bot/update-pragma-icons
+          title: "chore(pragma-icons): sync vendored icons"
+          body-path: /tmp/pragma-icons-pr-body.md
+          add-paths: |
+            resources/ext.ubuntu.styles/vendor/pragma-icons.less
+            resources/icons/pragma/
+            seed/Icon_catalog.txt
+          commit-message: "chore(pragma-icons): sync vendored icons"
+          labels: dependencies
+          delete-branch: true
+          sign-commits: true
+
+      - name: Create summary
+        if: always()
+        run: |
+          echo "# Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Vendor file changes detected: ${{ steps.diff.outputs.diff }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Pull request: ${{ steps.create-pr.outputs.pull-request-url || 'N/A' }}" >> "$GITHUB_STEP_SUMMARY"

@@ -307,7 +307,24 @@ div.ubuntu-card-button-links {
 	}
 }
 
-/* Optional platform icon shown to the left of the label. */
+.ubuntu-card-button-link.ubuntu-card-button-link a > [ class*='ubuntu-pragma-icon-' ] {
+	display: contents;
+	flex: none;
+	margin-inline-end: 0;
+	--ubuntu-icon-size: 1.25rem;
+}
+
+.ubuntu-card-button-link.ubuntu-card-button-link a > [ class*='ubuntu-pragma-icon-' ]::before {
+	margin-inline-end: 0.45rem;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.ubuntu-card-button-link.ubuntu-card-button-link a.external > [ class*='ubuntu-pragma-icon-' ]::before {
+	margin-inline-end: 0;
+}
+
+/* Deprecated aliases for legacy card button icon classes. Remove after legacy
+ * card-button wikitext has migrated to public Pragma icon classes. */
 .ubuntu-card-button-link.ubuntu-card-button-link--icon-desktop a,
 .ubuntu-card-button-link.ubuntu-card-button-link--icon-machines a,
 .ubuntu-card-button-link.ubuntu-card-button-link--icon-containers a {
@@ -317,9 +334,9 @@ div.ubuntu-card-button-links {
 	gap: 0.45rem;
 }
 
-.ubuntu-card-button-link--icon-desktop a::before,
-.ubuntu-card-button-link--icon-machines a::before,
-.ubuntu-card-button-link--icon-containers a::before {
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-desktop a::before,
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-machines a::before,
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-containers a::before {
 	content: '';
 	display: block;
 	flex: none;
@@ -334,18 +351,17 @@ div.ubuntu-card-button-links {
 	mask-size: contain;
 }
 
-/* TODO: to replace with imported Vanilla icons */
-.ubuntu-card-button-link--icon-desktop a::before {
-	-webkit-mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.5 3.5H13.5V10.5H2.5L2.5 3.5ZM1 3.5C1 2.67157 1.67157 2 2.5 2H13.5C14.3284 2 15 2.67157 15 3.5V10.5C15 11.3284 14.3284 12 13.5 12H8.75V13.25H11V14.75H5V13.25H7.25V12H2.5C1.67157 12 1 11.3284 1 10.5V3.5Z' fill='%23000'/%3E%3C/svg%3E" );
-	mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.5 3.5H13.5V10.5H2.5L2.5 3.5ZM1 3.5C1 2.67157 1.67157 2 2.5 2H13.5C14.3284 2 15 2.67157 15 3.5V10.5C15 11.3284 14.3284 12 13.5 12H8.75V13.25H11V14.75H5V13.25H7.25V12H2.5C1.67157 12 1 11.3284 1 10.5V3.5Z' fill='%23000'/%3E%3C/svg%3E" );
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-desktop a::before {
+	-webkit-mask-image: url( ../icons/pragma/desktop.svg );
+	mask-image: url( ../icons/pragma/desktop.svg );
 }
 
-.ubuntu-card-button-link--icon-machines a::before {
-	-webkit-mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .99a3 3 0 013 3v1.75c0 .938-.431 1.776-1.106 2.326A2.989 2.989 0 0115 10.392v1.75a3 3 0 01-3 3H4a3 3 0 01-3-3v-1.75c0-.94.431-1.777 1.106-2.327A2.989 2.989 0 011 5.739V3.99a3 3 0 013-3h8zm0 7.902H4a1.5 1.5 0 00-1.493 1.355l-.007.145v1.75a1.5 1.5 0 001.356 1.493l.144.007h8a1.5 1.5 0 001.493-1.356l.007-.144v-1.75a1.5 1.5 0 00-1.356-1.494L12 8.892zM11.5 10a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1zm.5-7.51H4a1.5 1.5 0 00-1.493 1.355l-.007.144v1.75a1.5 1.5 0 001.356 1.493L4 7.24h8a1.5 1.5 0 001.493-1.355l.007-.145V3.99a1.5 1.5 0 00-1.356-1.493L12 2.49zM11.5 4a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E" );
-	mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .99a3 3 0 013 3v1.75c0 .938-.431 1.776-1.106 2.326A2.989 2.989 0 0115 10.392v1.75a3 3 0 01-3 3H4a3 3 0 01-3-3v-1.75c0-.94.431-1.777 1.106-2.327A2.989 2.989 0 011 5.739V3.99a3 3 0 013-3h8zm0 7.902H4a1.5 1.5 0 00-1.493 1.355l-.007.145v1.75a1.5 1.5 0 001.356 1.493l.144.007h8a1.5 1.5 0 001.493-1.356l.007-.144v-1.75a1.5 1.5 0 00-1.356-1.494L12 8.892zM11.5 10a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1zm.5-7.51H4a1.5 1.5 0 00-1.493 1.355l-.007.144v1.75a1.5 1.5 0 001.356 1.493L4 7.24h8a1.5 1.5 0 001.493-1.355l.007-.145V3.99a1.5 1.5 0 00-1.356-1.493L12 2.49zM11.5 4a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h1z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E" );
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-machines a::before {
+	-webkit-mask-image: url( ../icons/pragma/machines.svg );
+	mask-image: url( ../icons/pragma/machines.svg );
 }
 
-.ubuntu-card-button-link--icon-containers a::before {
-	-webkit-mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.212 4.158l6.553 3.776v7.676l-6.693-3.704v-7.67l.14-.078zm3.57-1.976l6.81 3.923v7.647L9.265 15.04V7.013L2.76 3.301l2.022-1.119zM8 .402l6.928 3.835v7.669l-1.836 1.015V5.184L6.331 1.326 8 .402z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E" );
-	mask-image: url( "data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.212 4.158l6.553 3.776v7.676l-6.693-3.704v-7.67l.14-.078zm3.57-1.976l6.81 3.923v7.647L9.265 15.04V7.013L2.76 3.301l2.022-1.119zM8 .402l6.928 3.835v7.669l-1.836 1.015V5.184L6.331 1.326 8 .402z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E" );
+.ubuntu-card-button-link.ubuntu-card-button-link--icon-containers a::before {
+	-webkit-mask-image: url( ../icons/pragma/containers.svg );
+	mask-image: url( ../icons/pragma/containers.svg );
 }
