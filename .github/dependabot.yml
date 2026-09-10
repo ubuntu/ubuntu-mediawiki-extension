@@ -1,5 +1,19 @@
 version: 2
 updates:
+  # Infrastructure
+  ## GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "thursday"
+      time: "09:00"
+    groups:
+      gh-actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "deps(ci)"
+
   - package-ecosystem: npm
     directory: "/"
     schedule:
