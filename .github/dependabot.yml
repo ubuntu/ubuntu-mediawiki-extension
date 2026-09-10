@@ -19,5 +19,8 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 1
+    commit-message:
+      prefix: "deps(npm)"
     allow:
       - dependency-name: "@canonical/ds-assets"
+      - dependency-name: "@canonical/cookie-policy"
