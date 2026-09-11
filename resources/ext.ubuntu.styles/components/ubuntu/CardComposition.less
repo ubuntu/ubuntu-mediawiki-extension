@@ -9,6 +9,7 @@
 @card-flow-three-column-width: ( @card-flow-column-width * 3 + @card-col-gap * 2 );
 @button-radius: 0;
 @button-border-width: 1.5px;
+@button-gap: 0.75rem;
 @rule: 1px solid var( --border-color-base, rgba( 0, 0, 0, 0.25 ) );
 
 /* A source-ordered collection of standard-card flows and featured cards. */
@@ -121,6 +122,7 @@ div.ubuntu-card--featured {
 
 /* Section: a top rule and label, with no surrounding box */
 div.ubuntu-card {
+	container-type: inline-size;
 	display: flex;
 	flex-direction: column;
 	gap: 0.85rem;
@@ -227,16 +229,29 @@ ul.ubuntu-card__list {
 	}
 }
 
-/* Filled button links (grid, so docs wrap into columns) */
+/* Filled button links. Authors can set a readable minimum width with
+ * --ubuntu-card-button-min-width. */
 div.ubuntu-card-button-links {
 	display: grid;
-	grid-template-columns: repeat( auto-fit, minmax( 9rem, 1fr ) );
-	gap: 0.75rem;
+	grid-template-columns: repeat( auto-fit, minmax( ~'min( var( --ubuntu-card-button-min-width, 9rem ), 100% )', 1fr ) );
+	gap: @button-gap;
 	margin-top: 0.15rem;
 
 	p {
 		display: contents;
 	}
+}
+
+/* Four links balance into two rows of two while preserving their requested
+ * minimum width at narrower card sizes. */
+div.ubuntu-card-button-links:has( .ubuntu-card-button-link:nth-child( 4 ):last-child ) {
+	grid-template-columns: repeat( auto-fit, minmax( ~'min( max( var( --ubuntu-card-button-min-width, 9rem ), calc( ( 100% - @{button-gap} ) / 3 ) ), 100% )', 1fr ) );
+}
+
+/* Six links balance into two rows of three while preserving their requested
+ * minimum width at narrower card sizes. */
+div.ubuntu-card-button-links:has( .ubuntu-card-button-link:nth-child( 6 ):last-child ) {
+	grid-template-columns: repeat( auto-fit, minmax( ~'min( max( var( --ubuntu-card-button-min-width, 9rem ), calc( ( 100% - @{button-gap} * 2 ) / 3 ) ), 100% )', 1fr ) );
 }
 
 /* Button links in neutral Vanilla style */
@@ -315,6 +330,7 @@ div.ubuntu-card-button-links {
 }
 
 .ubuntu-card-button-link.ubuntu-card-button-link a > [ class*='ubuntu-pragma-icon-' ]::before {
+	flex: none;
 	margin-inline-end: 0.45rem;
 }
 
