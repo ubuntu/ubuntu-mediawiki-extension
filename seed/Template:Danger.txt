@@ -1,3 +1,6 @@
 <includeonly>{{Admonition|type=danger|text={{{text|{{{1|}}}}}}}}</includeonly><noinclude>Creates an Ubuntu danger admonition.
 
-Usage: <nowiki>{{Danger|Danger text}}</nowiki></noinclude>
+Usage: <nowiki>{{Danger|Danger text}}</nowiki>
+
+[[Category:Content presentation]]
+[[Category:Templates]]</noinclude>

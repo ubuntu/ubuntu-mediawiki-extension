@@ -1,0 +1,3 @@
+Seeded pages that demonstrate reusable visual components.
+
+[[Category:Seed content]]

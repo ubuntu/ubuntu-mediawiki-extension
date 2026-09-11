@@ -1,0 +1,5 @@
+Documentation for [[Module:CardComposition]].
+
+Composes cards into collections, flows, and rows.
+
+[[Category:Lua modules]]

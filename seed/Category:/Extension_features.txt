@@ -1,0 +1,3 @@
+Seeded pages that exercise behavior supplied by MediaWiki extensions and skins.
+
+[[Category:Examples and test pages]]

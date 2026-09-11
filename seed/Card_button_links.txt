@@ -13,6 +13,8 @@ __NOTOC__
 </div>
 </div>
 
+[[Category:Cards and layouts]]
+
 <div class="ubuntu-card">
 <div class="ubuntu-card__label">Wide buttons</div>
 <p><code>--ubuntu-card-button-min-width: 18rem</code></p>

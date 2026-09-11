@@ -140,6 +140,7 @@ class TestInitialSync(VendorIconsTestCase):
 
         catalog = self.catalog_path.read_text()
         self.assertIn("AUTO-GENERATED", catalog)
+        self.assertIn("[[Category:Content presentation]]", catalog)
         self.assertIn('<span class="ubuntu-pragma-icon-settings" aria-hidden="true"></span>', catalog)
         self.assertIn("| <code>settings</code>", catalog)
         self.assertIn("| <code>ubuntu-pragma-icon-settings</code>", catalog)

@@ -1,0 +1,5 @@
+Documentation for [[Module:ScribuntoUnit]].
+
+Provides the seeded Scribunto unit-test framework.
+
+[[Category:Lua modules]]

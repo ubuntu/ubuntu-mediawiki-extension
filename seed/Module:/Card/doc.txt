@@ -1,0 +1,5 @@
+Documentation for [[Module:Card]].
+
+Renders reusable editorial cards.
+
+[[Category:Lua modules]]

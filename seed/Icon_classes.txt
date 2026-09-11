@@ -33,3 +33,5 @@ These buttons keep the legacy component classes working while existing wiki text
 <span class="ubuntu-card-button-link ubuntu-card-button-link--icon-machines">[[:Category:Server|Server]]</span>
 <span class="ubuntu-card-button-link ubuntu-card-button-link--icon-containers">[[:Category:Containers|Containers]]</span>
 </div>
+
+[[Category:Content presentation]]

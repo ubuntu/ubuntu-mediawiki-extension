@@ -46,3 +46,5 @@ versions.forEach((version) => console.log(version));
 def quick_sort(arr):
     less = []
 </syntaxhighlight>
+
+[[Category:Extension features]]

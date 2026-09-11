@@ -1,0 +1,5 @@
+Documentation for [[Module:CardLinkDirectory]].
+
+Renders link directories within cards.
+
+[[Category:Lua modules]]

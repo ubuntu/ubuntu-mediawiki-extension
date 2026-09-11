@@ -1,0 +1,6 @@
+Seeded pages that define reusable wiki authoring interfaces.
+
+* [[:Category:Lua modules|Lua modules]]
+* [[:Category:Templates|Templates]]
+
+[[Category:Seed content]]

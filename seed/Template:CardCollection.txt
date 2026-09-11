@@ -32,4 +32,7 @@ Usage:
 		"1"
 	]
 }
-</templatedata></noinclude>
+</templatedata>
+
+[[Category:Cards and layouts]]
+[[Category:Templates]]</noinclude>

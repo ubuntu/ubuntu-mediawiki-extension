@@ -1,0 +1,3 @@
+Seeded templates for reusable wiki content and page composition.
+
+[[Category:Authoring]]

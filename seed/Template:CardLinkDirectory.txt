@@ -13,4 +13,8 @@ Usage:
 
 Each item is plain wikitext, written as it would be inside a normal
 <code><nowiki><li></nowiki></code>. Positional items are forwarded without a
-fixed limit.</noinclude>
+fixed limit.
+
+[[Category:Cards and layouts]]
+[[Category:Content presentation]]
+[[Category:Templates]]</noinclude>

@@ -1,0 +1,5 @@
+Documentation for [[Module:MainPage]].
+
+Assembles the fixed main-page arrangement from card content.
+
+[[Category:Lua modules]]

@@ -13,4 +13,8 @@ Usage:
 | edit-label = Edit the wiki
 | edit-body = Anyone can contribute.
 }}
-</pre></noinclude>
+</pre>
+
+[[Category:Cards and layouts]]
+[[Category:Homepage designs]]
+[[Category:Templates]]</noinclude>

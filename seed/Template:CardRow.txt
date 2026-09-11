@@ -15,4 +15,7 @@ Usage:
 }}
 </pre>
 
-Rows collapse naturally when two readable tracks no longer fit.</noinclude>
+Rows collapse naturally when two readable tracks no longer fit.
+
+[[Category:Cards and layouts]]
+[[Category:Templates]]</noinclude>

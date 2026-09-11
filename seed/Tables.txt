@@ -22,6 +22,8 @@ This page tests basic wikitext rendered tables.
 | Height || Fits fine
 |}
 
+[[Category:Extension features]]
+
 == No styling table ==
 
 {|

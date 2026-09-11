@@ -1,0 +1,3 @@
+Seeded card, button, and page-layout components.
+
+[[Category:Components]]

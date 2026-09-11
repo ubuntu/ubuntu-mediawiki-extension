@@ -1,0 +1,3 @@
+Documentation pages for reusable seeded Lua modules.
+
+[[Category:Authoring]]

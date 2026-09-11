@@ -56,3 +56,5 @@ Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristiq
 
 * [[Wide tables]] — layout stress at the other extreme
 * [[Main_Page]] — back to the index
+
+[[Category:Extension features]]

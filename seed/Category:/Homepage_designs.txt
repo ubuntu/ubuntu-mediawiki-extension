@@ -1,0 +1,3 @@
+Seeded alternatives for authoring the Ubuntu Wiki homepage layout.
+
+[[Category:Examples and test pages]]

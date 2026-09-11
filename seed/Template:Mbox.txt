@@ -139,7 +139,8 @@ This template is a base message box.
     }
 }
 </templatedata>
-</noinclude><includeonly><div {{#if:{{{id|}}}|id="{{{id}}}"}} class="ubuntu-template-box {{#if:{{{type|}}}|ubuntu-template-box-{{{type}}}}} {{#if:{{{class|}}}|{{{class}}}}}" style="margin-top:0; {{#ifeq:{{{inline|}}}|yes|display: inline-block;}} {{#if:{{{type|}}}||padding-left: 15px;}} {{#if:{{{style|}}}|{{{style}}}}}">
+[[Category:Content presentation]]
+[[Category:Templates]]</noinclude><includeonly><div {{#if:{{{id|}}}|id="{{{id}}}"}} class="ubuntu-template-box {{#if:{{{type|}}}|ubuntu-template-box-{{{type}}}}} {{#if:{{{class|}}}|{{{class}}}}}" style="margin-top:0; {{#ifeq:{{{inline|}}}|yes|display: inline-block;}} {{#if:{{{type|}}}||padding-left: 15px;}} {{#if:{{{style|}}}|{{{style}}}}}">
 {{#if:{{{label|}}}|<strong>{{{label}}}</strong>}}
 <div {{#if:{{{textstyle|}}}|style="{{{textstyle}}}"}}>{{{text|}}}</div>
 </div></includeonly>

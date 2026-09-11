@@ -1,0 +1,5 @@
+Documentation for [[Module:ButtonLink]].
+
+Renders button-styled internal and external links, with optional icons.
+
+[[Category:Lua modules]]

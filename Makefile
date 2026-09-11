@@ -116,6 +116,7 @@ seed:
 		while IFS= read -r -d "" file; do \
 			relative="$${file#/tmp/seed/}"; \
 			prefix="$${relative%/*}/"; \
+			prefix="$${prefix/:\//:}"; \
 			php maintenance/run.php importTextFiles \
 				--user Admin --summary "Seed test content" --overwrite \
 				--prefix "$$prefix" "$$file"; \

@@ -1,3 +1,6 @@
 <includeonly>{{Admonition|type=info|text={{{text|{{{1|}}}}}}}}</includeonly><noinclude>Creates an Ubuntu information admonition.
 
-Usage: <nowiki>{{Info|Information text}}</nowiki></noinclude>
+Usage: <nowiki>{{Info|Information text}}</nowiki>
+
+[[Category:Content presentation]]
+[[Category:Templates]]</noinclude>

@@ -9,4 +9,7 @@ Usage:
 {{Button|text=Desktop|target=Category:Desktop|icon=desktop}}
 {{Button|text=Server|target=Category:Server|icon=machines}}
 }}
-</pre></noinclude>
+</pre>
+
+[[Category:Cards and layouts]]
+[[Category:Templates]]</noinclude>

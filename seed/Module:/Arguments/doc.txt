@@ -1,0 +1,5 @@
+Documentation for [[Module:Arguments]].
+
+Normalizes arguments passed from templates and frames to Scribunto modules.
+
+[[Category:Lua modules]]

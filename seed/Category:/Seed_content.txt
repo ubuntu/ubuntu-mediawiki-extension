@@ -1,0 +1,5 @@
+The root of the local seed-content catalogue.
+
+* [[:Category:Authoring|Authoring]]
+* [[:Category:Components|Components]]
+* [[:Category:Examples and test pages|Examples and test pages]]

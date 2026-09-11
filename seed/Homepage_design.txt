@@ -92,3 +92,6 @@ Any [[red link]] is a page that people want. Select one to create it. If you're 
 </div>
 </div></div>
 </div>
+
+[[Category:Cards and layouts]]
+[[Category:Homepage designs]]

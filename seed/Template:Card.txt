@@ -25,4 +25,7 @@ Parameters:
   retain two slots whenever the containing flow or row has at least two slots.
 * '''link-directory''' (optional) &ndash; set to <code>yes</code> when the card pairs
   its label and description with a group of navigational links. The card adapts
-  that internal arrangement to its rendered width.</noinclude>
+  that internal arrangement to its rendered width.
+
+[[Category:Cards and layouts]]
+[[Category:Templates]]</noinclude>

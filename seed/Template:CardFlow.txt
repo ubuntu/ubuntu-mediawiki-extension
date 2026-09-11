@@ -27,4 +27,7 @@ two-column row:
 </pre>
 
 Featured cards belong directly in [[Template:CardCollection|CardCollection]],
-outside a CardFlow.</noinclude>
+outside a CardFlow.
+
+[[Category:Cards and layouts]]
+[[Category:Templates]]</noinclude>

@@ -1,3 +1,6 @@
 <includeonly>{{Admonition|type=note|text={{{text|{{{1|}}}}}}}}</includeonly><noinclude>Creates an Ubuntu note admonition.
 
-Usage: <nowiki>{{Note|Note text}}</nowiki></noinclude>
+Usage: <nowiki>{{Note|Note text}}</nowiki>
+
+[[Category:Content presentation]]
+[[Category:Templates]]</noinclude>

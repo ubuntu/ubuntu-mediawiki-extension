@@ -49,3 +49,5 @@ enhanced:
 <syntaxhighlight lang="bash">
 sudo apt update
 </syntaxhighlight>
+
+[[Category:Extension features]]

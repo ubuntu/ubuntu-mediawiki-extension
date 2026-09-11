@@ -2,6 +2,33 @@ Welcome to the local Ubuntu Wiki test instance.
 
 This wiki runs the [https://github.com/ubuntu/ubuntu-mediawiki-extension UbuntuWiki extension] from a live-mounted checkout, so edits to the extension's files apply on page reload.
 
+== Seed catalogue ==
+
+Browse the [[:Category:Seed content|seed-content hierarchy]] by category.
+
+=== [[:Category:Authoring|Authoring]] ===
+
+* [[:Category:Templates|Templates]]
+* [[:Category:Lua modules|Lua modules]]
+
+=== [[:Category:Components|Components]] ===
+
+* [[:Category:Cards and layouts|Cards and layouts]]
+* [[:Category:Content presentation|Content presentation]]
+
+=== [[:Category:Examples and test pages|Examples and test pages]] ===
+
+* [[:Category:Extension features|Extension features]]
+* [[:Category:Homepage designs|Homepage designs]]
+
+=== Start here ===
+
+* [[Template:MainPage]] — configure the fixed main-page arrangement
+* [[Template:Card]] — create an editorial card
+* [[Template:Admonition]] — create a styled content notice
+* [[Icon classes]] — use the vendored icon class contract
+* [[Code block examples]] — exercise copy-enabled code blocks
+
 == Test pages ==
 
 * [[Code block examples]] — the copy button on <code>.ubuntu-code-block</code> markup in regular wikitext
@@ -22,3 +49,5 @@ This wiki runs the [https://github.com/ubuntu/ubuntu-mediawiki-extension UbuntuW
 * Append <code>?useskin=minerva</code> to any page URL — the extension ships per-skin styles (Vector is not loaded in this environment: its skin.json DefaultUserOptions collide with the Ubuntu skin's)
 * [[Special:Version]] — loaded extensions and skins
 * The footer shows the extension's Ubuntu links and the "Manage your tracker settings" consent button
+
+[[Category:Examples and test pages]]

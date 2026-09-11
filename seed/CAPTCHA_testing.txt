@@ -23,3 +23,5 @@ wikitext rendering.
 == Configuration ==
 
 See the "Local testing only" section of <code>LocalSettings.example.php</code>.
+
+[[Category:Extension features]]

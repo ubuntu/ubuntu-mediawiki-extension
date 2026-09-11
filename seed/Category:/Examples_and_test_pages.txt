@@ -1,0 +1,3 @@
+Seeded pages for exercising extension behavior and page compositions.
+
+[[Category:Seed content]]

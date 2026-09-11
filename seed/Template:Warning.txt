@@ -1,3 +1,6 @@
 <includeonly>{{Admonition|type=warning|text={{{text|{{{1|}}}}}}}}</includeonly><noinclude>Creates an Ubuntu warning admonition.
 
-Usage: <nowiki>{{Warning|Warning text}}</nowiki></noinclude>
+Usage: <nowiki>{{Warning|Warning text}}</nowiki>
+
+[[Category:Content presentation]]
+[[Category:Templates]]</noinclude>

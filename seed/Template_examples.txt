@@ -36,3 +36,7 @@ The Ubuntu wiki's shared template styles are produced by on-wiki templates that 
 * [[Template:Note]], [[Template:Warning]], [[Template:Tip]], [[Template:DocCan]], [[Template:Info]], [[Template:Danger]] — typed admonitions
 * [[Template:Mbox]] — generic message box with a label parameter
 * [[Template:Ubuntu]] — circle-of-friends Mbox variant used for content of general interest to the Ubuntu community (e.g. the homepage welcome banner)
+
+[[Category:Content presentation]]
+[[Category:Extension features]]
+[[Category:Templates]]
