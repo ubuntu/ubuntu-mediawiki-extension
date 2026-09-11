@@ -1,0 +1,52 @@
+__NOTOC__
+
+<div class="ubuntu-card-collection">
+<div class="ubuntu-card">
+<div class="ubuntu-card__label">Default layout</div>
+<p><code>--ubuntu-card-button-min-width: 9rem</code> (default)</p>
+<div class="ubuntu-card-button-links">
+<span class="ubuntu-card-button-link">[[Ubuntu]]</span>
+<span class="ubuntu-card-button-link">[[Desktop]]</span>
+<span class="ubuntu-card-button-link">[[Server]]</span>
+<span class="ubuntu-card-button-link">[[Cloud]]</span>
+<span class="ubuntu-card-button-link">[[Security]]</span>
+</div>
+</div>
+
+<div class="ubuntu-card">
+<div class="ubuntu-card__label">Wide buttons</div>
+<p><code>--ubuntu-card-button-min-width: 18rem</code></p>
+<div class="ubuntu-card-button-links" style="--ubuntu-card-button-min-width: 18rem;">
+<span class="ubuntu-card-button-link">[[Documentation]]</span>
+<span class="ubuntu-card-button-link">[[Community]]</span>
+<span class="ubuntu-card-button-link">[[Support]]</span>
+<span class="ubuntu-card-button-link">[[Release notes]]</span>
+</div>
+</div>
+
+<div class="ubuntu-card">
+<div class="ubuntu-card__label">Standard buttons</div>
+<p><code>--ubuntu-card-button-min-width: 11rem</code></p>
+<div class="ubuntu-card-button-links" style="--ubuntu-card-button-min-width: 11rem;">
+<span class="ubuntu-card-button-link">[[Desktop]]</span>
+<span class="ubuntu-card-button-link">[[Server]]</span>
+<span class="ubuntu-card-button-link">[[Cloud]]</span>
+<span class="ubuntu-card-button-link">[[WSL]]</span>
+<span class="ubuntu-card-button-link">[[IoT]]</span>
+<span class="ubuntu-card-button-link">[[Raspberry Pi]]</span>
+</div>
+</div>
+
+<div class="ubuntu-card">
+<div class="ubuntu-card__label">Extra-wide buttons</div>
+<p><code>--ubuntu-card-button-min-width: 12rem</code></p>
+<div class="ubuntu-card-button-links" style="--ubuntu-card-button-min-width: 12rem;">
+<span class="ubuntu-card-button-link">[[Getting started]]</span>
+<span class="ubuntu-card-button-link">[[Install Ubuntu]]</span>
+<span class="ubuntu-card-button-link">[[Manage software]]</span>
+<span class="ubuntu-card-button-link">[[Configure networking]]</span>
+<span class="ubuntu-card-button-link">[[Troubleshooting]]</span>
+<span class="ubuntu-card-button-link">[[Contributing]]</span>
+</div>
+</div>
+</div>
