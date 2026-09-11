@@ -9,10 +9,13 @@ The Ubuntu wiki makes it easy to find, add and connect ideas about Ubuntu.
 <div class="ubuntu-card-flow ubuntu-card-flow--grid"><div class="ubuntu-card-flow__content">
 <div class="ubuntu-card ubuntu-card--two-wide-fixed">
 <div class="ubuntu-card__label">Platform-specific wiki pages</div>
-<div class="ubuntu-card-button-links">
+<div class="ubuntu-card-button-links" style="--ubuntu-card-button-min-width: 11rem;">
 <span class="ubuntu-card-button-link">[[:Category:Desktop|<span class="ubuntu-pragma-icon-desktop" aria-hidden="true"></span>Desktop]]</span>
 <span class="ubuntu-card-button-link">[[:Category:Server|<span class="ubuntu-pragma-icon-machines" aria-hidden="true"></span>Server]]</span>
 <span class="ubuntu-card-button-link">[[:Category:WSL|<span class="ubuntu-pragma-icon-containers" aria-hidden="true"></span>WSL]]</span>
+<span class="ubuntu-card-button-link">[[:Category:Development|<span class="ubuntu-pragma-icon-open-terminal" aria-hidden="true"></span>Development]]</span>
+<span class="ubuntu-card-button-link">[[:Category:AI|<span class="ubuntu-pragma-icon-models" aria-hidden="true"></span>AI]]</span>
+<span class="ubuntu-card-button-link">[[:Category:History|<span class="ubuntu-pragma-icon-information" aria-hidden="true"></span>History]]</span>
 </div>
 {{tip|
 Any [[red link]] is a page that people want. Select one to create it. If you're new to the wiki, you [[Project:Autoconfirmed users| may first need to make a few edits]] before you can create pages.
