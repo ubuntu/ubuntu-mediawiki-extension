@@ -1,0 +1,3 @@
+<includeonly>{{{{{♥|safesubst:}}}#invoke:key|keypress}}</includeonly><noinclude>
+{{documentation}}
+</noinclude>

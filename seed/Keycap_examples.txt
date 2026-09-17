@@ -1,0 +1,65 @@
+Keyboard and gamepad key presses are produced by the on-wiki
+[[Template:Key press]] (see [[Module:Key]]), which emits
+<code>&lt;kbd class="keyboard-key"&gt;</code> markup.
+
+The keys are given a border and shadow to distinguish
+them from inline code samples.
+
+== Single key ==
+
+Press {{key press|enter}} to confirm.
+
+== Key chain ==
+
+Reload the page: {{key press|ctrl|shift|r}}
+
+== Custom chain separator ==
+
+By default, chained keys are joined with "+". Use <code>chain</code> to
+override every join, or the <code>chain first</code>/<code>chain second</code>/...
+args to override a single join:
+
+{{key press|ctrl|alt|delete|chain=, then}}
+
+{{key press|ctrl|k|ctrl|s|chain first=+|chain second=, then|chain third=+}}
+
+== Named and symbol keys ==
+
+Some keys render as a symbol plus label, or as a bare symbol:
+
+{{key press|shift}}
+{{key press|cmd}}
+{{key press|win}}
+{{key press|backspace}}
+{{key press|up}}
+{{key press|down}}
+{{key press|left}}
+{{key press|right}}
+
+== Wikilinked keys ==
+
+Recognised keys can be written as a wikilink to point at a definition page;
+the module still substitutes the display symbol:
+
+{{key press|[[shift key|shift]]|[[enter key|enter]]}}
+
+== Gamepad input ==
+
+Analog sticks and face buttons are supported too:
+
+{{key press|l up}} {{key press|l down}} {{key press|l left}} {{key press|l right}}
+
+{{key press|ex}} {{key press|circle}} {{key press|square}} {{key press|triangle}}
+
+== Unrecognised key ==
+
+Anything not in the module's key table is passed through unchanged:
+
+{{key press|F13}}
+
+== Direct #invoke, same chaining ==
+
+<code>Module:Key</code> can also be called directly via <code>#invoke</code>
+instead of through the template; it accepts the same chained args:
+
+{{#invoke:key|press|ctrl|tab}}

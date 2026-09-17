@@ -1,0 +1,21 @@
+/**
+ * Keyboard key presses (.keyboard-key), rendered by Template:Key press /
+ * Module:Key as <kbd> elements.
+ */
+.keyboard-key {
+	display: inline-block;
+	margin: 0 0.15em;
+	padding: 0.1em 0.4em;
+	// Distinguish from inline code
+	// Use border and shadow
+	border: @border-width-base @border-style-base @border-color-base;
+	border-bottom-width: 2px;
+	border-radius: @border-radius-base;
+	background-color: @background-color-neutral-subtle;
+	box-shadow: 0 1px 1px 0 var( --box-shadow-color-base, rgba( 0, 0, 0, 0.15 ) );
+	font-size: 0.9em;
+}
+
+.keyboard-key.nowrap {
+	white-space: nowrap;
+}
