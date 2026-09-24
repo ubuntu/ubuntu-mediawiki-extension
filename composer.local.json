@@ -1,6 +1,7 @@
 {
     "require": {
         "ubuntu/mediawiki-ubuntu-skin": "dev-main",
+        "ubuntu/mediawiki-ubuntu-minerva-skin": "dev-main",
         "ubuntu/mediawiki-ubuntu-extension": "dev-main",
         "x-mediawiki/code-mirror": "1.0.0",
         "x-mediawiki/mobile-frontend": "1.0.0",
@@ -20,6 +21,10 @@
         {
             "type": "git",
             "url": "https://github.com/ubuntu/ubuntu-mediawiki-skin.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/ubuntu/ubuntu-mediawiki-minerva-skin.git"
         },
         {
             "type": "package",

@@ -58,6 +58,9 @@
                 ],
                 "minerva": [
                     "ext.ubuntu.styles/common.less"
+                ],
+                "ubuntu-minerva": [
+                    "ext.ubuntu.styles/common.less"
                 ]
             }
         },
@@ -68,10 +71,14 @@
             "skinStyles": {
                 "minerva": [
                     "ext.ubuntu.styles.minerva/minerva.less"
+                ],
+                "ubuntu-minerva": [
+                    "ext.ubuntu.styles.minerva/minerva.less"
                 ]
             },
             "skins": [
-                "minerva"
+                "minerva",
+                "ubuntu-minerva"
             ]
         },
         "zzz.ext.ubuntu.styles.vector": {
