@@ -5,6 +5,6 @@
     "license": "GPL-3.0",
     "dependencies": {
         "@canonical/cookie-policy": "^3.8.0",
-        "@canonical/ds-assets": "0.37.0"
+        "@canonical/ds-assets": "0.40.0"
     }
 }
