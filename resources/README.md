@@ -4,22 +4,26 @@ ResourceLoader modules shipped by the UbuntuWiki extension. Each module lives
 in a directory named after it. Entry files contain doc comments describing
 their purpose in detail; this file is the map.
 
+The compatibility targets are the Ubuntu desktop skin and Ubuntu Minerva skin.
+Skin IDs below describe ResourceLoader registrations only and do not guarantee
+compatibility with upstream skins.
+
 ## Modules
 
 | Module                          | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Loaded when                                                                                                          |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| `ext.ubuntu.styles`             | Common layer applied to every skin: Vanilla palette tokens (CSS custom properties), Ubuntu Sans webfonts, variables/mixins, and skin-agnostic component styles (code blocks, on-wiki template styles, content classes, print heading rules, link hover colors, blanked-footer-link hiding). The ubuntu skin fork depends on these tokens and fonts directly.                                                                                                             | Every page view (added in `Hooks::onBeforePageDisplay`); minerva additionally gets it via `ResourceModuleSkinStyles` |
-| `zzz.ext.ubuntu.styles.minerva` | Minerva-specific adaptations of the shared styles.                                                                                                                                                                                                                                                                                                                                                                                                                       | Every page view; only serves minerva (module `skins` option)                                                         |
-| `zzz.ext.ubuntu.styles.vector`  | Ubuntu branding for Vector-2022-class skins: dark header, logo and search-box theming (`components/Header.less`), page surroundings and content spacing (`components/Layout.less`), page-action tab and titlebar styles (`components/Body.less`), Tools menu colors and dropdown-button padding (`components/PageTools.less`), and icon button sizing and hover background (`components/Icons.less`). Selectors only match Vector markup, so other skins are unaffected. | Every page view; only serves ubuntu / vector / vector-2022 (module `skins` option)                                   |
+| `ext.ubuntu.styles`             | Shared base layer loaded on every page: Vanilla palette tokens (CSS custom properties), Ubuntu Sans webfonts, variables/mixins, and skin-agnostic component styles (code blocks, on-wiki template styles, content classes, print heading rules, link hover colors, blanked-footer-link hiding). The ubuntu skin fork depends on these tokens and fonts directly.                                                                                                             | Every page view (added in `Hooks::onBeforePageDisplay`); minerva additionally gets it via `ResourceModuleSkinStyles` |
+| `zzz.ext.ubuntu.styles.minerva` | Ubuntu Minerva styling layer.                                                                                                                                                                                                                                                                                                                                                                                                                       | Every page view; only serves minerva (module `skins` option)                                                         |
+| `zzz.ext.ubuntu.styles.vector`  | Ubuntu desktop-skin branding: dark header, logo and search-box theming (`components/Header.less`), page surroundings and content spacing (`components/Layout.less`), page-action tab and titlebar styles (`components/Body.less`), Tools menu colors and dropdown-button padding (`components/PageTools.less`), and icon button sizing and hover background (`components/Icons.less`). Selectors only match Vector markup, so other skins are unaffected. | Every page view; only serves ubuntu / vector / vector-2022 (module `skins` option)                                   |
 | `ext.ubuntu.codeBlock`          | Copy-button enhancement for `.ubuntu-code-block` markup (clipboard copy, accessible status announcements). Styles live in `ext.ubuntu.styles/components/ubuntu/CodeBlock.less`.                                                                                                                                                                                                                                                                                          | Every page view (added in `Hooks::onBeforePageDisplay`)                                                              |
 | `ext.ubuntu.cookieConsent`      | Canonical cookie-policy consent banner integration (vendored library + MediaWiki glue).                                                                                                                                                                                                                                                                                                                                                                                  | `$wgUbuntuCookieConsentEnabled = true` (added in `Hooks::onBeforePageDisplay`)                                       |
 
 Per-skin layers are delivered via the module's own `skinStyles` (appended
 after the shared base within the module's stylesheet), never via top-level
-`ResourceModuleSkinStyles` — that attribute is reserved for skins (or the
+ResourceModuleSkinStyles` — that attribute is reserved for skins (or the
 site) overriding a _module's_ styles, and module-defined skinStyles take
-precedence over it. Each layer's module declares a `skins` option listing
-the skins it serves; ResourceLoader reads that list itself, so the hook
+precedence over it. Each layer's module declares a `skins` option listing the
+skin IDs for which it registers; ResourceLoader reads that list itself, so the hook
 attaches every layer unconditionally and the skin list lives only in
 extension.json. Layer modules are named `zzz.ext.*` so they sort after
 every `skins.*` module in the combined stylesheet — their rules win
@@ -56,11 +60,7 @@ specificity ties against the skin's own styles by source order alone.
 
 ## Ownership boundary
 
-- **This extension**: cross-skin integrations (cookie banner, footer links),
-  shared design tokens, on-wiki template styles, Minerva adaptations, and the
-  Ubuntu _theme/branding_ layer for Vector-2022-class skins
-  (`zzz.ext.ubuntu.styles.vector`) — colors, token re-application, logo and
-  search-box theming on the skin's own classes.
+- **This extension**: shared integrations (cookie banner, footer links), design tokens, on-wiki template styles, Ubuntu Minerva styling, and Ubuntu desktop-skin branding (`zzz.ext.ubuntu.styles.vector`) — colors, token re-application, logo, and search-box theming on the Ubuntu skin's own classes.
 - **ubuntu-mediawiki-skin**: the skin's HTML structure and layout mechanics
   (grid, heights, component arrangement). Its `ubuntu/ubuntu-header.less`
   branding layer is superseded by this extension's vector layer and should be

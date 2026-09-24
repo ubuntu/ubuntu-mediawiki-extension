@@ -43,12 +43,16 @@ The pattern of suppressing one of MediaWiki core's default footer links while ke
 _Avoid_: Hiding a footer link, removing a footer link
 
 **Skin branding layer**:
-A per-skin ResourceLoader module (e.g. `ext.ubuntu.styles.vector`, `ext.ubuntu.styles.minerva`) that layers Ubuntu-specific styling on top of the shared `ext.ubuntu.styles` base for one particular skin. The `vector` layer is a mandatory compatibility target (Ubuntu skin lineage); the `minerva` layer is currently a nice-to-have, expected to become mandatory once an Ubuntu Minerva fork exists.
+A per-skin ResourceLoader module (e.g. `ext.ubuntu.styles.vector`, `ext.ubuntu.styles.minerva`) that layers Ubuntu-specific styling on top of the shared `ext.ubuntu.styles` base for one particular skin. The `vector` layer is mandatory for the Ubuntu skin; the `minerva` layer is mandatory for the Ubuntu Minerva skin. Compatibility with upstream Vector, Vector 2022, or Minerva is incidental and not guaranteed.
 _Avoid_: Skin override, skin theme
 
 **Ubuntu skin**:
-A separate extension/skin, maintained in another repository, forked from Vector 2022, registered in MediaWiki as `Ubuntu`. It is this extension's primary compatibility target — Vector and Vector 2022 compatibility matter mainly as a side effect of that fork lineage, not as goals in their own right. A parallel Ubuntu Minerva fork is expected in the future, at which point Minerva compatibility becomes mandatory too.
+A separate extension/skin, maintained in another repository, forked from Vector 2022 and registered in MediaWiki as `Ubuntu`. It is this extension's primary desktop compatibility target.
 _Avoid_: Ubuntu Skin (capital S), UbuntuSkin repo
+
+**Ubuntu Minerva skin**:
+The Ubuntu-maintained fork of MinervaNeue, loaded as `UbuntuMinervaNeue` and registered under the skin key `ubuntu-minerva`. It is the mobile counterpart to the Ubuntu skin.
+_Avoid_: Minerva when referring specifically to the Ubuntu fork
 
 **Vendored icon**:
 An SVG icon file copied unmodified from an external design system into this repository (under `resources/icons/`), never hand-edited, and refreshed only by the vendoring script. Its wiki-visible interface is the generated icon class, not the file.
@@ -73,7 +77,7 @@ A named bundle of JS and/or LESS/CSS registered in `extension.json`, loaded on d
 _Avoid_: Asset bundle, RL module (spell out on first use)
 
 **Skin**:
-A MediaWiki theme controlling page layout and chrome (e.g. Vector, Vector 2022, Minerva, the separate Ubuntu skin). This extension layers branding onto skins; it is not a skin itself. See **Ubuntu skin** for which skins actually matter here and why.
+A MediaWiki theme controlling page layout and chrome (e.g. Vector, Vector 2022, Minerva, the Ubuntu skin, or the Ubuntu Minerva skin). This extension layers branding onto skins; it is not a skin itself. See **Ubuntu skin** and **Ubuntu Minerva skin** for which skins matter here and why.
 _Avoid_: Theme
 
 **Extension**:

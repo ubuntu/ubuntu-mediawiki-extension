@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This is the `UbuntuWiki` MediaWiki extension: shared branding, styling, and integrations (code-block copy buttons, cookie consent, Google Tag Manager, footer link customization) for the Ubuntu Wiki, layered across MediaWiki skins (Vector, Vector 2022, Minerva).
+This is the `UbuntuWiki` MediaWiki extension: shared branding, styling, and integrations (code-block copy buttons, cookie consent, Google Tag Manager, footer link customization) for the Ubuntu Wiki, layered over the Ubuntu desktop skin and UbuntuMinervaNeue mobile skin.
 
 Before working in this repo, read `CONTEXT.md` for the project's domain vocabulary, and `docs/adr/` for any recorded architectural decisions relevant to the area you're touching. See `README.md` for local Docker dev setup.
 
