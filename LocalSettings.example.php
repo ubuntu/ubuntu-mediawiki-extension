@@ -28,18 +28,14 @@ $wgUpgradeKey = "change-me";
 $wgEnableUploads = false;
 $wgUseInstantCommons = true;
 
-# The extension under test, live-mounted at extensions/UbuntuWiki.
 wfLoadExtension('UbuntuWiki');
-
-# MinervaNeue ships with the MediaWiki tarball and stays enabled to
-# test the minerva skin styles — append ?useskin=minerva to any URL.
 wfLoadSkin('Ubuntu');
-wfLoadSkin('MinervaNeue');
+wfLoadSkin('UbuntuMinervaNeue');
 $wgDefaultSkin = 'ubuntu';
 
 wfLoadExtension('MobileFrontend');
 $wgMFAutodetectMobileView = true;
-$wgDefaultMobileSkin = 'minerva';
+$wgDefaultMobileSkin = 'ubuntu-minerva';
 
 # Logo — uses the Ubuntu logo bundled in this extension.
 $wgLogos = [
